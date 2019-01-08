@@ -2,11 +2,13 @@
   "name": "metadata-app",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://awlayton.github.io/metadata-app",
   "dependencies": {
     "@cerebral/react": "^4.0.3",
     "@material-ui/core": "^3.7.0",
     "@material-ui/icons": "^3.0.1",
     "cerebral": "^5.0.3",
+    "gh-pages": "^2.0.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-qr-reader": "^2.1.1",
@@ -14,6 +16,8 @@
     "survey-react": "^1.0.60"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
