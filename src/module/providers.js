@@ -6,7 +6,7 @@ import model from '../surveyModel';
 export const geolocation = {
     async getCurrentLoc() {
         try {
-            return new Promise((resolve, reject) =>
+            return await new Promise((resolve, reject) =>
                     navigator.geolocation.getCurrentPosition(resolve, reject))
                 .then(pos => pos.coords);
         } catch (err) {
