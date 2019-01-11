@@ -1,7 +1,10 @@
 import { Module } from 'cerebral';
-import { set } from 'cerebral/operators';
-import { state } from 'cerebral/tags';
+//import { set } from 'cerebral/operators';
+//import { state } from 'cerebral/tags';
+//
+import * as Survey from 'survey-react';
 
+import * as providers from './providers';
 import * as signals from './sequences';
 
 // TODO: Get current date/time better
@@ -55,6 +58,31 @@ export default Module({
                             ]
                         },
                         {
+                            // TODO: Support selecting region on a map
+                            name: 'location',
+                            title: 'Collection location',
+                            type: 'panel',
+                            state: 'collapsed',
+                            elements: [
+                                {
+                                    name: 'location-button',
+                                    title: 'Get current location',
+                                    type: 'html',
+                                    cerebralbutton: 'setCurrentLocation',
+                                },
+                                {
+                                    name: 'latitude',
+                                    title: 'Latitude',
+                                    type: 'text',
+                                },
+                                {
+                                    name: 'longitude',
+                                    title: 'Longitude',
+                                    type: 'text',
+                                },
+                            ],
+                        },
+                        {
                             name: 'notes',
                             title: 'Notes or comments',
                             type: 'comment'
@@ -71,11 +99,11 @@ export default Module({
                             title: 'Operator License',
                             type: 'text',
                             isRequired: true,
-                            placeHolder: 'xxxx-xxxx',
+                            placeHolder: '1234567',
                             validators: [
                                 {
                                     type: 'regex',
-                                    regex: /[A-Z0-9]{4}-[A-Z0-9]{4}/,
+                                    regex: /^[0-9]{7}$/,
                                     text: 'Invalid license number'
                                 }
                             ]
@@ -121,4 +149,5 @@ export default Module({
             ]
         }
     },
+    providers,
 });

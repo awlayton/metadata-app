@@ -29,7 +29,6 @@ class App extends Component {
                     onClose={props.hideSensorQRScanner}
                 />
                 <Questions
-                    json={props.questions}
                     isSinglePage={false}
                     completedHtml={
                         (<div> woo done!</div>)
