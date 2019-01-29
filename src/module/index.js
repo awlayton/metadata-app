@@ -129,12 +129,83 @@ export default Module({
                             type: 'html',
                             cerebralbutton: 'showDroneQRScanner',
                         },
+                    ]
+                },
+                {
+                    name: 'uav-sensors',
+                    title: 'Sensors',
+                    visibleIf: '{purpose} == "UAV"',
+                    elements: [
                         {
                             name: 'sensor-qr',
                             type: 'html',
                             cerebralbutton: 'showSensorQRScanner',
                         },
-                    ]
+                        {
+                            name: 'sensors',
+                            title: 'Sensors',
+                            type: 'paneldynamic',
+                            panelCount: 1,
+                            panelAddText: 'Add Sensor',
+                            panelRemoveText: 'Remove Sensor',
+                            templateTitle: 'Sensor #{panelIndex}',
+                            templateElements: [
+                                {
+                                    name: 'uav-sensor-type',
+                                    valueName: 'type',
+                                    title: 'Type',
+                                    type: 'dropdown',
+                                    isRequired: true,
+                                    hasOther: true,
+                                    choices: [
+                                        'RGB',
+                                        'Multispectral',
+                                        'Hyperspectral',
+                                        'LiDAR',
+                                        'Thermal',
+                                    ],
+                                },
+                                {
+                                    name: 'uav-sensor',
+                                    //valueName: 'sensor',
+                                    title: 'Sensor',
+                                    type: 'dropdown',
+                                    hideIfChoicesEmpty: true,
+                                    choicesVisibleIf: '{panel.type} == {item.type}',
+                                    choices: [
+                                        {
+                                            text: 'Sony A6000',
+                                            value: {
+                                                make: 'Sony',
+                                                model: 'A6000',
+                                                type: 'RGB',
+                                            },
+                                        },
+                                        {
+                                            text: 'Parrot Sequoia',
+                                            value: {
+                                                make: 'Parrot',
+                                                model: 'Sequoia',
+                                                type: 'Multispectral',
+                                            },
+                                        },
+                                    ],
+                                },
+                                {
+                                    name: 'uav-sensor-make',
+                                    valueName: 'sensor.make',
+                                    title: 'Make',
+                                    type: 'text',
+                                },
+                                {
+                                    name: 'uav-sensor-model',
+                                    valueName: 'model',
+                                    title: 'Model',
+                                    type: 'text',
+                                },
+                            ],
+                        },
+                    ],
                 },
                 {
                     name: 'b4ufly',

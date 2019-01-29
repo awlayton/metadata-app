@@ -34,6 +34,7 @@ class App extends Component {
                         (<div> woo done!</div>)
                     }
                     onValueChanged={({data}) => props.setSurveyData({data})}
+                    onComplete={({data}) => console.log(JSON.stringify(data))}
                 />
             </div>
             </React.Fragment>
