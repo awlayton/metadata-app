@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from '@cerebral/react';
-import {state,signal} from 'cerebral/tags';
 
 import Dialog from '@material-ui/core/Dialog';
 import AppBar from '@material-ui/core/AppBar';

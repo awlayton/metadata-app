@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 
 import {connect} from '@cerebral/react';
-import {state, signal} from 'cerebral/tags';
+import {state, sequences} from 'cerebral/tags';
 
 import Button from '@material-ui/core/Button';
 
@@ -31,7 +31,7 @@ function Questions({get, ...props}) {
 
                     ReactDOM.render(
                         <Button
-                            onClick={get(signal`${question.cerebralbutton}`)}>
+                            onClick={get(sequences`${question.cerebralbutton}`)}>
                             {question.title}
                         </Button>
                     , htmlElement);
@@ -44,7 +44,7 @@ function Questions({get, ...props}) {
 export default connect(
     {
         questions: state`questions`,
-        init: signal`initSurvey`,
+        init: sequences`initSurvey`,
     },
     ({questions, ...props}, ownProps, get) => {
         let model = new Survey.Model(questions);

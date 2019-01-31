@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from '@cerebral/react';
-import {state,signal} from 'cerebral/tags';
+import {state, sequences} from 'cerebral/tags';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -46,10 +46,10 @@ export default connect({
     questions: state`questions`,
     droneQRScannerActive: state`droneQRScannerActive`,
     sensorQRScannerActive: state`sensorQRScannerActive`,
-    showDroneQRScanner: signal`showDroneQRScanner`,
-    showSensorQRScanner: signal`showSensorQRScanner`,
-    hideDroneQRScanner: signal`hideDroneQRScanner`,
-    hideSensorQRScanner: signal`hideSensorQRScanner`,
-    setSurveyData: signal`setSurveyData`,
-    init: signal`init`,
+    showDroneQRScanner: sequences`showDroneQRScanner`,
+    showSensorQRScanner: sequences`showSensorQRScanner`,
+    hideDroneQRScanner: sequences`hideDroneQRScanner`,
+    hideSensorQRScanner: sequences`hideSensorQRScanner`,
+    setSurveyData: sequences`setSurveyData`,
+    init: sequences`init`,
 }, App);

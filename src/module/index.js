@@ -1,11 +1,10 @@
-import { Module } from 'cerebral';
 //import { set } from 'cerebral/operators';
 //import { state } from 'cerebral/tags';
 //
 import * as Survey from 'survey-react';
 
 import * as providers from './providers';
-import * as signals from './sequences';
+import * as sequences from './sequences';
 
 // TODO: Get current date/time better
 var [date, time] = (new Date((new Date()).toLocaleString() + ' UTC'))
@@ -32,8 +31,8 @@ const drones = [
     },
 ];
 
-export default Module({
-    signals,
+export default {
+    sequences,
     state: {
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
@@ -339,4 +338,4 @@ export default Module({
         },
     },
     providers,
-});
+};

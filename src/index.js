@@ -3,21 +3,21 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';
 
-import { Controller } from 'cerebral';
+import App from 'cerebral';
 import { Container } from '@cerebral/react';
-import devtools from 'cerebral/devtools';
+import Devtools from 'cerebral/devtools';
 
-import App from './App';
-import Module from './module';
+import AppComponent from './App';
+import main from './module';
 
-const controller = Controller(Module, {
+const app = App(main, {
     devtools: process.env.NODE_ENV === 'production' ?
-        null : devtools({host: 'localhost:8000', reconnect: true})
+        null : Devtools({host: 'localhost:8000', reconnect: true})
 });
 
 ReactDOM.render(
-    <Container controller={controller}>
-		<App />
+    <Container app={app}>
+		<AppComponent />
 	</Container>,
 document.getElementById('root'));
 
