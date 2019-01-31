@@ -11,6 +11,27 @@ import * as signals from './sequences';
 var [date, time] = (new Date((new Date()).toLocaleString() + ' UTC'))
         .toISOString().split(/[TZ]/);
 
+// TODO: Get these from sheets
+const sensors = [
+    {
+        make: 'Sony',
+        model: 'A6000',
+        type: 'RGB',
+    },
+    {
+        make: 'Parrot',
+        model: 'Sequoia',
+        type: 'Multispectral',
+    },
+];
+const drones = [
+    {
+        make: 'Test',
+        model: 'testtest',
+        type: 'Fixed wing',
+    },
+];
+
 export default Module({
     signals,
     state: {
@@ -120,14 +141,63 @@ export default Module({
                             name: 'observer',
                             title: 'Observer',
                             type: 'text',
-                            isRequired: true,
                             placeHolder: 'John Doe'
+                        },
+                    ]
+                },
+                {
+                    name: 'uav-drone',
+                    title: 'Drone Info',
+                    visibleIf: '{purpose} == "UAV"',
+                    elements: [
+                        {
+                            name: 'drone-screenshot',
+                            title: 'Screenshot of DroneDeploy',
+                            type: 'file',
+                            allowMultiple: false,
                         },
                         {
                             name: 'drone-qr',
                             title: 'Scan drone QR code',
                             type: 'html',
                             cerebralbutton: 'showDroneQRScanner',
+                        },
+                        {
+                            name: 'uav-drone-type',
+                            title: 'Type',
+                            type: 'dropdown',
+                            isRequired: true,
+                            defaultValue: 'Fixed wing',
+                            hasOther: true,
+                            choices: [
+                                'Fixed wing',
+                                'Multi-rotor',
+                                'Helicopter',
+                            ],
+                        },
+                        {
+                            name: 'uav-drone',
+                            title: 'Drone',
+                            type: 'dropdown',
+                            hideIfChoicesEmpty: true,
+                            choices: drones.map((e, i) => ({
+                                text: e.make + ' ' + e.model,
+                                value: e.make + ' ' + e.model,
+                                //value: i,
+                                visibleIf: `{uav-drone-type} == "${e.type}"`,
+                            })),
+                        },
+                        {
+                            name: 'uav-drone-make',
+                            title: 'Make',
+                            type: 'text',
+                            enableIf: '{uav-drone} empty'
+                        },
+                        {
+                            name: 'uav-drone-model',
+                            title: 'Model',
+                            type: 'text',
+                            enableIf: '{uav-drone} empty'
                         },
                     ]
                 },
@@ -167,41 +237,30 @@ export default Module({
                                 },
                                 {
                                     name: 'uav-sensor',
-                                    //valueName: 'sensor',
+                                    valueName: 'sensor',
                                     title: 'Sensor',
                                     type: 'dropdown',
                                     hideIfChoicesEmpty: true,
-                                    choicesVisibleIf: '{panel.type} == {item.type}',
-                                    choices: [
-                                        {
-                                            text: 'Sony A6000',
-                                            value: {
-                                                make: 'Sony',
-                                                model: 'A6000',
-                                                type: 'RGB',
-                                            },
-                                        },
-                                        {
-                                            text: 'Parrot Sequoia',
-                                            value: {
-                                                make: 'Parrot',
-                                                model: 'Sequoia',
-                                                type: 'Multispectral',
-                                            },
-                                        },
-                                    ],
+                                    choices: sensors.map((e, i) => ({
+                                        text: e.make + ' ' + e.model,
+                                        value: e.make + ' ' + e.model,
+                                        //value: i,
+                                        visibleIf: `{panel.type} == "${e.type}"`,
+                                    })),
                                 },
                                 {
                                     name: 'uav-sensor-make',
                                     valueName: 'sensor.make',
                                     title: 'Make',
                                     type: 'text',
+                                    enableIf: '{panel.sensor} empty'
                                 },
                                 {
                                     name: 'uav-sensor-model',
                                     valueName: 'model',
                                     title: 'Model',
                                     type: 'text',
+                                    enableIf: '{panel.sensor} empty'
                                 },
                             ],
                         },
@@ -277,7 +336,7 @@ export default Module({
                     ]
                 },
             ]
-        }
+        },
     },
     providers,
 });
