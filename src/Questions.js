@@ -32,11 +32,18 @@ class Questions extends Component {
         if (pageNum !== undefined) {
             this.model.currentPageNo = pageNum;
         }
+
         this.props.reaction('changePage',
             {
                 pageNum: state`pageNum`,
             },
             ({pageNum}) => this.model.currentPageNo = pageNum
+        );
+        this.props.reaction('changeData',
+            {
+                data: state`surveyData`,
+            },
+            ({data}) => this.model.data = data
         );
 
         this.updatePages(this.model);
@@ -64,6 +71,7 @@ class Questions extends Component {
                 }}
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
+                onValueChanged={({data}) => props.setSurveyData({data})}
                 completedHtml={
                     ReactDOMServer.renderToString(props.completedHtml)
                 }
@@ -90,6 +98,7 @@ export default connect(
     {
         questions: state`questions`,
         init: sequences`initSurvey`,
+        setSurveyData: sequences`setSurveyData`,
         setData: sequences`setSurveyData`,
         setPage: sequences`setSurveyPage`,
         setPages: sequences`setPages`,

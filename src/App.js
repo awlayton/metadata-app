@@ -33,21 +33,21 @@ class App extends Component {
             <React.Fragment>
             <CssBaseline />
             <div className='App'>
-                <AppBar position="static">
+                <AppBar position='static'>
                     <Toolbar>
-						<IconButton
-							onClick={()=>props.showNavigation()}
-							aria-label="Menu">
-							<MenuIcon
-							/>
+                        <IconButton
+                            onClick={()=>props.showNavigation()}
+                            aria-label='Menu'>
+                            <MenuIcon
+                            />
                         </IconButton>
-						<Button onClick={()=>props.goPreviousPage()}>
-							<NavigateBeforeIcon />
+                        <Button onClick={()=>props.goPreviousPage()}>
+                            <NavigateBeforeIcon />
                             Previous
                         </Button>
-						<Button onClick={()=>props.goNextPage()}>
+                        <Button onClick={()=>props.goNextPage()}>
                             Next
-							<NavigateNextIcon />
+                            <NavigateNextIcon />
                         </Button>
                     </Toolbar>
                 </AppBar>
@@ -80,7 +80,6 @@ class App extends Component {
                     completedHtml={
                         (<div> woo done!</div>)
                     }
-                    onValueChanged={({data}) => props.setSurveyData({data})}
                     onComplete={({data}) => console.log(JSON.stringify(data))}
                 />
             </div>
@@ -95,8 +94,8 @@ export default connect({
     hideNavigation: sequences`hideNavigation`,
     setSurveyPage: sequences`setSurveyPage`,
     pages: state`pages`,
-	goNextPage: sequences`goNextPage`,
-	goPreviousPage: sequences`goPreviousPage`,
+    goNextPage: sequences`goNextPage`,
+    goPreviousPage: sequences`goPreviousPage`,
     questions: state`questions`,
     droneQRScannerActive: state`droneQRScannerActive`,
     sensorQRScannerActive: state`sensorQRScannerActive`,
@@ -104,6 +103,5 @@ export default connect({
     showSensorQRScanner: sequences`showSensorQRScanner`,
     hideDroneQRScanner: sequences`hideDroneQRScanner`,
     hideSensorQRScanner: sequences`hideSensorQRScanner`,
-    setSurveyData: sequences`setSurveyData`,
     init: sequences`init`,
 }, App);
