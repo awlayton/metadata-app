@@ -74,6 +74,7 @@ class App extends Component {
                             <ListItem
                                 key={name}
                                 button
+                                selected={pageNum === props.pageNum}
                                 className={error ? 'page-err' : 'page-complete'}
                                 onClick={()=>props.setSurveyPage({pageNum})}>
                                 <ListItemIcon>
