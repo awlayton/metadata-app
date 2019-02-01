@@ -50,6 +50,11 @@ export default connect(
         let model = new Survey.Model(questions);
         surveyModel.model = model;
 
+        let data = get(state`surveyData`);
+        if (data) {
+            model.data = data;
+        }
+
         return {
             ...ownProps,
             ...props,

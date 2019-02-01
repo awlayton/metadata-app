@@ -3,6 +3,11 @@ import {connect} from '@cerebral/react';
 import {state, sequences} from 'cerebral/tags';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Drawer from '@material-ui/core/SwipeableDrawer';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import './App.css';
 import QRDialog from './QRDialog';
@@ -20,6 +25,19 @@ class App extends Component {
             <React.Fragment>
             <CssBaseline />
             <div className='App'>
+                <Drawer
+                  open={props.navigationOpen}
+                  onOpen={()=>props.showNavigation()}
+                  onClose={()=>props.hideNavigation()}
+                >
+                    <List>
+                        {props.questions.pages.map((page, i) => (
+                            <ListItem button onClick={()=>console.log(i)}>
+                                <ListItemText primary={page.title} />
+                            </ListItem>
+                        ))}
+                    </List>
+                </Drawer>
                 <QRDialog
                     open={props.droneQRScannerActive}
                     onClose={props.hideDroneQRScanner}
@@ -43,6 +61,9 @@ class App extends Component {
 }
 
 export default connect({
+    navigationOpen: state`navigationOpen`,
+    showNavigation: sequences`showNavigation`,
+    hideNavigation: sequences`hideNavigation`,
     questions: state`questions`,
     droneQRScannerActive: state`droneQRScannerActive`,
     sensorQRScannerActive: state`sensorQRScannerActive`,

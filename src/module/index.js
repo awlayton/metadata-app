@@ -34,6 +34,7 @@ const drones = [
 export default {
     sequences,
     state: {
+        navigationOpen: false,
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
         surveyData: null,
