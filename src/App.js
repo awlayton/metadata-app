@@ -57,8 +57,9 @@ class App extends Component {
                   onClose={()=>props.hideNavigation()}
                 >
                     <List>
-                        {props.questions.pages.map((page, pageNum) => (
+                        {props.pages.map((page, pageNum) => (
                             <ListItem
+                                key={page.name}
                                 button
                                 onClick={()=>props.setSurveyPage({pageNum})}>
                                 <ListItemText primary={page.title} />
@@ -93,6 +94,7 @@ export default connect({
     showNavigation: sequences`showNavigation`,
     hideNavigation: sequences`hideNavigation`,
     setSurveyPage: sequences`setSurveyPage`,
+    pages: state`pages`,
 	goNextPage: sequences`goNextPage`,
 	goPreviousPage: sequences`goPreviousPage`,
     questions: state`questions`,

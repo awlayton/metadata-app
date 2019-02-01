@@ -15,16 +15,16 @@ export const hideNavigation = [set(state`navigationOpen`, false)];
 export const setSurveyData = [set(state`surveyData`, props`data`)];
 export const setAnswer = [actions.setAnswer];
 export const setSurveyPage = [
-	actions.setSurveyPage,
-	set(state`pageNum`, props`pageNum`),
+    set(state`pageNum`, props`pageNum`),
 ];
+export const setPages = [set(state`pages`, props`pages`)];
 export const goNextPage = [
-	set(props`pageNum`, state`pageNum`, num => num + 1),
-	set(state`pageNum`, props`pageNum`),
+    set(props`pageNum`, state`pageNum`, num => num + 1),
+    set(state`pageNum`, props`pageNum`),
 ];
 export const goPreviousPage = [
-	set(props`pageNum`, state`pageNum`, num => num - 1),
-	set(state`pageNum`, props`pageNum`),
+    set(props`pageNum`, state`pageNum`, num => num - 1),
+    set(state`pageNum`, props`pageNum`),
 ];
 export const setCurrentLocation = [
     actions.getCurrentLocation,

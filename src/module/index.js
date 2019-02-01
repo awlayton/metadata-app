@@ -38,10 +38,11 @@ export default {
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
         surveyData: null,
+        pages: [],
         pageNum: 0,
         questions: {
             showNavigationButtons: false,
-			goNextPageAutomatic: true,
+            goNextPageAutomatic: true,
             earInvisibleValues: 'onHidden',
             checkErrorsMode: 'onValueChanged',
             pages: [
