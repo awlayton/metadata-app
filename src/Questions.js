@@ -52,10 +52,9 @@ class Questions extends Component {
     }
 
     updatePages(survey) {
-        console.dir(this.props);
         this.props.setPages({
             pages: survey.visiblePages.map((page) => ({
-                error: page.hasErrors(),
+                error: page.hasErrors(false, false),
                 name: page.name,
                 title: page.title,
             }))
@@ -75,9 +74,11 @@ class Questions extends Component {
                 }}
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
-                onValueChanged={(survey) => {
-                    this.updatePages(survey);
+                onValueChanged={(survey, {name, value}) => {
                     props.setData({data: survey.data});
+                    // No idea why, but cerebral freaks out if I call this
+                    // without the setTimeout...
+                    setTimeout(() => this.updatePages(survey));
                 }}
                 completedHtml={
                     ReactDOMServer.renderToString(props.completedHtml)
