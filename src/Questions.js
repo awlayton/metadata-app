@@ -16,29 +16,61 @@ Survey.JsonObject.metaData.addProperty('question', {
     name: 'cerebralbutton',
 });
 
-function Questions({get, ...props}) {
-    return (
-        <Survey.Survey
-            {...props}
-            completedHtml={
-                ReactDOMServer.renderToString(props.completedHtml)
-            }
-            onAfterRenderQuestion={
-                (survey, {question, htmlElement}) => {
-                    if (!question.cerebralbutton) {
-                        return;
-                    }
+class Questions extends Component {
+	componentWillMount() {
+		let get = this.props.get;
 
-                    ReactDOM.render(
-                        <Button
-                            onClick={get(sequences`${question.cerebralbutton}`)}>
-                            {question.title}
-                        </Button>
-                    , htmlElement);
-                }
-            }
-        />
-    );
+        this.model = new Survey.Model(this.props.questions);
+        surveyModel.model = this.model;
+
+		// TODO: I'm sure this is isn't right with cerebral..
+        let data = get(state`surveyData`);
+        if (data) {
+            this.model.data = data;
+        }
+		let pageNum = get(state`pageNum`);
+		if (pageNum !== undefined) {
+			this.model.currentPageNo = pageNum; 
+		}
+		this.props.reaction('changePage',
+			{
+				pageNum: state`pageNum`,
+			},
+			({pageNum}) => this.model.currentPageNo = pageNum
+		);
+	}
+
+	render() {
+		let {get, ...props} = this.props;
+		return (
+			<Survey.Survey
+				{...props}
+				model={this.model}
+				onCurrentPageChanged={(survey) => {
+					if (get(state`pageNum`) !== survey.currentPageNo) {
+						props.setPage({pageNum: survey.currentPageNo});
+				}
+				}}
+				completedHtml={
+					ReactDOMServer.renderToString(props.completedHtml)
+				}
+				onAfterRenderQuestion={
+					(survey, {question, htmlElement}) => {
+						if (!question.cerebralbutton) {
+							return;
+						}
+
+						ReactDOM.render(
+							<Button
+								onClick={get(sequences`${question.cerebralbutton}`)}>
+								{question.title}
+							</Button>
+						, htmlElement);
+					}
+				}
+			/>
+		);
+	}
 }
 
 export default connect(
@@ -47,27 +79,6 @@ export default connect(
         init: sequences`initSurvey`,
 		setData: sequences`setSurveyData`,
 		setPage: sequences`setSurveyPage`,
-    },
-    ({questions, ...props}, ownProps, get) => {
-        let model = new Survey.Model(questions);
-        surveyModel.model = model;
-
-		// TODO: I'm sure this is isn't right with cerebral..
-        let data = get(state`surveyData`);
-        if (data) {
-            model.data = data;
-        }
-		let pageNum = get(state`pageNum`);
-		if (pageNum !== undefined) {
-			model.currentPageNo = pageNum; 
-		}
-
-        return {
-            ...ownProps,
-            ...props,
-            get,
-            model,
-        };
     },
     Questions
 );

@@ -38,7 +38,12 @@ export default {
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
         surveyData: null,
+        pageNum: 0,
         questions: {
+            showNavigationButtons: false,
+			goNextPageAutomatic: true,
+            earInvisibleValues: 'onHidden',
+            checkErrorsMode: 'onValueChanged',
             pages: [
                 {
                     name: 'general',

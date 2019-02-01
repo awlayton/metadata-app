@@ -3,6 +3,14 @@ import {connect} from '@cerebral/react';
 import {state, sequences} from 'cerebral/tags';
 
 import CssBaseline from '@material-ui/core/CssBaseline';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
+import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import Drawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -25,6 +33,24 @@ class App extends Component {
             <React.Fragment>
             <CssBaseline />
             <div className='App'>
+                <AppBar position="static">
+                    <Toolbar>
+						<IconButton
+							onClick={()=>props.showNavigation()}
+							aria-label="Menu">
+							<MenuIcon
+							/>
+                        </IconButton>
+						<Button onClick={()=>props.goPreviousPage()}>
+							<NavigateBeforeIcon />
+                            Previous
+                        </Button>
+						<Button onClick={()=>props.goNextPage()}>
+                            Next
+							<NavigateNextIcon />
+                        </Button>
+                    </Toolbar>
+                </AppBar>
                 <Drawer
                   open={props.navigationOpen}
                   onOpen={()=>props.showNavigation()}
@@ -32,9 +58,9 @@ class App extends Component {
                 >
                     <List>
                         {props.questions.pages.map((page, pageNum) => (
-							<ListItem
-								button
-								onClick={()=>props.setSurveyPage({pageNum})}>
+                            <ListItem
+                                button
+                                onClick={()=>props.setSurveyPage({pageNum})}>
                                 <ListItemText primary={page.title} />
                             </ListItem>
                         ))}
@@ -66,7 +92,9 @@ export default connect({
     navigationOpen: state`navigationOpen`,
     showNavigation: sequences`showNavigation`,
     hideNavigation: sequences`hideNavigation`,
-	setSurveyPage: sequences`setSurveyPage`,
+    setSurveyPage: sequences`setSurveyPage`,
+	goNextPage: sequences`goNextPage`,
+	goPreviousPage: sequences`goPreviousPage`,
     questions: state`questions`,
     droneQRScannerActive: state`droneQRScannerActive`,
     sensorQRScannerActive: state`sensorQRScannerActive`,

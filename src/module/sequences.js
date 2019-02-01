@@ -1,4 +1,4 @@
-import {set, merge} from 'cerebral/operators';
+import {set, merge} from 'cerebral/factories';
 import {state, props} from 'cerebral/tags';
 import * as actions from './actions';
 import {sequence, parallel} from 'cerebral';
@@ -16,6 +16,14 @@ export const setSurveyData = [set(state`surveyData`, props`data`)];
 export const setAnswer = [actions.setAnswer];
 export const setSurveyPage = [
 	actions.setSurveyPage,
+	set(state`pageNum`, props`pageNum`),
+];
+export const goNextPage = [
+	set(props`pageNum`, state`pageNum`, num => num + 1),
+	set(state`pageNum`, props`pageNum`),
+];
+export const goPreviousPage = [
+	set(props`pageNum`, state`pageNum`, num => num - 1),
 	set(state`pageNum`, props`pageNum`),
 ];
 export const setCurrentLocation = [
