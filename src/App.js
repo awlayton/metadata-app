@@ -31,8 +31,10 @@ class App extends Component {
                   onClose={()=>props.hideNavigation()}
                 >
                     <List>
-                        {props.questions.pages.map((page, i) => (
-                            <ListItem button onClick={()=>console.log(i)}>
+                        {props.questions.pages.map((page, pageNum) => (
+							<ListItem
+								button
+								onClick={()=>props.setSurveyPage({pageNum})}>
                                 <ListItemText primary={page.title} />
                             </ListItem>
                         ))}
@@ -64,6 +66,7 @@ export default connect({
     navigationOpen: state`navigationOpen`,
     showNavigation: sequences`showNavigation`,
     hideNavigation: sequences`hideNavigation`,
+	setSurveyPage: sequences`setSurveyPage`,
     questions: state`questions`,
     droneQRScannerActive: state`droneQRScannerActive`,
     sensorQRScannerActive: state`sensorQRScannerActive`,

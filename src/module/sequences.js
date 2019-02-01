@@ -14,6 +14,10 @@ export const hideNavigation = [set(state`navigationOpen`, false)];
 
 export const setSurveyData = [set(state`surveyData`, props`data`)];
 export const setAnswer = [actions.setAnswer];
+export const setSurveyPage = [
+	actions.setSurveyPage,
+	set(state`pageNum`, props`pageNum`),
+];
 export const setCurrentLocation = [
     actions.getCurrentLocation,
     set(props`question`, 'latitude'),

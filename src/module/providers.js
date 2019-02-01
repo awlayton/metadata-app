@@ -36,6 +36,10 @@ export const survey = {
         model.model.setValue(name, value);
     },
 
+	setPage(num) {
+		model.model.currentPageNo = num;
+	},
+
     setData(data) {
         model.model.data = data;
     },

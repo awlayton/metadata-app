@@ -45,15 +45,22 @@ export default connect(
     {
         questions: state`questions`,
         init: sequences`initSurvey`,
+		setData: sequences`setSurveyData`,
+		setPage: sequences`setSurveyPage`,
     },
     ({questions, ...props}, ownProps, get) => {
         let model = new Survey.Model(questions);
         surveyModel.model = model;
 
+		// TODO: I'm sure this is isn't right with cerebral..
         let data = get(state`surveyData`);
         if (data) {
             model.data = data;
         }
+		let pageNum = get(state`pageNum`);
+		if (pageNum !== undefined) {
+			model.currentPageNo = pageNum; 
+		}
 
         return {
             ...ownProps,
