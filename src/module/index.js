@@ -43,7 +43,7 @@ export default {
         questions: {
             showNavigationButtons: false,
             goNextPageAutomatic: true,
-            earInvisibleValues: 'onHidden',
+            clearInvisibleValues: 'onHidden',
             checkErrorsMode: 'onValueChanged',
             pages: [
                 {

@@ -19,13 +19,20 @@ export const setSurveyPage = [
 ];
 export const setPages = [set(state`pages`, props`pages`)];
 export const goNextPage = [
+    actions.nextPage,
+    /*
     set(props`pageNum`, state`pageNum`, num => num + 1),
     set(state`pageNum`, props`pageNum`),
+    */
 ];
 export const goPreviousPage = [
+    actions.previousPage,
+    /*
     set(props`pageNum`, state`pageNum`, num => num - 1),
     set(state`pageNum`, props`pageNum`),
+    */
 ];
+export const completeSurvey = [actions.completeSurvey];
 export const setCurrentLocation = [
     actions.getCurrentLocation,
     set(props`question`, 'latitude'),

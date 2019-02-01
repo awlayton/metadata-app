@@ -36,11 +36,23 @@ export const survey = {
         model.model.setValue(name, value);
     },
 
-	setPage(num) {
-		model.model.currentPageNo = num;
-	},
+    setPage(num) {
+        model.model.currentPageNo = num;
+    },
+
+    nextPage() {
+        return model.model.nextPage();
+    },
+
+    previousPage() {
+        return model.model.prevPage();
+    },
 
     setData(data) {
         model.model.data = data;
+    },
+
+    submit() {
+        return model.model.completeLastPage();
     },
 };

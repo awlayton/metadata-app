@@ -39,21 +39,25 @@ class Questions extends Component {
             },
             ({pageNum}) => this.model.currentPageNo = pageNum
         );
+        /*
         this.props.reaction('changeData',
             {
                 data: state`surveyData`,
             },
             ({data}) => this.model.data = data
         );
+        */
 
         this.updatePages(this.model);
     }
 
     updatePages(survey) {
+        console.dir(this.props);
         this.props.setPages({
-            pages: survey.visiblePages.map(({name, title}) => ({
-                name,
-                title,
+            pages: survey.visiblePages.map((page) => ({
+                error: page.hasErrors(),
+                name: page.name,
+                title: page.title,
             }))
         });
     }
@@ -71,7 +75,10 @@ class Questions extends Component {
                 }}
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
-                onValueChanged={({data}) => props.setSurveyData({data})}
+                onValueChanged={(survey) => {
+                    this.updatePages(survey);
+                    props.setData({data: survey.data});
+                }}
                 completedHtml={
                     ReactDOMServer.renderToString(props.completedHtml)
                 }
@@ -98,7 +105,6 @@ export default connect(
     {
         questions: state`questions`,
         init: sequences`initSurvey`,
-        setSurveyData: sequences`setSurveyData`,
         setData: sequences`setSurveyData`,
         setPage: sequences`setSurveyPage`,
         setPages: sequences`setPages`,

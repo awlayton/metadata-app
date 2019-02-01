@@ -11,6 +11,9 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import SendIcon from '@material-ui/icons/Send';
+import WarningIcon from '@material-ui/icons/Warning';
+import DoneIcon from '@material-ui/icons/Done';
 import Drawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -36,18 +39,28 @@ class App extends Component {
                 <AppBar position='static'>
                     <Toolbar>
                         <IconButton
-                            onClick={()=>props.showNavigation()}
+                            onClick={() => props.showNavigation()}
                             aria-label='Menu'>
                             <MenuIcon
                             />
                         </IconButton>
-                        <Button onClick={()=>props.goPreviousPage()}>
+                        <Button
+                            disabled={props.pageNum === 0}
+                            onClick={() => props.goPreviousPage()}>
                             <NavigateBeforeIcon />
                             Previous
                         </Button>
-                        <Button onClick={()=>props.goNextPage()}>
+                        <Button
+                            disabled={props.pageNum === props.pages.length - 1}
+                            onClick={() => props.goNextPage()}>
                             Next
                             <NavigateNextIcon />
+                        </Button>
+                        <Button
+                            disabled={props.pages.some(page => page.error)}
+                            onClick={() => props.submit()}>
+                            Submit
+                            <SendIcon />
                         </Button>
                     </Toolbar>
                 </AppBar>
@@ -57,12 +70,16 @@ class App extends Component {
                   onClose={()=>props.hideNavigation()}
                 >
                     <List>
-                        {props.pages.map((page, pageNum) => (
+                        {props.pages.map(({name, title, error}, pageNum) => (
                             <ListItem
-                                key={page.name}
+                                key={name}
                                 button
+                                className={error ? 'page-err' : 'page-complete'}
                                 onClick={()=>props.setSurveyPage({pageNum})}>
-                                <ListItemText primary={page.title} />
+                                <ListItemIcon>
+                                    {error ? <WarningIcon /> : <DoneIcon />}
+                                </ListItemIcon>
+                                <ListItemText primary={title} />
                             </ListItem>
                         ))}
                     </List>
@@ -94,8 +111,10 @@ export default connect({
     hideNavigation: sequences`hideNavigation`,
     setSurveyPage: sequences`setSurveyPage`,
     pages: state`pages`,
+    pageNum: state`pageNum`,
     goNextPage: sequences`goNextPage`,
     goPreviousPage: sequences`goPreviousPage`,
+    submit: sequences`completeSurvey`,
     questions: state`questions`,
     droneQRScannerActive: state`droneQRScannerActive`,
     sensorQRScannerActive: state`sensorQRScannerActive`,
