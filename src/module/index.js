@@ -126,8 +126,8 @@ export default {
                     visibleIf: '{purpose} == "UAV"',
                     elements: [
                         {
-                            name: 'license',
-                            title: 'Operator License',
+                            name: 'certificate',
+                            title: 'Certificate Number or equivalent',
                             type: 'text',
                             isRequired: true,
                             placeHolder: '1234567',
@@ -140,15 +140,17 @@ export default {
                             ]
                         },
                         {
-                            name: 'operator',
-                            title: 'Operator',
+                            name: 'remote-pic',
+                            title: 'Remote Pilot in Command (PIC)',
+							description: 'remote PIC - A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107.',
                             type: 'text',
                             isRequired: true,
                             placeHolder: 'Rusty Shackleford'
                         },
                         {
                             name: 'observer',
-                            title: 'Observer',
+                            title: 'Visual Observer (VO)',
+							description: 'VO - A person acting as a flightcrew member who assists the small UA remote PIC and the person manipulating the controls to see and avoid other air traffic or objects aloft or on the ground.',
                             type: 'text',
                             placeHolder: 'John Doe'
                         },
