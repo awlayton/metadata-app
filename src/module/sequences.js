@@ -1,4 +1,4 @@
-import {set, merge} from 'cerebral/factories';
+import {set, push, pop, shift, unshift, merge} from 'cerebral/factories';
 import {state, props} from 'cerebral/tags';
 import * as actions from './actions';
 import {sequence, parallel} from 'cerebral';
@@ -35,10 +35,16 @@ export const goPreviousPage = [
 export const completeSurvey = [actions.completeSurvey];
 export const setCurrentLocation = [
     actions.getCurrentLocation,
-    set(props`question`, 'latitude'),
-    set(props`answer`, props`currentLoc.latitude`),
+	/*
+	set(props`question`, 'locations'),
+	unshift(state`surveyData.locations`, {}),
+	set(props`answer`, state`surveyData.locations`),
     actions.setAnswer,
-    set(props`question`, 'longitude'),
-    set(props`answer`, props`currentLoc.longitude`),
+	shift(state`surveyData.locations`),
+	*/
+	push(state`surveyData.locations`, props`currentLoc`),
+	/*
+	set(props`answer`, state`surveyData.locations`),
     actions.setAnswer,
+	*/
 ];

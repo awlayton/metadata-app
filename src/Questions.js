@@ -39,16 +39,15 @@ class Questions extends Component {
             },
             ({pageNum}) => this.model.currentPageNo = pageNum
         );
-        /*
         this.props.reaction('changeData',
             {
                 data: state`surveyData`,
             },
             ({data}) => this.model.data = data
         );
-        */
 
         this.updatePages(this.model);
+        this.props.setData({data: this.model.data});
     }
 
     updatePages(survey) {
@@ -89,9 +88,9 @@ class Questions extends Component {
                             return;
                         }
 
+                        let seq = get(sequences`${question.cerebralbutton}`);
                         ReactDOM.render(
-                            <Button
-                                onClick={get(sequences`${question.cerebralbutton}`)}>
+                            <Button onClick={() => seq()}>
                                 {question.title}
                             </Button>
                         , htmlElement);
@@ -106,6 +105,7 @@ export default connect(
     {
         questions: state`questions`,
         init: sequences`initSurvey`,
+        data: state`surveyData`,
         setData: sequences`setSurveyData`,
         setPage: sequences`setSurveyPage`,
         setPages: sequences`setPages`,
