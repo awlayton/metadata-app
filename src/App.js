@@ -26,6 +26,18 @@ import './App.css';
 import QRDialog from './QRDialog';
 import Questions from './Questions';
 
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import gold from '@material-ui/core/colors/amber';
+
+// All the following keys are optional.
+// We try our best to provide a great default value.
+const theme = createMuiTheme({
+	palette: {
+		//type: 'dark',
+		primary: gold,
+	},
+});
+
 class App extends Component {
 
     componentWillMount() {
@@ -35,6 +47,7 @@ class App extends Component {
     render() {
         let props = this.props;
         return (
+			<MuiThemeProvider theme={theme}>
             <React.Fragment>
             <CssBaseline />
             <div className='App'>
@@ -113,6 +126,7 @@ class App extends Component {
                 />
             </div>
             </React.Fragment>
+			</MuiThemeProvider>
         );
     }
 }
