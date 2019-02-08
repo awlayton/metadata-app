@@ -269,10 +269,24 @@ export default {
                     visibleIf: '{purpose} == "UAV"',
                     elements: [
                         {
-                            name: 'drone-screenshot',
-                            title: 'Screenshot of DroneDeploy',
-                            type: 'file',
-                            allowMultiple: false,
+                            // TODO: make required for submission only
+                            name: 'drone-screenshots',
+                            title: 'DroneDeploy Screenshots',
+                            type: 'panel',
+                            elements: [
+                                {
+                                    name: 'drone-flight-planning',
+                                    title: 'Screenshot of Flight Planning',
+                                    type: 'file',
+                                    allowMultiple: false,
+                                },
+                                {
+                                    name: 'drone-advanced-flight-planning',
+                                    title: 'Screenshot of Advanced Flight Planning',
+                                    type: 'file',
+                                    allowMultiple: false,
+                                },
+                            ],
                         },
                         {
                             name: 'drone-qr',
