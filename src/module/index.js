@@ -261,7 +261,7 @@ export default {
                             name: 'sensors',
                             title: 'Sensors',
                             type: 'paneldynamic',
-                            panelCount: 1,
+                            panelCount: 0,
                             panelAddText: 'Add Sensor',
                             panelRemoveText: 'Remove Sensor',
                             templateTitle: 'Sensor #{panelIndex}',
@@ -368,6 +368,11 @@ export default {
                                 'checked national parks',
                             ],
                         },
+						{
+							name: 'b4ufly-certificate',
+							title: 'COW or COA #',
+							type: 'text',
+						},
                     ],
                 },
                 {
