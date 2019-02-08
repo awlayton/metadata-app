@@ -131,6 +131,78 @@ export default {
                     ]
                 },
                 {
+                    name: 'place',
+                    title: 'Place',
+                    visibleIf: '{purpose} == "UAV"',
+                    elements: [
+                        {
+                            name: 'client',
+                            title: 'Grower (or Client)',
+                            type: 'text',
+                            placeHolder: 'Farmer Frank',
+                        },
+                        {
+                            name: 'operation',
+                            title: 'Farm (or Operation)',
+                            type: 'text',
+                            placeHolder: 'Frank Farms',
+                        },
+                        {
+                            name: 'site',
+                            title: 'Field (or Site)',
+                            type: 'text',
+                            placeHolder: 'East Field',
+                        },
+                        {
+                            name: 'crop',
+                            title: 'Crop',
+                            type: 'text',
+                            placeHolder: 'corn',
+                        },
+                        {
+                            name:'prev-crop',
+                            title: 'Previous Crop',
+                            type: 'text',
+                            placeHolder: 'beans',
+                        },
+                        {
+                            name: 'weather',
+                            title: 'Weather',
+                            type: 'panel',
+                            elements: [
+                                {
+                                    name: 'weather-button',
+                                    title: 'Get Current Weather',
+                                    type: 'html',
+                                    // TODO: Implement functionality for button
+                                    cerebralbutton: 'setCurrentWeather',
+                                },
+                                {
+                                    name: 'temperature',
+                                    title: 'Temperature',
+                                    type: 'text',
+                                    //inputType: 'number',
+                                    placeHolder: '60 F'
+                                },
+                                {
+                                    name: 'windspeed',
+                                    title: 'Wind Speed',
+                                    type: 'text',
+                                    //inputType: 'number',
+                                    placeHolder: '10 mph',
+                                },
+                                {
+                                    name: 'winddirection',
+                                    title: 'Wind Direction',
+                                    type: 'text',
+                                    //inputType: 'number',
+                                    placeHolder: '35 deg',
+                                },
+                            ],
+                        },
+                    ],
+                },
+                {
                     name: 'uav-operator',
                     title: 'UAV Operator',
                     visibleIf: '{purpose} == "UAV"',
@@ -368,11 +440,11 @@ export default {
                                 'checked national parks',
                             ],
                         },
-						{
-							name: 'b4ufly-certificate',
-							title: 'COW or COA #',
-							type: 'text',
-						},
+                        {
+                            name: 'b4ufly-certificate',
+                            title: 'COW or COA #',
+                            type: 'text',
+                        },
                     ],
                 },
                 {
