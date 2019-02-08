@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import {connect} from '@cerebral/react';
 import {state, sequences} from 'cerebral/tags';
 
+import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -32,11 +33,24 @@ import gold from '@material-ui/core/colors/amber';
 // All the following keys are optional.
 // We try our best to provide a great default value.
 const theme = createMuiTheme({
-	palette: {
-		//type: 'dark',
-		primary: gold,
-	},
+    palette: {
+        type: 'dark',
+        primary: gold,
+    },
 });
+
+const styles = {
+    root: {
+        flexGrow: 1,
+    },
+    grow: {
+        flexGrow: 1,
+    },
+    menuButton: {
+        marginLeft: -12,
+        marginRight: 20,
+    },
+};
 
 class App extends Component {
 
@@ -46,46 +60,53 @@ class App extends Component {
 
     render() {
         let props = this.props;
+        const {classes} = props;
         return (
-			<MuiThemeProvider theme={theme}>
+            <MuiThemeProvider theme={theme}>
             <React.Fragment>
             <CssBaseline />
             <div className='App'>
                 <AppBar position='static'>
                     <Toolbar>
                         <IconButton
+                            className={classes.menuButton}
+                            color='inherit'
                             onClick={() => props.showNavigation()}
                             aria-label='Menu'>
                             <MenuIcon
                             />
                         </IconButton>
                         <Button
+                            color='inherit'
                             disabled={props.pageNum === 0}
                             onClick={() => props.goPreviousPage()}>
                             <NavigateBeforeIcon />
                             Previous
                         </Button>
                         <Button
+                            color='inherit'
                             disabled={props.pageNum === props.pages.length - 1}
                             onClick={() => props.goNextPage()}>
                             Next
                             <NavigateNextIcon />
                         </Button>
                         <Button
+                            color='inherit'
                             disabled={props.pages.some(page => page.error)}
                             onClick={() => props.submit()}>
                             Submit
                             <SendIcon />
                         </Button>
-						{props.google ? 
-							<GoogleLogout theme='dark' onLogoutSuccess={props.logout} /> :
-							<GoogleLogin
-								clientId='971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
-								onSuccess={google => props.login({google: google.tokenObj})}
-								theme='dark'
-								isSignedIn={true}
-							/>
-						}
+                        <div className={classes.grow} />
+                        {props.google ? 
+                            <GoogleLogout theme='dark' onLogoutSuccess={props.logout} /> :
+                            <GoogleLogin
+                                clientId='971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
+                                onSuccess={google => props.login({google: google.tokenObj})}
+                                theme='dark'
+                                isSignedIn={true}
+                            />
+                        }
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -126,7 +147,7 @@ class App extends Component {
                 />
             </div>
             </React.Fragment>
-			</MuiThemeProvider>
+            </MuiThemeProvider>
         );
     }
 }
@@ -149,7 +170,7 @@ export default connect({
     hideDroneQRScanner: sequences`hideDroneQRScanner`,
     hideSensorQRScanner: sequences`hideSensorQRScanner`,
     init: sequences`init`,
-	login: sequences`login`,
-	logout: sequences`logout`,
-	google: state`google`,
-}, App);
+    login: sequences`login`,
+    logout: sequences`logout`,
+    google: state`google`,
+}, withStyles(styles)(App));
