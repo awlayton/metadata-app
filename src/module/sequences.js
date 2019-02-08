@@ -1,4 +1,4 @@
-import {set, push, pop, shift, unshift, merge} from 'cerebral/factories';
+import {set, unset, push, pop, shift, unshift, merge} from 'cerebral/factories';
 import {state, props} from 'cerebral/tags';
 import * as actions from './actions';
 import {sequence, parallel} from 'cerebral';
@@ -48,3 +48,6 @@ export const setCurrentLocation = [
     actions.setAnswer,
 	*/
 ];
+
+export const login = [set(state`google`, props`google`)];
+export const logout = [unset(state`google`)];

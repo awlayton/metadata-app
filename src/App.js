@@ -20,6 +20,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
+import {GoogleLogin, GoogleLogout} from 'react-google-login';
+
 import './App.css';
 import QRDialog from './QRDialog';
 import Questions from './Questions';
@@ -62,6 +64,15 @@ class App extends Component {
                             Submit
                             <SendIcon />
                         </Button>
+						{props.google ? 
+							<GoogleLogout theme='dark' onLogoutSuccess={props.logout} /> :
+							<GoogleLogin
+								clientId='971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
+								onSuccess={google => props.login({google: google.tokenObj})}
+								theme='dark'
+								isSignedIn={true}
+							/>
+						}
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -124,4 +135,7 @@ export default connect({
     hideDroneQRScanner: sequences`hideDroneQRScanner`,
     hideSensorQRScanner: sequences`hideSensorQRScanner`,
     init: sequences`init`,
+	login: sequences`login`,
+	logout: sequences`logout`,
+	google: state`google`,
 }, App);
