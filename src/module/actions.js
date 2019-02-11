@@ -23,3 +23,8 @@ export function previousPage({survey}) {
 export function completeSurvey({survey, props}) {
     return {done: survey.submit()};
 }
+
+export async function createSheet({googlesheets}) {
+	let sheet = await googlesheets.createSheet();
+	return {sheet};
+}

@@ -51,3 +51,5 @@ export const setCurrentLocation = [
 
 export const login = [set(state`google`, props`google`)];
 export const logout = [unset(state`google`)];
+
+export const createSheet = [actions.createSheet];

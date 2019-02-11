@@ -102,7 +102,10 @@ class App extends Component {
                             <GoogleLogout theme='dark' onLogoutSuccess={props.logout} /> :
                             <GoogleLogin
                                 clientId='971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
-                                onSuccess={google => props.login({google: google.tokenObj})}
+								onSuccess={google => {
+									props.login({google: google.tokenObj})
+									props.createSheet()
+								}}
                                 theme='dark'
                                 isSignedIn={true}
                             />
@@ -173,4 +176,5 @@ export default connect({
     login: sequences`login`,
     logout: sequences`logout`,
     google: state`google`,
+	createSheet: sequences`createSheet`,
 }, withStyles(styles)(App));

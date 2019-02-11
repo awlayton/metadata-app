@@ -1,5 +1,7 @@
-//import Promise from 'bluebird';
+import Promise from 'bluebird';
 //import {state} from 'cerebral';
+import googleapi from 'google-client-api';
+
 import {GetLocationError} from './errors';
 import model from '../surveyModel';
 
@@ -55,4 +57,23 @@ export const survey = {
     submit() {
         return model.model.completeLastPage();
     },
+};
+
+let client = new Promise(async (resolve, reject) => {
+	let gapi = await googleapi();
+	return gapi.load('client', {
+		callback: () => resolve(gapi.client),
+		onerror: reject,
+		ontimout: reject,
+	});
+}).tap(client => client.init({
+	scope: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets',
+	clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
+}));
+export const googlesheets = {
+	async createSheet() {
+
+		console.dir(await client)
+		return (await client).sheets.spreadsheets.create();
+	}
 };
