@@ -6,9 +6,6 @@ import * as Survey from 'survey-react';
 import * as providers from './providers';
 import * as sequences from './sequences';
 
-Survey.Survey.cssType = 'material';
-Survey.StylesManager.applyTheme('darkblue');
-
 // TODO: Get current date/time better
 var [date, time] = (new Date((new Date()).toLocaleString() + ' UTC'))
         .toISOString().split(/[TZ]/);

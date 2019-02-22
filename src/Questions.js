@@ -6,6 +6,7 @@ import {connect} from '@cerebral/react';
 import {state, sequences} from 'cerebral/tags';
 
 import Button from '@material-ui/core/Button';
+import {withTheme} from '@material-ui/core/styles';
 
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
@@ -18,7 +19,23 @@ Survey.JsonObject.metaData.addProperty('question', {
 
 class Questions extends Component {
     componentWillMount() {
-        let get = this.props.get;
+        const {get, theme} = this.props;
+
+        // Apply MUI theme to survey
+        const {palette} = theme;
+        let themeColors = Survey.StylesManager.ThemeColors['default'];
+        themeColors["$main-color"] = palette.primary.main;
+        themeColors["$main-hover-color"] = palette.primary.dark;
+        themeColors["$text-color"] = palette.text.primary;
+        themeColors["$header-color"] = palette.secondary.main;
+        themeColors["$border-color"] = palette.divider;
+        themeColors["$header-background-color"] = palette.secondary.main;
+        themeColors["$body-background-color"] = palette.background.default;
+        themeColors["$body-container-background-color"] = palette.background.paper;
+        themeColors["$inputs-background-color"] = palette.background.paper;
+        themeColors["$error-color"] = palette.error.main;
+        themeColors["$error-background-color"] = palette.error.light;
+        Survey.StylesManager.applyTheme('default');
 
         this.model = new Survey.Model(this.props.questions);
         surveyModel.model = this.model;
@@ -110,5 +127,5 @@ export default connect(
         setPage: sequences`setSurveyPage`,
         setPages: sequences`setPages`,
     },
-    Questions
+    withTheme()(Questions)
 );

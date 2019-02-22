@@ -34,7 +34,7 @@ import gold from '@material-ui/core/colors/amber';
 // We try our best to provide a great default value.
 const theme = createMuiTheme({
     palette: {
-        type: 'dark',
+		//type: 'dark',
         primary: gold,
     },
 });
