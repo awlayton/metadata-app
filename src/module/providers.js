@@ -59,21 +59,23 @@ export const survey = {
     },
 };
 
-let client = new Promise(async (resolve, reject) => {
-	let gapi = await googleapi();
-	return gapi.load('client', {
-		callback: () => resolve(gapi.client),
-		onerror: reject,
-		ontimout: reject,
+let gapi = Promise.resolve(googleapi())
+	.tap(console.dir)
+	.tap(({client}) => {
+		let t = client.init({
+		scope: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets',
+		clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com',
+		discoveryDocs: [ 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://sheets.googleapis.com/$discovery/rest?version=v4' ],
+		});
+		//return new Promise(t.then);
 	});
-}).tap(client => client.init({
-	scope: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets',
-	clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
-}));
 export const googlesheets = {
 	async createSheet() {
+		let g = await gapi.delay(1000);
+		g.auth2.getAuthInstance().signIn();
+		await Promise.delay(1000)
 
-		console.dir(await client)
-		return (await client).sheets.spreadsheets.create();
+		console.log(g.client.sheets)
+		return await (g.client.sheets.spreadsheets.create({}, {}));
 	}
 };

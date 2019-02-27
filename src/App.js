@@ -68,7 +68,7 @@ class App extends Component {
         return (
             <MuiThemeProvider theme={theme}>
             <React.Fragment>
-            <CssBaseline />
+			<CssBaseline />
             <div className='App'>
                 <AppBar position='static'>
                     <Toolbar>
@@ -102,6 +102,7 @@ class App extends Component {
                             <SendIcon />
                         </Button>
                         <div className={classes.grow} />
+						<div className="g-signin2" data-onsuccess={() => props.createSheet()}></div>
                         {props.google ? 
                             <GoogleLogout theme='dark' onLogoutSuccess={props.logout} /> :
                             <GoogleLogin

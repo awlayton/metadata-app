@@ -472,5 +472,8 @@ export default {
             ]
         },
     },
+	catch: [
+		[Error, ({error}) => console.error(error)],
+	],
     providers,
 };
