@@ -4,19 +4,20 @@
   "private": true,
   "homepage": "https://awlayton.github.io/metadata-app",
   "dependencies": {
-    "@cerebral/react": "^4.0.4",
-    "@material-ui/core": "^3.9.1",
+    "@cerebral/react": "^4.1.0",
+    "@material-ui/core": "^3.9.2",
     "@material-ui/icons": "^3.0.2",
     "bluebird": "^3.5.3",
-    "cerebral": "^5.0.4",
+    "cerebral": "^5.1.0",
     "gh-pages": "^2.0.1",
     "google-client-api": "^1.0.4",
-    "react": "^16.7.0",
-    "react-dom": "^16.7.0",
+    "query-string": "^6.2.0",
+    "react": "^16.8.3",
+    "react-dom": "^16.8.3",
     "react-google-login": "^5.0.2",
-    "react-qr-reader": "^2.1.2",
+    "react-qr-reader": "^2.2.1",
     "react-scripts": "2.1.1",
-    "survey-react": "^1.0.66"
+    "survey-react": "^1.0.72"
   },
   "scripts": {
     "predeploy": "npm run build",

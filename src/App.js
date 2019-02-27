@@ -22,6 +22,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
 import {GoogleLogin, GoogleLogout} from 'react-google-login';
+import queryString from 'query-string';
 
 import './App.css';
 import QRDialog from './QRDialog';
@@ -30,11 +31,14 @@ import Questions from './Questions';
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
 
+// Parse query string
+const params = queryString.parse(window.location.search);
+
 // All the following keys are optional.
 // We try our best to provide a great default value.
 const theme = createMuiTheme({
     palette: {
-		//type: 'dark',
+		type: params.theme || 'light',
         primary: gold,
     },
 });
@@ -142,7 +146,7 @@ class App extends Component {
                     onClose={props.hideSensorQRScanner}
                 />
                 <Questions
-                    isSinglePage={false}
+                    isSinglePage={params.singlePage !== undefined}
                     completedHtml={
                         (<div> woo done!</div>)
                     }
