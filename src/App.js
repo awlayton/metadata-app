@@ -103,11 +103,12 @@ class App extends Component {
                         </Button>
                         <div className={classes.grow} />
 						<div className="g-signin2" data-onsuccess={() => props.createSheet()}></div>
-                        {props.google ? 
+                        {props.google ?
                             <GoogleLogout theme='dark' onLogoutSuccess={props.logout} /> :
                             <GoogleLogin
-                                clientId='971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
+                                //clientId='971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com'
 								onSuccess={google => {
+                                    console.dir(google)
 									props.login({google: google.tokenObj})
 									props.createSheet()
 								}}
