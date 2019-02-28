@@ -60,9 +60,10 @@ export const survey = {
 };
 
 let gapi = Promise.resolve(googleapi())
-	.tap(console.dir)
-	.tap(({client}) => {
-		let t = client.init({
+  .then(({load}) => {
+    return Promise.promisify(load)('client');
+  }).then(() => {
+		let t = window.gapi.client.init({
 		scope: 'https://www.googleapis.com/auth/drive https://www.googleapis.com/auth/spreadsheets',
 		clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com',
 		discoveryDocs: [ 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://sheets.googleapis.com/$discovery/rest?version=v4' ],
