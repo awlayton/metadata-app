@@ -59,29 +59,27 @@ export const survey = {
     },
 };
 
-let gapi = Promise.resolve(googleapi())
-    .tap(({load}) => new Promise((resolve, reject) => load('client:auth2', {
+let gapiP = Promise.resolve(googleapi())
+    // Load client library
+    .tap(({load}) => new Promise((resolve, reject) => load('client', {
         callback: resolve,
         onerror: reject,
         timeout: 10000,
         ontimeout: reject,
     })))
-    .tap(console.dir)
-    .tap(() => new Promise((resolve, reject) => window.gapi.client.init({
-        immediate: true,
-        scope: 'https://www.googleapis.com/auth/drive.file',
-        clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com',
+    // Initialize client (load sheets and drive APIs)
+    .tap(({client}) => new Promise((resolve, reject) => client.init({
+        //scope: 'https://www.googleapis.com/auth/drive.file',
+        //clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com',
         discoveryDocs: [ 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://sheets.googleapis.com/$discovery/rest?version=v4' ],
     }).then(() => resolve(), reject)));
 export const googlesheets = {
     async createSheet() {
-        console.log('1');
-        let g = await gapi.delay(1000);
-        console.log('2')
-        g.auth2.getAuthInstance().signIn();
-        await Promise.delay(1000)
+        // Request needed scopes from user
+        let gapi = await gapiP.tap(({auth2}) => auth2.getAuthInstance().currentUser.get().grant({
+            scope: 'https://www.googleapis.com/auth/drive.file',
+        }));
 
-        //console.log(g.client.sheets)
-        return await (window.gapi.client.sheets.spreadsheets.create({}, {}));
+        return await (gapi.client.sheets.spreadsheets.create({}, {}));
     }
 };
