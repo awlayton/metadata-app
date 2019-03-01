@@ -61,31 +61,43 @@ export const survey = {
 };
 
 let client;
-// Do one-time gapi setup not effected by login/logout
-let gapi = Promise.resolve(googleapi())
-    // Load client library
-    .tap(({load}) => new Promise((resolve, reject) => load('client', {
-        callback: resolve,
-        onerror: reject,
-        timeout: 10000,
-        ontimeout: reject,
-    })))
-    // Initialize client (load sheets and drive APIs)
-    .tap(({client}) => client.init({
-        discoveryDocs: [
-            'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
-            'https://sheets.googleapis.com/$discovery/rest?version=v4'
-        ],
-    }))
-    // Listen for logout
-    .tap(({auth2}) => {
-        auth2.getAuthInstance().isSignedIn.listen(signedIn => {
-            if (!signedIn) {
-                client = undefined;
-            }
-        });
-    })
+let gapi;
 export const gapiClient = {
+    // Do one-time gapi setup not effected by login/logout
+    async init({login, logout}) {
+        gapi = Promise.resolve(googleapi())
+            // Load client library
+            .tap(({load}) => new Promise((resolve, reject) => load('client', {
+                callback: resolve,
+                onerror: reject,
+                timeout: 10000,
+                ontimeout: reject,
+            })))
+            // Initialize client (load sheets and drive APIs)
+            .tap(({client}) => client.init({
+                discoveryDocs: [
+                    'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
+                    'https://sheets.googleapis.com/$discovery/rest?version=v4'
+                ],
+            }))
+            // Listen for login/logout
+            .tap(({auth2}) => {
+                let auth = auth2.getAuthInstance();
+                let listener = signedIn => {
+                    if (!signedIn) {
+                        client = undefined;
+                        logout && this.context.get(logout)();
+                    } else {
+                        login && this.context.get(login)();
+                    }
+                };
+
+                auth.isSignedIn.listen(listener);
+                listener(auth.isSignedIn.get());
+            });
+        await gapi;
+    },
+
     async get() {
         if (client) {
             return client;
@@ -116,6 +128,27 @@ export const googlesheets = {
         } catch ({result}) {
             throw new GAPIError(result);
         }
+    },
+
+    async getSheet(id) {
+        let {sheets} = await this.context.gapiClient.get();
+
+        let result;
+        try {
+            ({result} = await sheets.spreadsheets.values.get({
+                spreadsheetId: id,
+                range: ['Sheet1'],
+            }));
+        } catch (error) {
+            throw new GAPIError({error});
+        }
+
+        if (!result.values) {
+            return [];
+        }
+
+        let sheet = XLSX.utils.aoa_to_sheet(result.values);
+        return XLSX.utils.sheet_to_json(sheet);
     },
 
     async writeSheet(id, data) {

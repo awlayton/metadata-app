@@ -1,8 +1,6 @@
 //import {state} from 'cerebral';
 import {state, props} from 'cerebral/tags';
 
-import XLSX from 'xlsx';
-
 export function getCurrentLocation({geolocation}) {
     return geolocation.getCurrentLoc()
         .then(({latitude, longitude}) => ({currentLoc: {latitude, longitude}}));
@@ -27,6 +25,9 @@ export function completeSurvey({survey, props}) {
     return {done: survey.submit()};
 }
 
+export async function initGapi({gapiClient, props}) {
+	return gapiClient.init(props);
+}
 export async function createSheet({googlesheets}) {
 	let sheet = await googlesheets.createSheet();
 	return {sheet};
@@ -35,19 +36,50 @@ export async function initSheet({googlesheets, props}) {
 	let {result} = await googlesheets.createSheet();
 	await googlesheets.addRow(result.spreadsheetId, props.headerRow);
 }
-export async function uploadResults({googlesheets, get}) {
-	let data = get(state`pastData`);
-	let results = get(state`surveyData`);
+export async function serializeResults({props}) {
+	let {results} = props;
 
 	// TODO: Better way to handle arrays and such in a spreadsheet?
-	let newData = {};
-	Object.keys(results).forEach(key => {
-		if (results[key] && typeof results[key] === 'object') {
-			newData[key] = JSON.stringify(results[key]);
-		} else {
-			newData[key] = results[key];
-		}
+	let serialized = results.map(result => {
+		let serialized = {};
+		Object.keys(result).forEach(key => {
+			if (result[key] && typeof result[key] === 'object') {
+				serialized['$$' + key] = JSON.stringify(result[key]);
+			} else {
+				serialized[key] = result[key];
+			}
+		});
+		return serialized;
 	});
 
-	return googlesheets.writeSheet(get(state`resultsId`), data.concat(newData));
+	return {results: serialized};
+}
+export async function deserializeResults({props}) {
+	let {results} = props;
+
+	let deserialized = results.map(result => {
+		let deserialized = {};
+		Object.keys(result).forEach(key => {
+			if (key.startsWith('$$')) {
+				deserialized[key.substring(2)] = JSON.parse(result[key]);
+			} else {
+				deserialized[key] = result[key];
+			}
+		});
+		return deserialized;
+	});
+
+	return {results: deserialized};
+}
+export async function loadPastResults({googlesheets, props}) {
+	let {resultsId} = props;
+
+	let results = (await googlesheets.getSheet(resultsId)) || [];
+
+	return {results};
+}
+export async function uploadResults({googlesheets, props}) {
+	let {results, resultsId} = props;
+
+	return googlesheets.writeSheet(resultsId, results);
 }

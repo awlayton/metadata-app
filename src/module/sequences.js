@@ -1,9 +1,13 @@
-import {set, unset, push, pop, shift, unshift, merge} from 'cerebral/factories';
-import {state, props} from 'cerebral/tags';
+import {set, push, when} from 'cerebral/factories';
+import {state, sequences, props} from 'cerebral/tags';
 import * as actions from './actions';
 import {sequence, parallel} from 'cerebral';
 
-export const init = [];
+export const init = [
+    set(props`login`, sequences`login`),
+    set(props`logout`, sequences`logout`),
+    actions.initGapi,
+];
 
 export const showDroneQRScanner = [set(state`droneQRScannerActive`, true)];
 export const hideDroneQRScanner = [set(state`droneQRScannerActive`, false)];
@@ -49,11 +53,28 @@ export const setCurrentLocation = [
 	*/
 ];
 
-export const login = [set(state`google`, props`google`)];
-export const logout = [unset(state`google`)];
+export const login = [
+    set(props`resultsId`, state`resultsId`),
+    actions.loadPastResults,
+    actions.deserializeResults,
+    set(state`pastData`, props`results`),
+    set(state`loggedin`, true),
+];
+export const logout = [
+    set(state`loggedin`, false),
+    set(state`pastData`, []),
+];
 
 export const createSheet = [actions.createSheet];
 export const submitResults = [
-    actions.uploadResults,
+    when(state`loggedin`),
+    {
+        true: [],
+        false: login,
+    },
     push(state`pastData`, state`surveyData`),
+    set(props`results`, state`pastData`),
+    actions.serializeResults,
+    set(props`resultsId`, state`resultsId`),
+    actions.uploadResults,
 ];
