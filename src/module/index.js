@@ -1,14 +1,11 @@
 //import { set } from 'cerebral/operators';
 //import { state } from 'cerebral/tags';
-//
+
+import {DateTime} from 'luxon';
 import * as Survey from 'survey-react';
 
 import * as providers from './providers';
 import * as sequences from './sequences';
-
-// TODO: Get current date/time better
-var [date, time] = (new Date((new Date()).toLocaleString() + ' UTC'))
-        .toISOString().split(/[TZ]/);
 
 // TODO: Get these from sheets
 const sensors = [
@@ -34,10 +31,13 @@ const drones = [
 export default {
     sequences,
     state: {
+        // TODO: make this not hardcoded
+        resultsId: '1PLwhdJdjYJ6vO_HNhZ6_aW32AwGzyz2CvL0Ymyf5Qo8', // Sheet ID
         navigationOpen: true,
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
         surveyData: null,
+        pastData: [],
         pages: [],
         pageNum: 0,
         questions: {
@@ -66,23 +66,10 @@ export default {
                         {
                             name: 'datetime',
                             title: 'Date/Time of data',
-                            type: 'multipletext',
-                            defaultValue: {
-                                date: date,
-                                time: time,
-                            },
-                            items: [
-                                {
-                                    name: 'date',
-                                    title: 'Date',
-                                    inputType: 'date',
-                                },
-                                {
-                                    name: 'time',
-                                    title: 'Time',
-                                    inputType: 'time',
-                                },
-                            ]
+                            type: 'text',
+                            inputType: 'datetime-local',
+                            defaultValue: DateTime.local()
+                                .toFormat("yyyy-MM-dd'T'HH:mm:ss"),
                         },
                         {
                             type: 'panel',
@@ -472,8 +459,8 @@ export default {
             ]
         },
     },
-	catch: [
-		[Error, ({error}) => console.error(error)],
-	],
+    catch: [
+        [Error, ({error}) => console.error(error)],
+    ],
     providers,
 };

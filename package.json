@@ -11,12 +11,14 @@
     "cerebral": "^5.1.0",
     "gh-pages": "^2.0.1",
     "google-client-api": "^1.0.4",
+    "luxon": "^1.11.3",
     "query-string": "^6.2.0",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
     "react-qr-reader": "^2.2.1",
     "react-scripts": "2.1.1",
-    "survey-react": "^1.0.72"
+    "survey-react": "^1.0.72",
+    "xlsx": "^0.14.1"
   },
   "scripts": {
     "predeploy": "npm run build",
