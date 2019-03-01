@@ -103,6 +103,7 @@ class App extends Component {
                         </Button>
                         <div className={classes.grow} />
                         <Button onClick={() => props.createSheet()}> Foo </Button>
+                        <Button onClick={() => props.submitResults()}> Bar </Button>
 						<div className="g-signin2" data-theme='dark' />
                     </Toolbar>
                 </AppBar>
@@ -171,4 +172,5 @@ export default connect({
     logout: sequences`logout`,
     google: state`google`,
 	createSheet: sequences`createSheet`,
+    submitResults: sequences`submitResults`,
 }, withStyles(styles)(App));

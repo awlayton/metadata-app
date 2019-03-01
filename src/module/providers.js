@@ -1,8 +1,9 @@
 import Promise from 'bluebird';
 //import {state} from 'cerebral';
 import googleapi from 'google-client-api';
+import XLSX from 'xlsx';
 
-import {GetLocationError} from './errors';
+import {GetLocationError, GAPIError} from './errors';
 import model from '../surveyModel';
 
 export const geolocation = {
@@ -59,7 +60,9 @@ export const survey = {
     },
 };
 
-let gapiP = Promise.resolve(googleapi())
+let client;
+// Do one-time gapi setup not effected by login/logout
+let gapi = Promise.resolve(googleapi())
     // Load client library
     .tap(({load}) => new Promise((resolve, reject) => load('client', {
         callback: resolve,
@@ -68,18 +71,87 @@ let gapiP = Promise.resolve(googleapi())
         ontimeout: reject,
     })))
     // Initialize client (load sheets and drive APIs)
-    .tap(({client}) => new Promise((resolve, reject) => client.init({
-        //scope: 'https://www.googleapis.com/auth/drive.file',
-        //clientId: '971551995245-9fmoq64cftrk371tft6qutehpn4i04b9.apps.googleusercontent.com',
-        discoveryDocs: [ 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest', 'https://sheets.googleapis.com/$discovery/rest?version=v4' ],
-    }).then(() => resolve(), reject)));
+    .tap(({client}) => client.init({
+        discoveryDocs: [
+            'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
+            'https://sheets.googleapis.com/$discovery/rest?version=v4'
+        ],
+    }))
+    // Listen for logout
+    .tap(({auth2}) => {
+        auth2.getAuthInstance().isSignedIn.listen(signedIn => {
+            if (!signedIn) {
+                client = undefined;
+            }
+        });
+    })
+export const gapiClient = {
+    async get() {
+        if (client) {
+            return client;
+        }
+
+        client = await gapi
+            // Request needed scopes from user
+            .tap(({auth2}) => {
+                const grants = {
+                    scope: 'https://www.googleapis.com/auth/drive.file',
+                };
+                let auth = auth2.getAuthInstance();
+
+                return auth.currentUser.get().grant(grants);
+            })
+            .get('client');
+
+        return client;
+    }
+}
 export const googlesheets = {
     async createSheet() {
-        // Request needed scopes from user
-        let gapi = await gapiP.tap(({auth2}) => auth2.getAuthInstance().currentUser.get().grant({
-            scope: 'https://www.googleapis.com/auth/drive.file',
-        }));
+        let {sheets} = await this.context.gapiClient.get();
 
-        return await (gapi.client.sheets.spreadsheets.create({}, {}));
-    }
+        try {
+            let {result} = await sheets.spreadsheets.create({}, {});
+            return result;
+        } catch ({result}) {
+            throw new GAPIError(result);
+        }
+    },
+
+    async writeSheet(id, data) {
+        let {sheets} = await this.context.gapiClient.get();
+
+        // Format data with spreadsheet lib
+        let sheet = XLSX.utils.json_to_sheet(data);
+        let values = XLSX.utils.sheet_to_json(sheet, {header: 1});
+
+        try {
+            let {result} = await sheets.spreadsheets.values.update({
+                spreadsheetId: id,
+                range: sheet['!ref'],
+                valueInputOption: 'USER_ENTERED', // 'RAW'
+                includeValuesInResponse: false,
+            }, {
+                majorDimension: 'ROWS',
+                values,
+            });
+            return result;
+        } catch ({result}) {
+            throw new GAPIError(result);
+        }
+    },
+
+    async addRow(id, cols, row) {
+        let {sheets} = await this.context.gapiClient.get();
+
+        return sheets.spreadsheets.values.append({
+            spreadsheetId: id,
+            valueInputOption: 'USER_ENTERED', // 'RAW'
+            insertDataOption: 'INSERT_ROWS', // 'OVERWRITE'
+            includeValuesInResponse: false,
+        }, {
+            majorDimension: 'ROWS',
+            values: [row],
+        });
+    },
 };

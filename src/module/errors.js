@@ -6,3 +6,11 @@ export class GetLocationError extends CerebralError {
         this.name = 'GetLocationError';
     }
 }
+
+export class GAPIError extends CerebralError {
+    constructor({error}) {
+        super(error.message);
+        this.name = 'GAPIError';
+        this.result = error;
+    }
+}
