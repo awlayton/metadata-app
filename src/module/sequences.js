@@ -7,6 +7,7 @@ export const init = [
     set(props`login`, sequences`login`),
     set(props`logout`, sequences`logout`),
     actions.initGapi,
+    ({get}) => get(sequences`store.init`)(),
 ];
 
 export const showDroneQRScanner = [set(state`droneQRScannerActive`, true)];
@@ -39,18 +40,12 @@ export const goPreviousPage = [
 export const completeSurvey = [actions.completeSurvey];
 export const setCurrentLocation = [
     actions.getCurrentLocation,
-	/*
+    set(props`locations`, state`surveyData.locations`),
+    // Using the push factory seems to break things...
+    ({props}) => ({locations: props.locations.concat(props.currentLoc)}),
 	set(props`question`, 'locations'),
-	unshift(state`surveyData.locations`, {}),
-	set(props`answer`, state`surveyData.locations`),
+	set(props`answer`, props`locations`),
     actions.setAnswer,
-	shift(state`surveyData.locations`),
-	*/
-	push(state`surveyData.locations`, props`currentLoc`),
-	/*
-	set(props`answer`, state`surveyData.locations`),
-    actions.setAnswer,
-	*/
 ];
 
 export const login = [

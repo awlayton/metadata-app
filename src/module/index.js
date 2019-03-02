@@ -4,6 +4,8 @@
 import {DateTime} from 'luxon';
 import * as Survey from 'survey-react';
 
+import localstore from '../localstore';
+
 import * as providers from './providers';
 import * as sequences from './sequences';
 
@@ -27,6 +29,8 @@ const drones = [
         type: 'Fixed wing',
     },
 ];
+
+const store = localstore(['pageNum', 'surveyData']);
 
 export default {
     sequences,
@@ -463,4 +467,8 @@ export default {
         [Error, ({error}) => console.error(error)],
     ],
     providers,
+    modules: {
+        store,
+        //storage,
+    },
 };

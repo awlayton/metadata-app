@@ -1,5 +1,4 @@
 //import {state} from 'cerebral';
-import {state, props} from 'cerebral/tags';
 
 export function getCurrentLocation({geolocation}) {
     return geolocation.getCurrentLoc()

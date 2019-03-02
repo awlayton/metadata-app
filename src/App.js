@@ -141,7 +141,7 @@ class App extends Component {
                     completedHtml={
                         (<div> woo done!</div>)
                     }
-                    onComplete={({data}) => console.log(JSON.stringify(data))}
+                    onComplete={({data}) => props.submitResults()}
                 />
             </div>
             </React.Fragment>
