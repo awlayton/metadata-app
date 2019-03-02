@@ -40,7 +40,7 @@ export default (paths) => ({
             // Load each path from store and set it in state
             paths.map(path => [
                 ({localstore}) => ({val: localstore.get(path)}),
-                when(props`val`, val => typeof val === 'object'),
+                when(props`val`, val => val && typeof val === 'object'),
                 {
                     true: [merge(state`${path}`, props`val`)],
                     false: [set(state`${path}`, props`val`)],
