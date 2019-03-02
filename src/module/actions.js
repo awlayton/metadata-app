@@ -82,3 +82,18 @@ export async function uploadResults({googlesheets, props}) {
 
 	return googlesheets.writeSheet(resultsId, results);
 }
+
+export async function createAppData({googleappdata, props}) {
+    let result = await googleappdata.initData(props);
+
+    return {result};
+}
+export async function loadAppData({googleappdata, path}) {
+    let data = await googleappdata.getData();
+
+    if (data) {
+        return path.found({body: data});
+    } else {
+        return path.notfound();
+    }
+}

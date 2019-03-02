@@ -1,6 +1,6 @@
 import {Reaction} from 'cerebral';
 import {state, props, sequences} from 'cerebral/tags'
-import {set, when} from 'cerebral/factories';
+import {set, merge, when} from 'cerebral/factories';
 
 import ls from 'local-storage';
 
@@ -40,7 +40,11 @@ export default (paths) => ({
             // Load each path from store and set it in state
             paths.map(path => [
                 ({localstore}) => ({val: localstore.get(path)}),
-                set(state`${path}`, props`val`),
+                when(props`val`, val => typeof val === 'object'),
+                {
+                    true: [merge(state`${path}`, props`val`)],
+                    false: [set(state`${path}`, props`val`)],
+                }
             ]),
             set(state`store.initialized`, true),
         ],

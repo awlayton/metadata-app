@@ -35,8 +35,7 @@ const store = localstore(['pageNum', 'surveyData']);
 export default {
     sequences,
     state: {
-        // TODO: make this not hardcoded
-        resultsId: '1PLwhdJdjYJ6vO_HNhZ6_aW32AwGzyz2CvL0Ymyf5Qo8', // Sheet ID
+        resultsId: null,
         navigationOpen: true,
         droneQRScannerActive: false,
         sensorQRScannerActive: false,

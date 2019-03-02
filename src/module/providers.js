@@ -107,7 +107,10 @@ export const gapiClient = {
             // Request needed scopes from user
             .tap(({auth2}) => {
                 const grants = {
-                    scope: 'https://www.googleapis.com/auth/drive.file',
+                    scope: [
+                        'https://www.googleapis.com/auth/drive.file',
+                        'https://www.googleapis.com/auth/drive.appdata',
+                    ].reduce((a, b) => `${a} ${b}`),
                 };
                 let auth = auth2.getAuthInstance();
 
@@ -117,6 +120,42 @@ export const gapiClient = {
 
         return client;
     }
+}
+export const googleappdata = {
+    async getData() {
+        let {drive} = await this.context.gapiClient.get();
+
+        let result;
+        try {
+            ({result} = await drive.files.list({
+                spaces: 'appDataFolder',
+                q: "name='config.json'",
+                fields: 'files(id, appProperties)',
+            }));
+        } catch (err) {
+            throw new GAPIError(err);
+        }
+
+        return result.files[0].appProperties;
+    },
+
+    async initData({body = {}}) {
+        let {drive} = await this.context.gapiClient.get();
+
+        try {
+            let {result} = await drive.files.create({
+                resource: {
+                    name: 'config.json',
+                    mimeType: 'application/json',
+                    parents: ['appDataFolder'],
+                    appProperties: body,
+                },
+            });
+            return result;
+        } catch (err) {
+            throw new GAPIError(err);
+        }
+    },
 }
 export const googlesheets = {
     async createSheet() {

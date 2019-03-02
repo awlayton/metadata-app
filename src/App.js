@@ -101,8 +101,6 @@ class App extends Component {
                             <SendIcon />
                         </Button>
                         <div className={classes.grow} />
-                        <Button onClick={() => props.createSheet()}> Foo </Button>
-                        <Button onClick={() => props.submitResults()}> Bar </Button>
 						<div className="g-signin2" data-theme='dark' />
                     </Toolbar>
                 </AppBar>

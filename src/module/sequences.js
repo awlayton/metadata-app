@@ -48,13 +48,30 @@ export const setCurrentLocation = [
     actions.setAnswer,
 ];
 
+export const loadappdata = [
+    actions.loadAppData,
+    {
+        found: [],
+        notfound: [
+            actions.createSheet,
+            set(props`body`, {}),
+            set(props`body.resultsId`, props`sheet.spreadsheetId`),
+            actions.createAppData,
+        ],
+    },
+    set(state`resultsId`, props`body.resultsId`),
+];
+
+// Run _after_ login
 export const login = [
+    loadappdata,
     set(props`resultsId`, state`resultsId`),
     actions.loadPastResults,
     actions.deserializeResults,
     set(state`pastData`, props`results`),
     set(state`loggedin`, true),
 ];
+// Runs _after_ logout
 export const logout = [
     set(state`loggedin`, false),
     set(state`pastData`, []),
