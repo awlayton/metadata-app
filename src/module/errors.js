@@ -8,7 +8,13 @@ export class GetLocationError extends CerebralError {
 }
 
 export class GAPIError extends CerebralError {
-    constructor({error}) {
+    constructor(err) {
+        // gapi doesn't always throw the same sorts of things..
+        let error = err;
+        if (err.result && error.result.error) {
+            error = err.result.error;
+        }
+
         super(error.message);
         this.name = 'GAPIError';
         this.result = error;

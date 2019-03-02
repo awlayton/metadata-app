@@ -125,8 +125,8 @@ export const googlesheets = {
         try {
             let {result} = await sheets.spreadsheets.create({}, {});
             return result;
-        } catch ({result}) {
-            throw new GAPIError(result);
+        } catch (err) {
+            throw new GAPIError(err);
         }
     },
 
@@ -139,8 +139,8 @@ export const googlesheets = {
                 spreadsheetId: id,
                 range: ['Sheet1'],
             }));
-        } catch (error) {
-            throw new GAPIError({error});
+        } catch (err) {
+            throw new GAPIError(err);
         }
 
         if (!result.values) {
@@ -169,8 +169,8 @@ export const googlesheets = {
                 values,
             });
             return result;
-        } catch ({result}) {
-            throw new GAPIError(result);
+        } catch (err) {
+            throw new GAPIError(err);
         }
     },
 
