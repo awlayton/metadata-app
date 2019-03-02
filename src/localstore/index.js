@@ -14,6 +14,10 @@ export default (paths) => ({
             set(key, val) {
                 return ls.set(key, val);
             },
+
+            clear() {
+                return ls.clear();
+            },
         },
     },
 
@@ -33,6 +37,7 @@ export default (paths) => ({
             },
         ],
         init: [
+            // Load each path from store and set it in state
             paths.map(path => [
                 ({localstore}) => ({val: localstore.get(path)}),
                 set(state`${path}`, props`val`),
@@ -41,6 +46,7 @@ export default (paths) => ({
         ],
     },
 
+    // Generate a reaction for each path in the store
     reactions: paths.map(path => ({[path] : Reaction(
         {
             val: state`${path}`,

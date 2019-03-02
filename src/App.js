@@ -21,7 +21,6 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 
-import {GoogleLogin, GoogleLogout} from 'react-google-login';
 import queryString from 'query-string';
 
 import './App.css';
