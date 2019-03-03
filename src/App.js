@@ -70,8 +70,8 @@ window.addEventListener('beforeinstallprompt', (e) => {
     e.preventDefault();
     // Stash the event so it can be triggered later.
     //deferredPrompt = e;
-    if (params.install) {
-        prompt(e); // TODO: Don't show prompt immediately?
+    if (params.install !== undefined) {
+        e.prompt(); // TODO: Don't show prompt immediately?
     }
 });
 
