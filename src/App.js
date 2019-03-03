@@ -65,6 +65,16 @@ const styles = {
     },
 };
 
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent Chrome 67 and earlier from automatically showing the prompt
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    //deferredPrompt = e;
+    if (params.install) {
+        prompt(e); // TODO: Don't show prompt immediately?
+    }
+});
+
 class App extends Component {
 
     componentWillMount() {
@@ -101,9 +111,9 @@ class App extends Component {
                     </Toolbar>
                 </AppBar>
                 <Drawer
-                  open={props.navigationOpen}
-                  onOpen={()=>props.showNavigation()}
-                  onClose={()=>props.hideNavigation()}
+                    open={props.navigationOpen}
+                    onOpen={()=>props.showNavigation()}
+                    onClose={()=>props.hideNavigation()}
                 >
                     <List>
                         {props.pages.map(({name, title, error}, pageNum) => (
