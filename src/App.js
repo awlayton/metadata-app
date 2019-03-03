@@ -7,7 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+//import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -38,6 +38,9 @@ const params = queryString.parse(window.location.search);
 // All the following keys are optional.
 // We try our best to provide a great default value.
 const theme = createMuiTheme({
+    typography: {
+        useNextVariants: true,
+    },
     palette: {
         type: params.theme || 'dark',
         primary: gold,
@@ -76,14 +79,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
 });
 
 class App extends Component {
-
     componentWillMount() {
         this.props.init();
     }
 
     render() {
-        let props = this.props;
+        let {props} = this;
         const {classes} = props;
+
         return (
             <MuiThemeProvider theme={theme}>
             <React.Fragment>

@@ -1,7 +1,6 @@
 import {set, push, when} from 'cerebral/factories';
 import {state, sequences, props} from 'cerebral/tags';
 import * as actions from './actions';
-import {sequence, parallel} from 'cerebral';
 
 export const init = [
     set(props`login`, sequences`login`),

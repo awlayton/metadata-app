@@ -2,9 +2,8 @@
 //import { state } from 'cerebral/tags';
 
 import {DateTime} from 'luxon';
-import * as Survey from 'survey-react';
 
-import localstore from '../localstore';
+import localstore from './modules/localstore';
 
 import * as providers from './providers';
 import * as sequences from './sequences';
@@ -30,6 +29,7 @@ const drones = [
     },
 ];
 
+// Parts of state to keep in localstorage
 const store = localstore(['pageNum', 'surveyData']);
 
 export default {
