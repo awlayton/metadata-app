@@ -4,12 +4,14 @@ import {state, sequences} from 'cerebral/tags';
 
 import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
+import MobileStepper from '@material-ui/core/MobileStepper';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
@@ -37,7 +39,7 @@ const params = queryString.parse(window.location.search);
 // We try our best to provide a great default value.
 const theme = createMuiTheme({
     palette: {
-		type: params.theme || 'light',
+        type: params.theme || 'dark',
         primary: gold,
     },
 });
@@ -45,6 +47,14 @@ const theme = createMuiTheme({
 const styles = {
     root: {
         flexGrow: 1,
+    },
+    appBar: {
+        top: 0,
+        bottom: 'auto',
+    },
+    bottomBar: {
+        bottom: 0,
+        top: 'auto',
     },
     grow: {
         flexGrow: 1,
@@ -67,9 +77,9 @@ class App extends Component {
         return (
             <MuiThemeProvider theme={theme}>
             <React.Fragment>
-			<CssBaseline />
+            <CssBaseline />
             <div className='App'>
-                <AppBar position='static'>
+                <AppBar position='fixed' className={classes.appBar}>
                     <Toolbar>
                         <IconButton
                             className={classes.menuButton}
@@ -81,27 +91,13 @@ class App extends Component {
                         </IconButton>
                         <Button
                             color='inherit'
-                            disabled={props.pageNum === 0}
-                            onClick={() => props.goPreviousPage()}>
-                            <NavigateBeforeIcon />
-                            Previous
-                        </Button>
-                        <Button
-                            color='inherit'
-                            disabled={props.pageNum === props.pages.length - 1}
-                            onClick={() => props.goNextPage()}>
-                            Next
-                            <NavigateNextIcon />
-                        </Button>
-                        <Button
-                            color='inherit'
                             disabled={props.pages.some(page => page.error)}
                             onClick={() => props.submit()}>
                             Submit
                             <SendIcon />
                         </Button>
                         <div className={classes.grow} />
-						<div className="g-signin2" data-theme='dark' />
+                        <div className="g-signin2" data-theme='dark' />
                     </Toolbar>
                 </AppBar>
                 <Drawer
@@ -133,13 +129,41 @@ class App extends Component {
                     open={props.sensorQRScannerActive}
                     onClose={props.hideSensorQRScanner}
                 />
-                <Questions
-                    isSinglePage={params.singlePage !== undefined}
-                    completedHtml={
-                        (<div> woo done!</div>)
-                    }
-                    onComplete={({data}) => props.submitResults()}
-                />
+                <Paper square>
+                    <Questions
+                        isSinglePage={params.singlePage !== undefined}
+                        completedHtml={
+                            (<div> woo done!</div>)
+                        }
+                        onComplete={({data}) => props.submitResults()}
+                    />
+                </Paper>
+                <AppBar position='fixed' className={classes.bottomBar}>
+                    <MobileStepper
+                        steps={props.pages.length}
+                        position='static'
+                        activeStep={props.pageNum}
+                        className={classes.mobileStepper}
+                        nextButton={
+                            <Button
+                                color='primary'
+                                disabled={props.pageNum === props.pages.length - 1}
+                                onClick={() => props.goNextPage()}>
+                                Next
+                                <NavigateNextIcon />
+                            </Button>
+                        }
+                        backButton={
+                            <Button
+                                color='primary'
+                                disabled={props.pageNum === 0}
+                                onClick={() => props.goPreviousPage()}>
+                                <NavigateBeforeIcon />
+                                Previous
+                            </Button>
+                        }
+                    />
+                </AppBar>
             </div>
             </React.Fragment>
             </MuiThemeProvider>
@@ -168,6 +192,6 @@ export default connect({
     login: sequences`login`,
     logout: sequences`logout`,
     google: state`google`,
-	createSheet: sequences`createSheet`,
+    createSheet: sequences`createSheet`,
     submitResults: sequences`submitResults`,
 }, withStyles(styles)(App));

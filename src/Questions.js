@@ -30,9 +30,9 @@ class Questions extends Component {
         themeColors["$header-color"] = palette.secondary.main;
         themeColors["$border-color"] = palette.divider;
         themeColors["$header-background-color"] = palette.secondary.main;
-        themeColors["$body-background-color"] = palette.background.default;
+        themeColors["$body-background-color"] = palette.background.paper;
         themeColors["$body-container-background-color"] = palette.background.paper;
-        themeColors["$inputs-background-color"] = palette.background.paper;
+        themeColors["$inputs-background-color"] = palette.background.default;
         themeColors["$error-color"] = palette.error.main;
         themeColors["$error-background-color"] = palette.error.light;
         Survey.StylesManager.applyTheme('default');
