@@ -4,7 +4,6 @@ import {state, sequences} from 'cerebral/tags';
 
 import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 //import Typography from '@material-ui/core/Typography';
@@ -15,19 +14,13 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
-import WarningIcon from '@material-ui/icons/Warning';
-import DoneIcon from '@material-ui/icons/Done';
-import Drawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
 import queryString from 'query-string';
 
 import './App.css';
 import QRDialog from './QRDialog';
 import Questions from './Questions';
+import PagesDrawer from './PagesDrawer';
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
@@ -47,17 +40,35 @@ const theme = createMuiTheme({
     },
 });
 
-const styles = {
+const drawerWidth = 240;
+const styles = (theme) => ({
     root: {
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    content: {
+        textAlign: 'center',
         flexGrow: 1,
+        alignSelf: 'center',
+        maxWidth: 800,
     },
     appBar: {
         top: 0,
         bottom: 'auto',
+        marginLeft: drawerWidth,
+        [theme.breakpoints.up('sm')]: {
+            width: `calc(100% - ${drawerWidth}px)`,
+        },
     },
+    toolbar: theme.mixins.toolbar,
     bottomBar: {
         bottom: 0,
         top: 'auto',
+        marginLeft: drawerWidth,
+        [theme.breakpoints.up('sm')]: {
+            width: `calc(100% - ${drawerWidth}px)`,
+        },
     },
     grow: {
         flexGrow: 1,
@@ -65,8 +76,20 @@ const styles = {
     menuButton: {
         marginLeft: -12,
         marginRight: 20,
+        [theme.breakpoints.up('sm')]: {
+          display: 'none',
+        },
     },
-};
+    drawer: {
+        [theme.breakpoints.up('sm')]: {
+            width: drawerWidth,
+            flexShrink: 0,
+        },
+    },
+    drawerPaper: {
+        width: drawerWidth,
+    },
+});
 
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
@@ -91,14 +114,21 @@ class App extends Component {
             <MuiThemeProvider theme={theme}>
             <React.Fragment>
             <CssBaseline />
-            <div className='App'>
+            <div className={classes.root}>
+                <PagesDrawer
+                    classes={classes}
+                    // Screens sizes to show permanent drawer
+                    permScreens={{smUp: true}}
+                    // Screens sizes to show temporary drawer
+                    tempScreens={{xsDown: true}}
+                />
                 <AppBar position='fixed' className={classes.appBar}>
                     <Toolbar>
                         <IconButton
                             className={classes.menuButton}
                             color='inherit'
                             onClick={() => props.showNavigation()}
-                            aria-label='Menu'>
+                            aria-label='Pages'>
                             <MenuIcon
                             />
                         </IconButton>
@@ -113,27 +143,6 @@ class App extends Component {
                         <div className="g-signin2" data-theme='dark' />
                     </Toolbar>
                 </AppBar>
-                <Drawer
-                    open={props.navigationOpen}
-                    onOpen={()=>props.showNavigation()}
-                    onClose={()=>props.hideNavigation()}
-                >
-                    <List>
-                        {props.pages.map(({name, title, error}, pageNum) => (
-                            <ListItem
-                                key={name}
-                                button
-                                selected={pageNum === props.pageNum}
-                                className={error ? 'page-err' : 'page-complete'}
-                                onClick={()=>props.setSurveyPage({pageNum})}>
-                                <ListItemIcon>
-                                    {error ? <WarningIcon /> : <DoneIcon />}
-                                </ListItemIcon>
-                                <ListItemText primary={title} />
-                            </ListItem>
-                        ))}
-                    </List>
-                </Drawer>
                 <QRDialog
                     open={props.droneQRScannerActive}
                     onClose={props.hideDroneQRScanner}
@@ -142,7 +151,8 @@ class App extends Component {
                     open={props.sensorQRScannerActive}
                     onClose={props.hideSensorQRScanner}
                 />
-                <Paper square>
+                <main className={classes.content}>
+                    <div className={classes.toolbar} />
                     <Questions
                         isSinglePage={params.singlePage !== undefined}
                         completedHtml={
@@ -150,7 +160,8 @@ class App extends Component {
                         }
                         onComplete={({data}) => props.submitResults()}
                     />
-                </Paper>
+                    <div className={classes.toolbar} />
+                </main>
                 <AppBar position='fixed' className={classes.bottomBar}>
                     <MobileStepper
                         steps={props.pages.length}
