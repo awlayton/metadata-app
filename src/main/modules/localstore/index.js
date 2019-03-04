@@ -59,8 +59,8 @@ export default (paths) => ({
             // TODO: Why didn't using moduleSequences work??
             //({val, get}) => get(moduleSequences`persistState`)({key: path, val})
             ({val, get}) => {
-                const path = reaction.modulePath.join('.');
-                const sequence = get(sequences`${path}.persistState`);
+                const name = reaction.modulePath.join('.');
+                const sequence = get(sequences`${name}.persistState`);
                 return sequence({key: path, val});
             }
         );
