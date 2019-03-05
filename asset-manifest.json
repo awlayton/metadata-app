@@ -1,15 +1,15 @@
 {
   "main.css": "/metadata-app/static/css/main.33eb3c82.chunk.css",
-  "main.js": "/metadata-app/static/js/main.058d2c8d.chunk.js",
-  "main.js.map": "/metadata-app/static/js/main.058d2c8d.chunk.js.map",
+  "main.js": "/metadata-app/static/js/main.997bff55.chunk.js",
+  "main.js.map": "/metadata-app/static/js/main.997bff55.chunk.js.map",
   "static/css/1.53335fb2.chunk.css": "/metadata-app/static/css/1.53335fb2.chunk.css",
-  "static/js/1.15c39235.chunk.js": "/metadata-app/static/js/1.15c39235.chunk.js",
-  "static/js/1.15c39235.chunk.js.map": "/metadata-app/static/js/1.15c39235.chunk.js.map",
+  "static/js/1.a2f45683.chunk.js": "/metadata-app/static/js/1.a2f45683.chunk.js",
+  "static/js/1.a2f45683.chunk.js.map": "/metadata-app/static/js/1.a2f45683.chunk.js.map",
   "runtime~main.js": "/metadata-app/static/js/runtime~main.95cfd469.js",
   "runtime~main.js.map": "/metadata-app/static/js/runtime~main.95cfd469.js.map",
   "static/css/main.33eb3c82.chunk.css.map": "/metadata-app/static/css/main.33eb3c82.chunk.css.map",
   "static/css/1.53335fb2.chunk.css.map": "/metadata-app/static/css/1.53335fb2.chunk.css.map",
   "index.html": "/metadata-app/index.html",
-  "precache-manifest.1229845679cda5ccee94a35fd3893078.js": "/metadata-app/precache-manifest.1229845679cda5ccee94a35fd3893078.js",
+  "precache-manifest.3946cdff631985500f7644d74cd8de2b.js": "/metadata-app/precache-manifest.3946cdff631985500f7644d74cd8de2b.js",
   "service-worker.js": "/metadata-app/service-worker.js"
 }
