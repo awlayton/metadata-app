@@ -124,6 +124,14 @@ class App extends Component {
                 />
                 <AppBar position='fixed' className={classes.appBar}>
                     <Toolbar>
+                        {params.debug !== undefined &&
+                            // Super secret debug button
+                            <Button
+                                color='inherit'
+                                onClick={() => props.submitResults()}>
+                                {process.env.REACT_APP_GIT}
+                            </Button>
+                        }
                         <IconButton
                             className={classes.menuButton}
                             color='inherit'
@@ -140,7 +148,7 @@ class App extends Component {
                             <SendIcon />
                         </Button>
                         <div className={classes.grow} />
-                        <div className="g-signin2" data-theme='dark' />
+                        <div className='g-signin2' data-theme='dark' />
                     </Toolbar>
                 </AppBar>
                 <QRDialog
