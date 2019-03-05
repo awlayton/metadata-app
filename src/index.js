@@ -12,7 +12,9 @@ import main from './main';
 
 const app = App(main, {
     devtools: process.env.NODE_ENV === 'production' ?
-        null : Devtools({host: 'localhost:8000', reconnect: true})
+        null : Devtools({host: 'localhost:8000', reconnect: true}),
+    throwToConsole: true,
+    noRethrow: false,
 });
 
 // Run init sequence
