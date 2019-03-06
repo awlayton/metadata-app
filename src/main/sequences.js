@@ -76,6 +76,8 @@ export const logout = [
     set(state`pastData`, []),
 ];
 
+export const disconnectGoogle = [actions.disconnectGapi];
+
 export const createSheet = [actions.createSheet];
 export const submitResults = [
     when(state`loggedin`),
@@ -97,3 +99,5 @@ export const confirmSubmit = [
     ({get}) => get(sequences`store.clear`)(),
     () => window.location.reload(),
 ];
+
+export const setDebugMenuOpen = [set(state`debugMenuOpen`, props`open`)];

@@ -22,6 +22,7 @@ import QRDialog from './QRDialog';
 import Questions from './Questions';
 import PagesDrawer from './PagesDrawer';
 import ConfirmSubmitDialog from './ConfirmSubmitDialog';
+import DebugButton from './DebugButton';
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
@@ -127,11 +128,7 @@ class App extends Component {
                     <Toolbar>
                         {params.debug !== undefined &&
                             // Super secret debug button
-                            <Button
-                                color='inherit'
-                                onClick={() => props.submitResults()}>
-                                {process.env.REACT_APP_GIT}
-                            </Button>
+                            <DebugButton />
                         }
                         <IconButton
                             className={classes.menuButton}
