@@ -37,6 +37,7 @@ export default {
     state: {
         resultsId: null,
         navigationOpen: true,
+        confirmSubmitOpen: false,
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
         surveyData: null,

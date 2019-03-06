@@ -191,6 +191,7 @@ export const googlesheets = {
     },
 
     async writeSheet(id, data) {
+        const sheetsURL = 'https://docs.google.com/spreadsheets';
         let {sheets} = await this.context.gapiClient.get();
 
         // Format data with spreadsheet lib
@@ -207,7 +208,12 @@ export const googlesheets = {
                 majorDimension: 'ROWS',
                 values,
             });
-            return result;
+            let row = data.length + 1;
+            return {
+                ...result,
+                // TODO: How to better handle URL from ID etc.?
+                resultsUrl: `${sheetsURL}/d/${id}#gid=0&range=${row}:${row}`
+            };
         } catch (err) {
             throw new GAPIError(err);
         }

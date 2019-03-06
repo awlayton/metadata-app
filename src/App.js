@@ -21,6 +21,7 @@ import './App.css';
 import QRDialog from './QRDialog';
 import Questions from './Questions';
 import PagesDrawer from './PagesDrawer';
+import ConfirmSubmitDialog from './ConfirmSubmitDialog';
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
@@ -159,6 +160,7 @@ class App extends Component {
                     open={props.sensorQRScannerActive}
                     onClose={props.hideSensorQRScanner}
                 />
+                <ConfirmSubmitDialog />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Questions

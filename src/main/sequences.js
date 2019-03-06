@@ -42,8 +42,8 @@ export const setCurrentLocation = [
     set(props`locations`, state`surveyData.locations`),
     // Using the push factory seems to break things...
     ({props}) => ({locations: props.locations.concat(props.currentLoc)}),
-	set(props`question`, 'locations'),
-	set(props`answer`, props`locations`),
+    set(props`question`, 'locations'),
+    set(props`answer`, props`locations`),
     actions.setAnswer,
 ];
 
@@ -88,4 +88,12 @@ export const submitResults = [
     actions.serializeResults,
     set(props`resultsId`, state`resultsId`),
     actions.uploadResults,
+    set(state`resultsUrl`, props`resultsUrl`),
+    set(state`confirmSubmitOpen`, true),
+];
+
+export const confirmSubmit = [
+    set(state`confirmSubmitOpen`, false),
+    ({get}) => get(sequences`store.clear`)(),
+    () => window.location.reload(),
 ];
