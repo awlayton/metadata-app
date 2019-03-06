@@ -27,6 +27,9 @@ export function completeSurvey({survey, props}) {
 export async function initGapi({gapiClient, props}) {
     return gapiClient.init(props);
 }
+export async function disconnectGapi({gapiClient}) {
+    return gapiClient.disconnect();
+}
 export async function createSheet({googlesheets}) {
     let sheet = await googlesheets.createSheet();
     return {sheet};
@@ -35,40 +38,15 @@ export async function initSheet({googlesheets, props}) {
     let {result} = await googlesheets.createSheet();
     await googlesheets.addRow(result.spreadsheetId, props.headerRow);
 }
-export async function serializeResults({props}) {
+export async function serializeResults({serialize, props}) {
     let {results} = props;
 
-    // TODO: Better way to handle arrays and such in a spreadsheet?
-    let serialized = results.map(result => {
-        let serialized = {};
-        Object.keys(result).forEach(key => {
-            if (result[key] && typeof result[key] === 'object') {
-                serialized['$$' + key] = JSON.stringify(result[key]);
-            } else {
-                serialized[key] = result[key];
-            }
-        });
-        return serialized;
-    });
-
-    return {results: serialized};
+    return {results: serialize.serialize(results)};
 }
-export async function deserializeResults({props}) {
+export async function deserializeResults({serialize, props}) {
     let {results} = props;
 
-    let deserialized = results.map(result => {
-        let deserialized = {};
-        Object.keys(result).forEach(key => {
-            if (key.startsWith('$$') && result[key]) {
-                deserialized[key.substring(2)] = JSON.parse(result[key]);
-            } else {
-                deserialized[key] = result[key];
-            }
-        });
-        return deserialized;
-    });
-
-    return {results: deserialized};
+    return {results: serialize.deserialize(results)};
 }
 export async function loadPastResults({googlesheets, props}) {
     let {resultsId} = props;

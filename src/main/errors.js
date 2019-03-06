@@ -20,3 +20,19 @@ export class GAPIError extends CerebralError {
         this.result = error;
     }
 }
+
+export class SerializeError extends CerebralError {
+    constructor(r, c, err) {
+        super(`Error serializing column "${c}" of row ${r}: ${err.message}`);
+        this.name = 'DeserializeError';
+        this.err = err;
+    }
+}
+
+export class DeserializeError extends CerebralError {
+    constructor(r, c, err) {
+        super(`Error deserializing column "${c}" of row ${r}: ${err.message}`);
+        this.name = 'DeserializeError';
+        this.err = err;
+    }
+}

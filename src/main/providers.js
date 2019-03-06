@@ -3,7 +3,7 @@ import Promise from 'bluebird';
 import googleapi from 'google-client-api';
 import XLSX from 'xlsx';
 
-import {GetLocationError, GAPIError} from './errors';
+import * as errors from './errors';
 import model from '../surveyModel';
 
 export const geolocation = {
@@ -29,7 +29,7 @@ export const geolocation = {
                     msg = 'Unknown error';
             }
 
-            throw new GetLocationError(msg);
+            throw new errors.GetLocationError(msg);
         }
     }
 };
@@ -119,7 +119,11 @@ export const gapiClient = {
             .get('client');
 
         return client;
-    }
+    },
+
+    async disconnect() {
+        (await gapi).auth2.getAuthInstance().currentUser.get().disconnect();
+    },
 }
 export const googleappdata = {
     async getData() {
@@ -133,7 +137,7 @@ export const googleappdata = {
                 fields: 'files(id, appProperties)',
             }));
         } catch (err) {
-            throw new GAPIError(err);
+            throw new errors.GAPIError(err);
         }
 
         return result.files[0].appProperties;
@@ -153,7 +157,7 @@ export const googleappdata = {
             });
             return result;
         } catch (err) {
-            throw new GAPIError(err);
+            throw new errors.GAPIError(err);
         }
     },
 }
@@ -165,7 +169,7 @@ export const googlesheets = {
             let {result} = await sheets.spreadsheets.create({}, {});
             return result;
         } catch (err) {
-            throw new GAPIError(err);
+            throw new errors.GAPIError(err);
         }
     },
 
@@ -179,7 +183,7 @@ export const googlesheets = {
                 range: ['Sheet1'],
             }));
         } catch (err) {
-            throw new GAPIError(err);
+            throw new errors.GAPIError(err);
         }
 
         if (!result.values) {
@@ -215,7 +219,7 @@ export const googlesheets = {
                 resultsUrl: `${sheetsURL}/d/${id}#gid=0&range=${row}:${row}`
             };
         } catch (err) {
-            throw new GAPIError(err);
+            throw new errors.GAPIError(err);
         }
     },
 
@@ -230,6 +234,52 @@ export const googlesheets = {
         }, {
             majorDimension: 'ROWS',
             values: [row],
+        });
+    },
+};
+
+// TODO: Better way to handle arrays and such in a spreadsheet?
+export const serialize = {
+    serialize(data) {
+        return data.map((result, i) => {
+            let serialized = {};
+            Object.keys(result).forEach(key => {
+                try {
+                    if (typeof result[key] === 'object') {
+                        if (result[key]) {
+                            let kkey = '$$' + key;
+                            serialized[kkey] = JSON.stringify(result[key]);
+                        }
+                    } else {
+                        serialized[key] = result[key];
+                    }
+                } catch (err) {
+                    throw new errors.SerializeError(i, key, err);
+                }
+            });
+            return serialized;
+        });
+    },
+
+    deserialize(data) {
+        return data.map((result, i) => {
+            let deserialized = {};
+            Object.keys(result).forEach(key => {
+                try {
+                    if (key.startsWith('$$')) {
+                        if (result[key]) {
+                            let kkey = key.substring(2);
+                            deserialized[kkey] = JSON.parse(result[key]);
+                        }
+                    } else {
+                        deserialized[key] = result[key];
+                    }
+                } catch (err) {
+                    // +2 is for header row and 1 vs 0 indexing
+                    throw new errors.DeserializeError(i + 2, key, err);
+                }
+            });
+            return deserialized;
         });
     },
 };
