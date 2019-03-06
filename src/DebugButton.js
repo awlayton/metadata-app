@@ -23,7 +23,7 @@ function DebugButton(props) {
             <Menu
                 id='debug-menu'
                 //anchorEl={button}
-                open={props.open}
+                open={props.open || false}
                 onClose={() => props.setState({open: false})}
             >
                 <MenuItem onClick={() => props.submitResults()}>
