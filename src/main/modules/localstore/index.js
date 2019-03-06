@@ -21,7 +21,7 @@ export default (paths) => ({
         },
     },
 
-    state:{
+    state: {
         initialized: false,
     },
 
@@ -36,14 +36,25 @@ export default (paths) => ({
                 false: [],
             },
         ],
+        clear: [
+            parallel('clear paths', paths.map(path => [
+                ({localstore}) => ({val: localstore.clear(path)}),
+            ])),
+        ],
         init: [
             // Load each path from store and set it in state
             parallel('get paths', paths.map(path => [
                 ({localstore}) => ({val: localstore.get(path)}),
-                when(props`val`, val => val && typeof val === 'object'),
+                when(props`val`, val => val === null),
                 {
-                    true: [merge(state`${path}`, props`val`)],
-                    false: [set(state`${path}`, props`val`)],
+                    true: [], // Ignore null/unset keys
+                    false: [
+                        when(props`val`, val => typeof val === 'object'),
+                        {
+                            true: [merge(state`${path}`, props`val`)],
+                            false: [set(state`${path}`, props`val`)],
+                        }
+                    ],
                 }
             ])),
             set(moduleState`initialized`, true),
