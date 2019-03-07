@@ -114,7 +114,7 @@ export default {
                         {
                             name: 'notes',
                             title: 'Notes or comments',
-                            type: 'comment'
+                            type: 'comment',
                         },
                     ]
                 },
@@ -127,6 +127,7 @@ export default {
                             name: 'client',
                             title: 'Grower (or Client)',
                             type: 'text',
+                            autofill: 'person',
                             placeHolder: 'Farmer Frank',
                         },
                         {

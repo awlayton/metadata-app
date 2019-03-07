@@ -1,4 +1,4 @@
-import {set, push, when} from 'cerebral/factories';
+import {set, push, when, equals} from 'cerebral/factories';
 import {state, sequences, props} from 'cerebral/tags';
 import * as actions from './actions';
 
@@ -68,7 +68,7 @@ export const login = [
     actions.loadPastResults,
     actions.deserializeResults,
     set(state`pastData`, props`results`),
-    set(state`loggedin`, true),
+    set(state`loggedin`, props`name`, name => ({name})),
 ];
 // Runs _after_ logout
 export const logout = [
@@ -101,3 +101,12 @@ export const confirmSubmit = [
 ];
 
 export const setDebugMenuOpen = [set(state`debugMenuOpen`, props`open`)];
+
+export const autofill = [
+    equals(props`autofill`),
+    {
+        person: [set(props`answer`, state`loggedin.name`)],
+        otherwise: [],
+    },
+    actions.setAnswer,
+];

@@ -88,7 +88,10 @@ export const gapiClient = {
                         client = undefined;
                         logout && this.context.get(logout)();
                     } else {
-                        login && this.context.get(login)();
+                        let user = auth.currentUser.get().getBasicProfile();
+                        login && this.context.get(login)({
+                            name: user.getName(),
+                        });
                     }
                 };
 

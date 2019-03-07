@@ -17,6 +17,11 @@ Survey.JsonObject.metaData.addProperty('question', {
     name: 'cerebralbutton',
 });
 
+Survey.JsonObject.metaData.addProperty('question', {
+    name: 'autofill',
+    default: false,
+});
+
 class Questions extends Component {
     componentWillMount() {
         const {get, theme} = this.props;
@@ -24,17 +29,17 @@ class Questions extends Component {
         // Apply MUI theme to survey
         const {palette} = theme;
         let themeColors = Survey.StylesManager.ThemeColors['default'];
-        themeColors["$main-color"] = palette.primary.main;
-        themeColors["$main-hover-color"] = palette.primary.dark;
-        themeColors["$text-color"] = palette.text.primary;
-        themeColors["$header-color"] = palette.secondary.main;
-        themeColors["$border-color"] = palette.divider;
-        themeColors["$header-background-color"] = palette.secondary.main;
-        themeColors["$body-background-color"] = palette.background.paper;
-        themeColors["$body-container-background-color"] = palette.background.paper;
-        themeColors["$inputs-background-color"] = palette.background.default;
-        themeColors["$error-color"] = palette.error.main;
-        themeColors["$error-background-color"] = palette.error.light;
+        themeColors['$main-color'] = palette.primary.main;
+        themeColors['$main-hover-color'] = palette.primary.dark;
+        themeColors['$text-color'] = palette.text.primary;
+        themeColors['$header-color'] = palette.secondary.main;
+        themeColors['$border-color'] = palette.divider;
+        themeColors['$header-background-color'] = palette.secondary.main;
+        themeColors['$body-background-color'] = palette.background.paper;
+        themeColors['$body-container-background-color'] = palette.background.paper;
+        themeColors['$inputs-background-color'] = palette.background.default;
+        themeColors['$error-color'] = palette.error.main;
+        themeColors['$error-background-color'] = palette.error.light;
         Survey.StylesManager.applyTheme('default');
 
         this.model = new Survey.Model(this.props.questions);
@@ -100,7 +105,20 @@ class Questions extends Component {
                     ReactDOMServer.renderToString(props.completedHtml)
                 }
                 onAfterRenderQuestion={
-                    (survey, {question, htmlElement}) => {
+                    async (survey, {question, htmlElement}) => {
+                        let {autofill} = question;
+                        // Try to autofill if unanswered
+                        if (question.value === undefined && autofill) {
+                            if (typeof autofill === 'function') {
+                                question.value = await autofill(question);
+                            } else {
+                                props.autofill({
+                                    // TODO: How to handle dynamic questions?
+                                    question: question.name,
+                                    autofill,
+                                });
+                            }
+                        }
                         if (!question.cerebralbutton) {
                             return;
                         }
@@ -126,6 +144,7 @@ export default connect(
         setData: sequences`setSurveyData`,
         setPage: sequences`setSurveyPage`,
         setPages: sequences`setPages`,
+        autofill: sequences`autofill`,
     },
     withTheme()(Questions)
 );
