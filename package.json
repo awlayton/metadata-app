@@ -19,12 +19,14 @@
     "react-dom": "^16.8.3",
     "react-qr-reader": "^2.2.1",
     "react-scripts": "2.1.1",
+    "serve": "^10.1.2",
     "survey-react": "^1.0.72",
     "xlsx": "^0.14.1"
   },
   "scripts": {
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
+    "serve": "PORT=3000 serve",
     "start": "REACT_APP_GIT=`git rev-parse --short HEAD` react-scripts start && cra-append-sw --mode dev ./src/custom-sw.js",
     "build": "REACT_APP_GIT=`git rev-parse --short HEAD` react-scripts build && cra-append-sw ./src/custom-sw.js",
     "test": "react-scripts test",

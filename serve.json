@@ -1,0 +1,27 @@
+{
+    "public": "build",
+    "rewrites": [
+        {
+            "source": "/metadata-app",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/metadata-app/",
+            "destination": "/index.html"
+        },
+        {
+            "source": "/metadata-app/:file",
+            "destination": "/:file"
+        },
+        {
+            "source": "/metadata-app/static/:dir/:file",
+            "destination": "/static/:dir/:file"
+        }
+    ],
+    "redirects" : [
+        {
+            "source": "/",
+            "destination" : "/metadata-app/"
+        }
+    ]
+}
