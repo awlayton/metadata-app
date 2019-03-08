@@ -15,6 +15,10 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
 
+import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import gold from '@material-ui/core/colors/amber';
+
+import HttpsRedirect from 'react-https-redirect';
 import queryString from 'query-string';
 
 import './App.css';
@@ -23,9 +27,6 @@ import Questions from './Questions';
 import PagesDrawer from './PagesDrawer';
 import ConfirmSubmitDialog from './ConfirmSubmitDialog';
 import DebugButton from './DebugButton';
-
-import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
-import gold from '@material-ui/core/colors/amber';
 
 // Parse query string
 const params = queryString.parse(window.location.search);
@@ -113,6 +114,7 @@ class App extends Component {
         const {classes} = props;
 
         return (
+            <HttpsRedirect>
             <MuiThemeProvider theme={theme}>
             <React.Fragment>
             <CssBaseline />
@@ -198,6 +200,7 @@ class App extends Component {
             </div>
             </React.Fragment>
             </MuiThemeProvider>
+            </HttpsRedirect>
         );
     }
 }
