@@ -143,7 +143,7 @@ export const googleappdata = {
             throw new errors.GAPIError(err);
         }
 
-        return result.files[0].appProperties;
+        return result.files[0] && result.files[0].appProperties;
     },
 
     async initData({body = {}}) {
