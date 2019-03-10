@@ -60,7 +60,6 @@ export const survey = {
     },
 };
 
-let client;
 let gapi;
 export const gapiClient = {
     // Do one-time gapi setup not effected by login/logout
@@ -85,7 +84,6 @@ export const gapiClient = {
                 let auth = auth2.getAuthInstance();
                 let listener = signedIn => {
                     if (!signedIn) {
-                        client = undefined;
                         logout && this.context.get(logout)();
                     } else {
                         let user = auth.currentUser.get().getBasicProfile();
@@ -101,36 +99,30 @@ export const gapiClient = {
         await gapi;
     },
 
-    async get() {
-        if (client) {
-            return client;
-        }
-
-        client = await gapi
-            // Request needed scopes from user
+    async get(scope) {
+        return gapi
             .tap(({auth2}) => {
-                const grants = {
-                    scope: [
-                        'https://www.googleapis.com/auth/drive.file',
-                        'https://www.googleapis.com/auth/drive.appdata',
-                    ].reduce((a, b) => `${a} ${b}`),
-                };
-                let auth = auth2.getAuthInstance();
+                let user = auth2.getAuthInstance().currentUser.get();
 
-                return auth.currentUser.get().grant(grants);
+                // Request needed scopes from user
+                if (!user.hasGrantedScopes(scope)) {
+                   return user.grant({scope});
+                }
             })
             .get('client');
-
-        return client;
     },
 
     async disconnect() {
         (await gapi).auth2.getAuthInstance().currentUser.get().disconnect();
     },
 }
+const appdataScope = [
+    'https://www.googleapis.com/auth/drive.appdata',
+    //'https://www.googleapis.com/auth/drive.file',
+].join(' ');
 export const googleappdata = {
     async getData() {
-        let {drive} = await this.context.gapiClient.get();
+        let {drive} = await this.context.gapiClient.get(appdataScope);
 
         let result;
         try {
@@ -147,7 +139,7 @@ export const googleappdata = {
     },
 
     async initData({body = {}}) {
-        let {drive} = await this.context.gapiClient.get();
+        let {drive} = await this.context.gapiClient.get(appdataScope);
 
         try {
             let {result} = await drive.files.create({
@@ -164,9 +156,10 @@ export const googleappdata = {
         }
     },
 }
+const sheetsScope = 'https://www.googleapis.com/auth/drive.file';
 export const googlesheets = {
     async createSheet() {
-        let {sheets} = await this.context.gapiClient.get();
+        let {sheets} = await this.context.gapiClient.get(sheetsScope);
 
         try {
             let {result} = await sheets.spreadsheets.create({}, {});
@@ -177,7 +170,7 @@ export const googlesheets = {
     },
 
     async getSheet(id) {
-        let {sheets} = await this.context.gapiClient.get();
+        let {sheets} = await this.context.gapiClient.get(sheetsScope);
 
         let result;
         try {
@@ -199,7 +192,7 @@ export const googlesheets = {
 
     async writeSheet(id, data) {
         const sheetsURL = 'https://docs.google.com/spreadsheets';
-        let {sheets} = await this.context.gapiClient.get();
+        let {sheets} = await this.context.gapiClient.get(sheetsScope);
 
         // Format data with spreadsheet lib
         let sheet = XLSX.utils.json_to_sheet(data);
@@ -227,7 +220,7 @@ export const googlesheets = {
     },
 
     async addRow(id, cols, row) {
-        let {sheets} = await this.context.gapiClient.get();
+        let {sheets} = await this.context.gapiClient.get(sheetsScope);
 
         return sheets.spreadsheets.values.append({
             spreadsheetId: id,
