@@ -6,7 +6,7 @@ import {withStyles} from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-//import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -14,9 +14,13 @@ import MobileStepper from '@material-ui/core/MobileStepper';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
+
+// Has to be last mui import
+import {unstable_Box as Box} from '@material-ui/core/Box';
 
 import HttpsRedirect from 'react-https-redirect';
 import queryString from 'query-string';
@@ -142,7 +146,10 @@ class App extends Component {
                         </IconButton>
                         <Button
                             color='inherit'
-                            disabled={props.pages.some(page => page.error)}
+                            disabled={
+                                props.submitting ||
+                                    props.pages.some(page => page.error)
+                            }
                             onClick={() => props.submit()}>
                             Submit
                             <SendIcon />
@@ -164,9 +171,16 @@ class App extends Component {
                     <div className={classes.toolbar} />
                     <Questions
                         isSinglePage={params.singlePage !== undefined}
-                        completedHtml={
-                            (<div> woo done!</div>)
-                        }
+                        completedHtml={(
+                            <div>
+                                <Typography color='inherit' >
+                                    Submitting Metadata
+                                </Typography>
+                                <Box p={4} >
+                                    <CircularProgress size={100} />
+                                </Box>
+                            </div>
+                        )}
                         onComplete={({data}) => props.submitResults()}
                     />
                     <div className={classes.toolbar} />
@@ -228,4 +242,5 @@ export default connect({
     google: state`google`,
     createSheet: sequences`createSheet`,
     submitResults: sequences`submitResults`,
+    submitting: state`submitting`,
 }, withStyles(styles)(App));

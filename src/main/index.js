@@ -35,7 +35,9 @@ const store = localstore(['pageNum', 'surveyData']);
 export default {
     sequences,
     state: {
+        loggedin: null,
         resultsId: null,
+        submitting: false,
         navigationOpen: true,
         confirmSubmitOpen: false,
         droneQRScannerActive: false,

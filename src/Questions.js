@@ -146,5 +146,5 @@ export default connect(
         setPages: sequences`setPages`,
         autofill: sequences`autofill`,
     },
-    withTheme()(Questions)
+    withTheme(Questions)
 );

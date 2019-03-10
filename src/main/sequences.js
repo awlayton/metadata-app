@@ -80,6 +80,7 @@ export const disconnectGoogle = [actions.disconnectGapi];
 
 export const createSheet = [actions.createSheet];
 export const submitResults = [
+    set(state`submitting`, true),
     when(state`loggedin`),
     {
         true: [],
