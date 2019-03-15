@@ -106,7 +106,7 @@ export const gapiClient = {
 
                 // Request needed scopes from user
                 if (!user.hasGrantedScopes(scope)) {
-                   return user.grant({scope});
+                    return user.grant({scope});
                 }
             })
             .get('client');
@@ -115,7 +115,7 @@ export const gapiClient = {
     async disconnect() {
         (await gapi).auth2.getAuthInstance().currentUser.get().disconnect();
     },
-}
+};
 const appdataScope = [
     'https://www.googleapis.com/auth/drive.appdata',
     //'https://www.googleapis.com/auth/drive.file',
@@ -155,14 +155,15 @@ export const googleappdata = {
             throw new errors.GAPIError(err);
         }
     },
-}
+};
 const sheetsScope = 'https://www.googleapis.com/auth/drive.file';
 export const googlesheets = {
     async createSheet() {
         let {sheets} = await this.context.gapiClient.get(sheetsScope);
 
+        const properties = {title: 'CONTxT metadata uploads'};
         try {
-            let {result} = await sheets.spreadsheets.create({}, {});
+            let {result} = await sheets.spreadsheets.create({properties});
             return result;
         } catch (err) {
             throw new errors.GAPIError(err);
