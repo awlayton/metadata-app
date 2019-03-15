@@ -25,7 +25,7 @@ function ConfirmSubmitDialog(props) {
             <DialogContent>
                 <DialogContentText id='alert-dialog-description'>
                     {'Your metadata have been uploaded '}
-                    <Link href={props.resultsUrl}>
+                    <Link target='_blank' href={props.resultsUrl}>
                         here.
                     </Link>
                 </DialogContentText>
