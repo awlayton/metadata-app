@@ -7,6 +7,7 @@ import localstore from './modules/localstore';
 
 import * as providers from './providers';
 import * as sequences from './sequences';
+import * as errors from './errors';
 
 // TODO: Get these from sheets
 const sensors = [
@@ -95,22 +96,28 @@ export default {
                                             name: 'latitude',
                                             title: 'Latitude',
                                             type: 'text',
+                                            inputType: 'number',
+                                            autofill: 'latitude',
                                             isRequired: true,
                                         },
                                         {
                                             name: 'longitude',
                                             title: 'Longitude',
                                             type: 'text',
+                                            inputType: 'number',
+                                            autofill: 'longitude',
                                             isRequired: true,
                                         },
                                     ],
                                 },
+                                /*
                                 {
                                     name: 'location-button',
                                     title: 'Add current location',
                                     type: 'html',
                                     cerebralbutton: 'setCurrentLocation',
                                 },
+                                */
                             ],
                         },
                         {
@@ -129,7 +136,6 @@ export default {
                             name: 'client',
                             title: 'Grower (or Client)',
                             type: 'text',
-                            autofill: 'person',
                             placeHolder: 'Farmer Frank',
                         },
                         {
@@ -151,7 +157,7 @@ export default {
                             placeHolder: 'corn',
                         },
                         {
-                            name:'prev-crop',
+                            name: 'prev-crop',
                             title: 'Previous Crop',
                             type: 'text',
                             placeHolder: 'beans',
@@ -213,6 +219,7 @@ export default {
                                     name: 'remote-pic-name',
                                     title: 'Name',
                                     type: 'text',
+                                    autofill: 'person',
                                     isRequired: true,
                                     placeHolder: 'Rusty Shackleford'
                                 },
@@ -220,6 +227,7 @@ export default {
                                     name: 'remote-pic-certificate',
                                     title: 'Certificate Number or equivalent',
                                     type: 'text',
+                                    inputType: 'number',
                                     isRequired: true,
                                     placeHolder: '1234567',
                                     validators: [
@@ -467,6 +475,8 @@ export default {
         },
     },
     catch: [
+        // TODO: Pop up toast or something about giving permission?
+        [errors.GetLocationError, ({error}) => console.error(error)],
         [Error, ({error}) => console.error(error)],
     ],
     providers,

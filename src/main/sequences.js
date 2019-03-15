@@ -107,6 +107,15 @@ export const autofill = [
     equals(props`autofill`),
     {
         person: [set(props`answer`, state`loggedin.name`)],
+        // TODO: Combine lat/lon into one autofill?
+        latitude: [
+            actions.getCurrentLocation,
+            set(props`answer`, props`currentLoc.latitude`),
+        ],
+        longitude: [
+            actions.getCurrentLocation,
+            set(props`answer`, props`currentLoc.longitude`),
+        ],
         otherwise: [],
     },
     actions.setAnswer,

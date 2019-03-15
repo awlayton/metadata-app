@@ -112,11 +112,12 @@ class Questions extends Component {
                             if (typeof autofill === 'function') {
                                 question.value = await autofill(question);
                             } else {
-                                props.autofill({
+                                let seq = await props.autofill({
                                     // TODO: How to handle dynamic questions?
                                     question: question.name,
                                     autofill,
                                 });
+                                question.value = seq && seq.answer;
                             }
                         }
                         if (!question.cerebralbutton) {

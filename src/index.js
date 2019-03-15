@@ -15,6 +15,7 @@ const app = App(main, {
         null : Devtools({host: 'localhost:8000', reconnect: true}),
     throwToConsole: true,
     noRethrow: false,
+    returnSequencePromise: true,
 });
 
 // Run init sequence
