@@ -93,11 +93,11 @@ export const submitResults = [
     actions.uploadResults,
     set(state`resultsUrl`, props`resultsUrl`),
     set(state`confirmSubmitOpen`, true),
+    ({get}) => get(sequences`store.clear`)(),
 ];
 
 export const confirmSubmit = [
     set(state`confirmSubmitOpen`, false),
-    ({get}) => get(sequences`store.clear`)(),
     () => window.location.reload(),
 ];
 
