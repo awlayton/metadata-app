@@ -1,15 +1,15 @@
 {
-  "main.css": "/metadata-app/static/css/main.de287597.chunk.css",
-  "main.js": "/metadata-app/static/js/main.ff49e168.chunk.js",
-  "main.js.map": "/metadata-app/static/js/main.ff49e168.chunk.js.map",
-  "static/css/1.8fa99069.chunk.css": "/metadata-app/static/css/1.8fa99069.chunk.css",
-  "static/js/1.ba7cd3c7.chunk.js": "/metadata-app/static/js/1.ba7cd3c7.chunk.js",
-  "static/js/1.ba7cd3c7.chunk.js.map": "/metadata-app/static/js/1.ba7cd3c7.chunk.js.map",
-  "runtime~main.js": "/metadata-app/static/js/runtime~main.95cfd469.js",
-  "runtime~main.js.map": "/metadata-app/static/js/runtime~main.95cfd469.js.map",
-  "static/css/main.de287597.chunk.css.map": "/metadata-app/static/css/main.de287597.chunk.css.map",
-  "static/css/1.8fa99069.chunk.css.map": "/metadata-app/static/css/1.8fa99069.chunk.css.map",
-  "index.html": "/metadata-app/index.html",
-  "precache-manifest.44ae6839890900d49cfbb535d6aa7145.js": "/metadata-app/precache-manifest.44ae6839890900d49cfbb535d6aa7145.js",
-  "service-worker.js": "/metadata-app/service-worker.js"
+  "main.css": "https://awlayton.github.io/metadata-app/static/css/main.de287597.chunk.css",
+  "main.js": "https://awlayton.github.io/metadata-app/static/js/main.25eaaaed.chunk.js",
+  "main.js.map": "https://awlayton.github.io/metadata-app/static/js/main.25eaaaed.chunk.js.map",
+  "static/css/1.8fa99069.chunk.css": "https://awlayton.github.io/metadata-app/static/css/1.8fa99069.chunk.css",
+  "static/js/1.06164d8a.chunk.js": "https://awlayton.github.io/metadata-app/static/js/1.06164d8a.chunk.js",
+  "static/js/1.06164d8a.chunk.js.map": "https://awlayton.github.io/metadata-app/static/js/1.06164d8a.chunk.js.map",
+  "runtime~main.js": "https://awlayton.github.io/metadata-app/static/js/runtime~main.81f75e13.js",
+  "runtime~main.js.map": "https://awlayton.github.io/metadata-app/static/js/runtime~main.81f75e13.js.map",
+  "static/css/main.de287597.chunk.css.map": "https://awlayton.github.io/metadata-app/static/css/main.de287597.chunk.css.map",
+  "static/css/1.8fa99069.chunk.css.map": "https://awlayton.github.io/metadata-app/static/css/1.8fa99069.chunk.css.map",
+  "index.html": "https://awlayton.github.io/metadata-app/index.html",
+  "precache-manifest.b61dbc141d759be4122a40705637dd44.js": "https://awlayton.github.io/metadata-app/precache-manifest.b61dbc141d759be4122a40705637dd44.js",
+  "service-worker.js": "https://awlayton.github.io/metadata-app/service-worker.js"
 }
