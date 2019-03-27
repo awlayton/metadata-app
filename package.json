@@ -2,7 +2,7 @@
   "name": "metadata-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://awlayton.github.io/metadata-app",
+  "homepage": "https://OpenATK.github.io/CONTxT",
   "dependencies": {
     "@cerebral/react": "^4.1.0",
     "@material-ui/core": "^4.0.0-alpha.3",
@@ -26,7 +26,8 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build --repo git@github.com:OpenATK/CONTxT.git",
+    "devdeploy": "PUBLIC_URL=https://awlayton.github.io/metadata-app npm run deploy -- -r git@github.com:awlayton/metadata-app.git",
     "serve": "PORT=3000 serve",
     "start": "REACT_APP_GIT=`git rev-parse --short HEAD` react-scripts start && cra-append-sw --mode dev ./src/custom-sw.js",
     "build": "REACT_APP_GIT=`git rev-parse --short HEAD` react-scripts build && cra-append-sw ./src/custom-sw.js",
