@@ -20,7 +20,7 @@ import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
 
 // Has to be last mui import
-import {unstable_Box as Box} from '@material-ui/core/Box';
+import Box from '@material-ui/core/Box';
 
 import HttpsRedirect from 'react-https-redirect';
 import queryString from 'query-string';
