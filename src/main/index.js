@@ -270,7 +270,7 @@ export default {
                         {
                             // TODO: make required for submission only
                             name: 'drone-screenshots',
-                            title: 'DroneDeploy Screenshots',
+                            title: 'Flight Planning Screenshots',
                             type: 'panel',
                             elements: [
                                 {
