@@ -397,10 +397,11 @@ export default {
                         },
                     ],
                 },
+                /* Get rid of B4UFLY for now
                 {
                     name: 'b4ufly',
                     title: 'B4UFLY Status',
-                    visibleIf: '{purpose} == "UAV"',
+                    visible: false,
                     elements: [
                         {
                             name: 'b4ufly-status',
@@ -460,6 +461,7 @@ export default {
                         },
                     ],
                 },
+                */
                 {
                     name: 'planting',
                     visibleIf: '!({purpose} == "UAV")',
