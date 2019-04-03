@@ -297,6 +297,7 @@ export default {
                             title: 'Scan drone QR code',
                             type: 'html',
                             cerebralbutton: 'showDroneQRScanner',
+                            visible: false,
                         },
                         {
                             name: 'uav-drone-type',
@@ -346,6 +347,7 @@ export default {
                             name: 'sensor-qr',
                             type: 'html',
                             cerebralbutton: 'showSensorQRScanner',
+                            visible: false,
                         },
                         {
                             name: 'sensors',

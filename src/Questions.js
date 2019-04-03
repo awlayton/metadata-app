@@ -120,16 +120,14 @@ class Questions extends Component {
                                 question.value = seq && seq.answer;
                             }
                         }
-                        if (!question.cerebralbutton) {
-                            return;
+                        if (question.cerebralbutton) {
+                            let seq = get(sequences`${question.cerebralbutton}`);
+                            ReactDOM.render(
+                                <Button onClick={() => seq()}>
+                                    {question.title}
+                                </Button>
+                            , htmlElement);
                         }
-
-                        let seq = get(sequences`${question.cerebralbutton}`);
-                        ReactDOM.render(
-                            <Button onClick={() => seq()}>
-                                {question.title}
-                            </Button>
-                        , htmlElement);
                     }
                 }
             />
