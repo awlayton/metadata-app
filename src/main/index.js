@@ -358,6 +358,8 @@ export default {
                                     type: 'dropdown',
                                     isRequired: true,
                                     hasOther: true,
+                                    otherText: 'Add new type',
+                                    otherErrorText: 'Please enter the new type',
                                     choices: [
                                         'RGB',
                                         'Multispectral',
@@ -367,31 +369,22 @@ export default {
                                     ],
                                 },
                                 {
-                                    name: 'uav-sensor',
+                                    name: 'uav-sensor-makemodel',
                                     valueName: 'sensor',
-                                    title: 'Sensor',
+                                    title: 'Make and Model',
                                     type: 'dropdown',
-                                    hideIfChoicesEmpty: true,
+                                    hideIfChoicesEmpty: false,
+                                    isRequired: true,
+                                    hasOther: true,
+                                    otherText: 'Add new make and model',
+                                    otherErrorText:
+                                        'Please enter the new make and model',
                                     choices: sensors.map((e, i) => ({
                                         text: e.make + ' ' + e.model,
                                         value: e.make + ' ' + e.model,
                                         //value: i,
                                         visibleIf: `{panel.type} == "${e.type}"`,
                                     })),
-                                },
-                                {
-                                    name: 'uav-sensor-make',
-                                    valueName: 'sensor.make',
-                                    title: 'Make',
-                                    type: 'text',
-                                    enableIf: '{panel.sensor} empty'
-                                },
-                                {
-                                    name: 'uav-sensor-model',
-                                    valueName: 'model',
-                                    title: 'Model',
-                                    type: 'text',
-                                    enableIf: '{panel.sensor} empty'
                                 },
                             ],
                         },
