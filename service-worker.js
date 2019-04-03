@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "https://awlayton.github.io/metadata-app/precache-manifest.b61dbc141d759be4122a40705637dd44.js"
+  "https://awlayton.github.io/metadata-app/precache-manifest.94c2599cd7acc13a59d3f7c24099fc14.js"
 );
 
 workbox.clientsClaim();
