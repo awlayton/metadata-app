@@ -11,6 +11,8 @@ import {withTheme} from '@material-ui/core/styles';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
+import Pica from 'pica';
+
 import surveyModel from './surveyModel';
 
 Survey.JsonObject.metaData.addProperty('question', {
@@ -21,6 +23,8 @@ Survey.JsonObject.metaData.addProperty('question', {
     name: 'autofill',
     default: false,
 });
+
+let pica = new Pica();
 
 class Questions extends Component {
     componentWillMount() {
@@ -95,7 +99,47 @@ class Questions extends Component {
                 }}
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
-                onValueChanged={(survey, {name, value}) => {
+                onValueChanging={(survey, options) => {
+                    let {value, question} = options;
+                    if (question instanceof Survey.QuestionFileModel) {
+                        (value || []).forEach((file, i) => {
+                            if (!(file && file.content) || file.converted) {
+                                return;
+                            }
+
+                            let img = new Image();
+                            img.src = file.content;
+                            let canvas = document.createElement('canvas');
+                            // TODO: Too small, need to upload to photos etc...
+                            canvas.width = 150;
+                            // Maintain aspect ratio
+                            canvas.height =
+                                img.height * canvas.width / img.width;
+
+                            const options = {
+                                unsharpAmount: 80,
+                                unsharpRadius: 0.6,
+                                unsharpThreshold: 2,
+                            };
+                            pica.resize(img, canvas, options).then(() => {
+                                let resized = {
+                                    name: file.name,
+                                    content: canvas.toDataURL(),
+                                    type: 'image/png',
+                                    converted: true
+                                };
+
+                                // You have to reassign question.value
+                                // Stuff breaks if you assign question.value[i]
+                                let value = question.value;
+                                question.value = [];
+                                value[i] = resized;
+                                question.value = value;
+                            });
+                        });
+                    }
+                }}
+                onValueChanged={(survey, {name, value, question}) => {
                     props.setData({data: survey.data});
                     // No idea why, but cerebral freaks out if I call this
                     // without the setTimeout...
