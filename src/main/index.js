@@ -58,8 +58,13 @@ export default {
                     title: 'General',
                     elements: [
                         {
+                            name: 'jobname',
+                            title: 'Job/Project name',
+                            type: 'text',
+                        },
+                        {
                             name: 'purpose',
-                            title: 'Purpose',
+                            title: 'Operation/Purpose',
                             type: 'dropdown',
                             choices: [
                                 'UAV',
