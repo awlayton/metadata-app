@@ -192,13 +192,22 @@ class App extends Component {
                         activeStep={props.pageNum}
                         className={classes.mobileStepper}
                         nextButton={
-                            <Button
-                                color='primary'
-                                disabled={props.pageNum === props.pages.length - 1}
-                                onClick={() => props.goNextPage()}>
-                                Next
-                                <NavigateNextIcon />
-                            </Button>
+                            props.pageNum === props.pages.length - 1 ?
+                                <Button
+                                    color='primary'
+                                    //disabled={}
+                                    onClick={() => props.submit()}>
+                                    Sumbit
+                                    <SendIcon />
+                                </Button>
+                                :
+                                <Button
+                                    color='primary'
+                                    //disabled={}
+                                    onClick={() => props.goNextPage()}>
+                                    Next
+                                    <NavigateNextIcon />
+                                </Button>
                         }
                         backButton={
                             <Button
