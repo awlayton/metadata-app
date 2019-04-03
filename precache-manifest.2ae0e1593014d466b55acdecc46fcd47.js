@@ -20,7 +20,7 @@ self.__precacheManifest = [
     "url": "https://awlayton.github.io/metadata-app/static/js/runtime~main.81f75e13.js"
   },
   {
-    "revision": "6ea288326b32cfe09dde34e5e8d8e5e7",
+    "revision": "bf887e5a02482762d3dae8e60992e57a",
     "url": "https://awlayton.github.io/metadata-app/index.html"
   }
 ];
