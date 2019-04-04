@@ -2,6 +2,7 @@ import Promise from 'bluebird';
 //import {state} from 'cerebral';
 import googleapi from 'google-client-api';
 import XLSX from 'xlsx';
+import {Apixu} from 'apixu';
 
 import * as errors from './errors';
 import model from '../surveyModel';
@@ -278,5 +279,12 @@ export const serialize = {
             });
             return deserialized;
         });
+    },
+};
+
+const apixu = new Apixu({apikey: '5a942f64c1a041238c602818190802'});
+export const weather = {
+    async current(query) {
+        return (await apixu.current(query)).current;
     },
 };

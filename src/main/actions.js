@@ -75,3 +75,8 @@ export async function loadAppData({googleappdata, path}) {
         return path.notfound();
     }
 }
+
+export async function getCurrentWeather({weather, props}) {
+    let query = props.latitude + ',' + props.longitude;
+    return await weather.current(query);
+}
