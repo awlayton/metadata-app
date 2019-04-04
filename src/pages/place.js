@@ -42,6 +42,7 @@ export default {
                     name: 'weather-button',
                     title: 'Get Current Weather',
                     type: 'html',
+                    visible: false,
                     // TODO: Implement functionality for button
                     cerebralbutton: 'setCurrentWeather',
                 },
@@ -49,6 +50,7 @@ export default {
                     name: 'temperature',
                     title: 'Temperature',
                     type: 'text',
+                    autofill: 'temperature',
                     //inputType: 'number',
                     placeHolder: '60 F'
                 },
@@ -56,6 +58,7 @@ export default {
                     name: 'windspeed',
                     title: 'Wind Speed',
                     type: 'text',
+                    autofill: 'windspeed',
                     //inputType: 'number',
                     placeHolder: '10 mph',
                 },
@@ -63,6 +66,7 @@ export default {
                     name: 'winddirection',
                     title: 'Wind Direction',
                     type: 'text',
+                    autofill: 'winddirection',
                     //inputType: 'number',
                     placeHolder: '35 deg',
                 },

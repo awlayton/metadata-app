@@ -7,6 +7,7 @@
     "@cerebral/react": "^4.1.0",
     "@material-ui/core": "^4.0.0-alpha.6",
     "@material-ui/icons": "^3.0.2",
+    "apixu": "github:apixu/apixu-nodejs#v0.3.0",
     "bluebird": "^3.5.4",
     "cerebral": "^5.1.0",
     "cra-append-sw": "^2.6.1",

@@ -103,6 +103,13 @@ export const confirmSubmit = [
 
 export const setDebugMenuOpen = [set(state`debugMenuOpen`, props`open`)];
 
+export const getCurrentLocationWeather = [
+    actions.getCurrentLocation,
+    set(props`latitude`, props`currentLoc.latitude`),
+    set(props`longitude`, props`currentLoc.longitude`),
+    actions.getCurrentWeather,
+];
+
 export const autofill = [
     equals(props`autofill`),
     {
@@ -115,6 +122,19 @@ export const autofill = [
         longitude: [
             actions.getCurrentLocation,
             set(props`answer`, props`currentLoc.longitude`),
+        ],
+        // TODO: Combine weather autofills?
+        temperature: [
+            getCurrentLocationWeather,
+            set(props`answer`, props`temp_f`),
+        ],
+        windspeed: [
+            getCurrentLocationWeather,
+            set(props`answer`, props`wind_mph`),
+        ],
+        winddirection: [
+            getCurrentLocationWeather,
+            set(props`answer`, props`wind_dir`),
         ],
         otherwise: [],
     },
