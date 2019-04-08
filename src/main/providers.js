@@ -102,7 +102,7 @@ export const gapiClient = {
         await gapi;
     },
 
-    async get(scope) {
+    async get(/*scope*/) { // TODO: Fix/remove code for incremental scopes?
         return gapi
             .tap(({auth2}) => {
                 let user = auth2.getAuthInstance().currentUser.get();
