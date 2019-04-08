@@ -6,6 +6,7 @@ import {Apixu} from 'apixu';
 
 import * as errors from './errors';
 import model from '../surveyModel';
+import scope from '../googleScopes';
 
 export const geolocation = {
     async getCurrentLoc() {
@@ -79,6 +80,7 @@ export const gapiClient = {
                     'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest',
                     'https://sheets.googleapis.com/$discovery/rest?version=v4'
                 ],
+                scope,
             }))
             // Listen for login/logout
             .tap(({auth2}) => {
