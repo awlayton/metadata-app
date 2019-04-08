@@ -237,6 +237,38 @@ export const googlesheets = {
         });
     },
 };
+const driveFilesUrl = 'https://www.googleapis.com/upload/drive/v3/files/';
+export const googledrive = {
+    async upload(file) {
+        let {drive} = await this.context.gapiClient.get();
+
+        try {
+            let {result} = await drive.files.create({
+                resource: {
+                    name: file.name,
+                    mimeType: file.type,
+                },
+                fields: 'id',
+            })
+            const url = driveFilesUrl + result.id;
+
+            // TODO: You really can't sent the body with gapi??? wtf
+            let token = (await this.context.gapiClient.get()).getToken();
+            await fetch(url, {
+                method: 'PATCH',
+                headers: new Headers({
+                    'Authorization': `Bearer ${token['access_token']}`,
+                    'Content-Type': file.type,
+                }),
+                body: file,
+            });
+
+            return url;
+        } catch (err) {
+            throw new errors.GAPIError(err);
+        }
+    },
+};
 
 // TODO: Better way to handle arrays and such in a spreadsheet?
 export const serialize = {
