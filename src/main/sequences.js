@@ -63,12 +63,19 @@ export const loadappdata = [
 
 // Run _after_ login
 export const login = [
-    loadappdata,
-    set(props`resultsId`, state`resultsId`),
-    actions.loadPastResults,
-    actions.deserializeResults,
-    set(state`pastData`, props`results`),
-    set(state`loggedin`, props`name`, name => ({name})),
+    when(state`loggedin`),
+    {
+        true: [], // Don't login multiple times?
+        false: [
+            set(state`loggedin`, true),
+            loadappdata,
+            set(props`resultsId`, state`resultsId`),
+            actions.loadPastResults,
+            actions.deserializeResults,
+            set(state`pastData`, props`results`),
+            set(state`loggedin`, props`name`, name => ({name})),
+        ],
+    },
 ];
 // Runs _after_ logout
 export const logout = [
