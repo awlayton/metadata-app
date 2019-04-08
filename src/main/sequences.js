@@ -61,6 +61,10 @@ export const loadappdata = [
     set(state`resultsId`, props`body.resultsId`),
 ];
 
+export const uploadScreenshot = [
+    actions.uploadScreenshot,
+];
+
 // Run _after_ login
 export const login = [
     when(state`loggedin`),

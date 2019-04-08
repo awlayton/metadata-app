@@ -99,6 +99,9 @@ class Questions extends Component {
                 }}
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
+                onUploadFiles={async (survey, {files, callback}) => {
+                    let res = await props.upload({file: files[0]});
+                }}
                 onValueChanging={(survey, options) => {
                     let {value, question} = options;
                     if (question instanceof Survey.QuestionFileModel) {
@@ -188,6 +191,7 @@ export default connect(
         setPage: sequences`setSurveyPage`,
         setPages: sequences`setPages`,
         autofill: sequences`autofill`,
+        upload: sequences`uploadScreenshot`,
     },
     withTheme(Questions)
 );

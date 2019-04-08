@@ -76,6 +76,12 @@ export async function loadAppData({googleappdata, path}) {
     }
 }
 
+export async function uploadScreenshot({googledrive, props}) {
+    let url = await googledrive.upload(props.file);
+
+    return {url};
+}
+
 export async function getCurrentWeather({weather, props}) {
     let query = props.latitude + ',' + props.longitude;
     return await weather.current(query);
