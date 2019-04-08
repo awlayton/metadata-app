@@ -1,4 +1,4 @@
-import {set, push, when, equals} from 'cerebral/factories';
+import {set, unset, push, when, equals} from 'cerebral/factories';
 import {state, sequences, props} from 'cerebral/tags';
 import * as actions from './actions';
 
@@ -140,3 +140,9 @@ export const autofill = [
     },
     actions.setAnswer,
 ];
+
+export const displayError = [
+    ({error}) => console.error(error),
+    set(state`error`, props`error`),
+];
+export const clearError =[unset(state`error`)];
