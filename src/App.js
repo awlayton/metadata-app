@@ -33,6 +33,8 @@ import ConfirmSubmitDialog from './ConfirmSubmitDialog';
 import DebugButton from './DebugButton';
 import ErrorDisplay from './ErrorDisplay';
 
+import scope from './googleScopes'
+
 // Parse query string
 const params = queryString.parse(window.location.search);
 
@@ -166,7 +168,10 @@ class App extends Component {
                             <SendIcon />
                         </Button>
                         <div className={classes.grow} />
-                        <div className='g-signin2' data-theme='dark' />
+                        <div className='g-signin2'
+                            data-theme='dark'
+                            data-scope={scope}
+                        />
                     </Toolbar>
                 </AppBar>
                 <QRDialog
