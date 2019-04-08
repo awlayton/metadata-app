@@ -10,6 +10,7 @@
     "apixu": "github:apixu/apixu-nodejs#v0.3.0",
     "bluebird": "^3.5.4",
     "cerebral": "^5.1.0",
+    "classnames": "^2.2.6",
     "cra-append-sw": "^2.6.1",
     "gh-pages": "^2.0.1",
     "google-client-api": "^1.0.4",

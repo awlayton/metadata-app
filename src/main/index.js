@@ -1,6 +1,3 @@
-//import { set } from 'cerebral/operators';
-//import { state } from 'cerebral/tags';
-
 import localstore from './modules/localstore';
 
 import * as providers from './providers';
@@ -37,8 +34,9 @@ export default {
     },
     catch: [
         // TODO: Pop up toast or something about giving permission?
-        [errors.GetLocationError, ({error}) => console.error(error)],
-        [Error, ({error}) => console.error(error)],
+        //[errors.GetLocationError, ({error}) => console.error(error)],
+        //[Error, ({error}) => console.error(error)],
+        [Error, sequences.displayError],
     ],
     providers,
     modules: {

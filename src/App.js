@@ -31,6 +31,7 @@ import Questions from './Questions';
 import PagesDrawer from './PagesDrawer';
 import ConfirmSubmitDialog from './ConfirmSubmitDialog';
 import DebugButton from './DebugButton';
+import ErrorDisplay from './ErrorDisplay';
 
 // Parse query string
 const params = queryString.parse(window.location.search);
@@ -95,6 +96,16 @@ const styles = (theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+    },
+    icon: {
+        fontSize: 20,
+    },
+    iconVariant: {
+        opacity: 0.9,
+        marginRight: theme.spacing(1),
+    },
+    error: {
+        backgroundColor: theme.palette.error.dark,
     },
 });
 
@@ -166,7 +177,7 @@ class App extends Component {
                     open={props.sensorQRScannerActive}
                     onClose={props.hideSensorQRScanner}
                 />
-                <ConfirmSubmitDialog />
+                <ConfirmSubmitDialog classes={classes} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Questions
@@ -185,6 +196,7 @@ class App extends Component {
                     />
                     <div className={classes.toolbar} />
                 </main>
+                <ErrorDisplay classes={classes} />
                 <AppBar position='fixed' className={classes.bottomBar}>
                     <MobileStepper
                         steps={props.pages.length}
