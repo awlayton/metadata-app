@@ -57,28 +57,21 @@ export default {
             ],
         },
         {
-            name: 'uav-drone',
-            title: 'Drone',
+            name: 'uav-drone-makemodel',
+            title: 'Make and Model',
             type: 'dropdown',
-            hideIfChoicesEmpty: true,
+            autofill: 'lastused',
+            hideIfChoicesEmpty: false,
+            hasOther: true,
+            storeOthersAsComment: false,
+            otherText: 'Add new make and model',
+            otherErrorText: 'Please enter the new make and model',
             choices: drones.map((e, i) => ({
                 text: e.make + ' ' + e.model,
                 value: e.make + ' ' + e.model,
                 //value: i,
                 visibleIf: `{uav-drone-type} == "${e.type}"`,
             })),
-        },
-        {
-            name: 'uav-drone-make',
-            title: 'Make',
-            type: 'text',
-            enableIf: '{uav-drone} empty'
-        },
-        {
-            name: 'uav-drone-model',
-            title: 'Model',
-            type: 'text',
-            enableIf: '{uav-drone} empty'
         },
     ]
 };
