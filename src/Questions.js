@@ -100,9 +100,18 @@ class Questions extends Component {
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
                 onUploadFiles={async (survey, {files, callback}) => {
-                    let res = await props.upload({file: files[0]});
+                    // TODO: Support multiple files?
+                    let file = files[0];
+
+                    let res = await props.upload({file});
+
+                    callback('success', [{
+                        file,
+                        content: res.url,
+                    }]);
                 }}
                 onValueChanging={(survey, options) => {
+                    return;
                     let {value, question} = options;
                     if (question instanceof Survey.QuestionFileModel) {
                         (value || []).forEach((file, i) => {

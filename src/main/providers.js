@@ -250,11 +250,10 @@ export const googledrive = {
                 },
                 fields: 'id',
             })
-            const url = driveFilesUrl + result.id;
 
             // TODO: You really can't sent the body with gapi??? wtf
             let token = (await this.context.gapiClient.get()).getToken();
-            await fetch(url, {
+            await fetch(driveFilesUrl + result.id, {
                 method: 'PATCH',
                 headers: new Headers({
                     'Authorization': `Bearer ${token['access_token']}`,
@@ -263,7 +262,7 @@ export const googledrive = {
                 body: file,
             });
 
-            return url;
+            return `https://drive.google.com/uc?id=${result.id}`;
         } catch (err) {
             throw new errors.GAPIError(err);
         }

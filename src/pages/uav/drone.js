@@ -29,6 +29,7 @@ export default {
                     name: 'drone-advanced-flight-planning',
                     title: 'Screenshot of Advanced Flight Planning',
                     type: 'file',
+                    storeDataAsText: false,
                     allowMultiple: false,
                 },
             ],
