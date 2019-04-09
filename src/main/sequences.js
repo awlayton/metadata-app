@@ -1,4 +1,4 @@
-import {set, unset, push, when, equals} from 'cerebral/factories';
+import {set, unset, push, concat, when, equals} from 'cerebral/factories';
 import {state, sequences, props} from 'cerebral/tags';
 import * as actions from './actions';
 
@@ -133,6 +133,11 @@ export const autofill = [
         longitude: [
             actions.getCurrentLocation,
             set(props`answer`, props`currentLoc.longitude`),
+        ],
+        location: [
+            actions.getCurrentLocation,
+            set(props`answer`, props`currentLoc`,
+                    ({latitude, longitude}) => `${latitude},${longitude}`),
         ],
         // TODO: Combine weather autofills?
         temperature: [
