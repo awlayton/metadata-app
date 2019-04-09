@@ -11,6 +11,7 @@ import {withTheme} from '@material-ui/core/styles';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
+import classNames from 'classnames';
 import Pica from 'pica';
 
 import surveyModel from './surveyModel';
@@ -22,6 +23,12 @@ Survey.JsonObject.metaData.addProperty('question', {
 Survey.JsonObject.metaData.addProperty('question', {
     name: 'autofill',
     default: false,
+});
+
+// Override imageWidth for file questions
+Survey.JsonObject.metaData.addProperty('file', {
+    name: 'imageWidth',
+    default: '100%',
 });
 
 let pica = new Pica();
@@ -87,7 +94,7 @@ class Questions extends Component {
     }
 
     render() {
-        let {get, ...props} = this.props;
+        const {get, classes={}, ...props} = this.props;
         return (
             <Survey.Survey
                 {...props}
@@ -97,6 +104,13 @@ class Questions extends Component {
                         props.setPage({pageNum: survey.currentPageNo});
                     }
                 }}
+                onUpdateQuestionCssClasses={
+                    (survey, {question, cssClasses}) => {
+                        // TODO: Support more CSS stuff?
+                        cssClasses.preview =
+                            classNames(cssClasses.preview, classes.ssPreview);
+                    }
+                }
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
                 onUploadFiles={async (survey, {files, callback}) => {

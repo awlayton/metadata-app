@@ -9,7 +9,7 @@ import IconButton from '@material-ui/core/IconButton';
 import ErrorIcon from '@material-ui/icons/Error';
 import CloseIcon from '@material-ui/icons/Close';
 
-function ErrorDisplay({classes, error, close}) {
+function ErrorDisplay({classes={}, error, close}) {
     return (
         <Snackbar
             open={!!error}

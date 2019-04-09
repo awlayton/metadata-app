@@ -23,6 +23,7 @@ export default {
                     title: 'Screenshot of Flight Planning',
                     type: 'file',
                     storeDataAsText: false,
+                    acceptedTypes: 'image/*',
                     allowMultiple: false,
                 },
                 {
@@ -30,6 +31,7 @@ export default {
                     title: 'Screenshot of Advanced Flight Planning',
                     type: 'file',
                     storeDataAsText: false,
+                    acceptedTypes: 'image/*',
                     allowMultiple: false,
                 },
             ],
