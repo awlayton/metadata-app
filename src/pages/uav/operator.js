@@ -33,7 +33,7 @@ export default {
                         {
                             type: 'regex',
                             regex: /^[0-9]{7}$/,
-                            text: 'Invalid license number'
+                            text: 'License number must be 7 digits'
                         }
                     ]
                 },
