@@ -45,19 +45,10 @@ export default {
                     templateTitle: 'Location #{panelIndex}',
                     templateElements: [
                         {
-                            name: 'latitude',
-                            title: 'Latitude',
+                            name: 'location',
+                            title: 'Lat/Lon or Label',
                             type: 'text',
-                            inputType: 'number',
-                            autofill: 'latitude',
-                            isRequired: true,
-                        },
-                        {
-                            name: 'longitude',
-                            title: 'Longitude',
-                            type: 'text',
-                            inputType: 'number',
-                            autofill: 'longitude',
+                            autofill: 'location',
                             isRequired: true,
                         },
                     ],
