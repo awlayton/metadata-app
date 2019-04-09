@@ -3,6 +3,7 @@ import Promise from 'bluebird';
 import googleapi from 'google-client-api';
 import XLSX from 'xlsx';
 import {Apixu} from 'apixu';
+import ducky from 'ducky';
 
 import * as errors from './errors';
 import model from '../surveyModel';
@@ -262,7 +263,7 @@ export const googledrive = {
                 body: file,
             });
 
-            return `https://drive.google.com/uc?id=${result.id}`;
+            return `https://docs.google.com/uc?export=download&id=${result.id}`;
         } catch (err) {
             throw new errors.GAPIError(err);
         }
@@ -270,6 +271,8 @@ export const googledrive = {
 };
 
 // TODO: Better way to handle arrays and such in a spreadsheet?
+const fileResult = ducky.validate
+        .compile('[ { content: string, name: string, type: string } ]');
 export const serialize = {
     serialize(data) {
         return data.map((result, i) => {
@@ -277,7 +280,10 @@ export const serialize = {
             Object.keys(result).forEach(key => {
                 try {
                     if (typeof result[key] === 'object') {
-                        if (result[key]) {
+                        if (ducky.validate.execute(result[key], fileResult)) {
+                            serialized[key] =
+                                    `=IMAGE("${result[key][0].content}",3)`;
+                        } else if (result[key]) {
                             let kkey = '$$' + key;
                             serialized[kkey] = JSON.stringify(result[key]);
                         }
