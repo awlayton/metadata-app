@@ -30,6 +30,7 @@ export default {
             panelCount: 0,
             panelAddText: 'Add Sensor',
             panelRemoveText: 'Remove Sensor',
+            autofill: 'lastused',
             templateTitle: 'Sensor #{panelIndex}',
             templateElements: [
                 {

@@ -1,4 +1,4 @@
-//import {state} from 'cerebral';
+import {state} from 'cerebral/tags';
 
 export function getCurrentLocation({geolocation}) {
     return geolocation.getCurrentLoc()
@@ -85,4 +85,16 @@ export async function uploadScreenshot({googledrive, props}) {
 export async function getCurrentWeather({weather, props}) {
     let query = props.latitude + ',' + props.longitude;
     return await weather.current(query);
+}
+
+export function getLastAnswer({get, props}) {
+    let {question} = props;
+
+    try {
+        let data = get(state`pastData`);
+
+        return {answer: data[data.length - 1][question]};
+    } catch (err) {
+        return {};
+    }
 }

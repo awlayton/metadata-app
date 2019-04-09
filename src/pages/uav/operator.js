@@ -12,15 +12,16 @@ export default {
             minPanelCount: 1,
             panelAddText: 'Add Remote PIC',
             panelRemoveText: 'Remove Remote PIC',
+            autofill: 'lastused',
             templateTitle: 'Remote PIC #{panelIndex}',
             templateElements: [
                 {
                     name: 'remote-pic-name',
                     title: 'Name',
                     type: 'text',
-                    autofill: 'person',
+                    //autofill: 'person',
                     isRequired: true,
-                    placeHolder: 'Rusty Shackleford'
+                    placeHolder: 'Rusty Shackleford',
                 },
                 {
                     name: 'remote-pic-certificate',
