@@ -8,6 +8,7 @@ export default {
             title: 'Grower (or Client)',
             type: 'text',
             placeHolder: 'Farmer Frank',
+            autofill: 'lastused',
         },
         {
             name: 'operation',

@@ -12,6 +12,7 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
 import classNames from 'classnames';
+import isEmpty from 'lodash.isempty';
 import Pica from 'pica';
 
 import surveyModel from './surveyModel';
@@ -32,6 +33,10 @@ Survey.JsonObject.metaData.addProperty('file', {
 });
 
 let pica = new Pica();
+
+function unanswered(value) {
+    return isEmpty(value) || (value.every && value.every(isEmpty));
+}
 
 class Questions extends Component {
     componentWillMount() {
@@ -178,7 +183,7 @@ class Questions extends Component {
                     async (survey, {question, htmlElement}) => {
                         let {autofill} = question;
                         // Try to autofill if unanswered
-                        if (question.value === undefined && autofill) {
+                        if (unanswered(question.value) && autofill) {
                             if (typeof autofill === 'function') {
                                 question.value = await autofill(question);
                             } else {

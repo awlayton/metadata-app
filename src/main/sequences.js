@@ -152,6 +152,9 @@ export const autofill = [
             getCurrentLocationWeather,
             set(props`answer`, props`wind_dir`),
         ],
+        lastused: [
+            actions.getLastAnswer,
+        ],
         otherwise: [],
     },
     actions.setAnswer,
