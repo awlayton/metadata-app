@@ -40,6 +40,7 @@ export default {
                     type: 'dropdown',
                     isRequired: true,
                     hasOther: true,
+                    storeOthersAsComment: false,
                     otherText: 'Add new type',
                     otherErrorText: 'Please enter the new type',
                     choices: [
@@ -52,7 +53,6 @@ export default {
                 },
                 {
                     name: 'uav-sensor-makemodel',
-                    valueName: 'sensor',
                     title: 'Make and Model',
                     type: 'dropdown',
                     hideIfChoicesEmpty: false,
