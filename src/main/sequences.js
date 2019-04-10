@@ -1,4 +1,4 @@
-import {set, unset, push, concat, when, equals} from 'cerebral/factories';
+import {set, unset, push, concat, when, equals, wait} from 'cerebral/factories';
 import {state, sequences, props} from 'cerebral/tags';
 import * as actions from './actions';
 
@@ -7,6 +7,7 @@ export const init = [
     set(props`logout`, sequences`logout`),
     actions.initGapi,
     ({get}) => get(sequences`store.init`)(),
+    set(state`initialized`, true),
 ];
 
 export const showDroneQRScanner = [set(state`droneQRScannerActive`, true)];

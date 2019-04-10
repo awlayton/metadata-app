@@ -1,3 +1,4 @@
+import Promise from 'bluebird';
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
@@ -13,6 +14,7 @@ import 'survey-react/survey.css';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash.isempty';
+import AutoComplete from 'react-autocomplete';
 import Pica from 'pica';
 
 import surveyModel from './surveyModel';
@@ -71,11 +73,31 @@ class Questions extends Component {
             this.model.currentPageNo = pageNum;
         }
 
+        this.props.reaction('initialized',
+            {
+                initialized: state`initialized`,
+            },
+            ({initialized}) => {
+                if (!this.props.initialized) {
+                    return;
+                }
+                let page = this.model.getPageByName('loading');
+                let num = this.props.pageNum;
+                this.model.removePage(page);
+                this.updatePages(this.model);
+                this.model.currentPageNo = num;
+            }
+        );
         this.props.reaction('changePage',
             {
                 pageNum: state`pageNum`,
             },
-            ({pageNum}) => this.model.currentPageNo = pageNum
+            ({pageNum}) => {
+                if (!this.props.initialized) {
+                    return;
+                }
+                this.model.currentPageNo = pageNum
+            }
         );
         this.props.reaction('changeData',
             {
@@ -181,6 +203,24 @@ class Questions extends Component {
                 }
                 onAfterRenderQuestion={
                     async (survey, {question, htmlElement}) => {
+                        // Autocomplete?
+                        if (question.getType() === 'text') {
+                            let input = document
+                                    .getElementById(question.inputId);
+                            let attrs = input.attributes;
+                            let pprops = {};
+                            for (let i = 0; i < attrs.length; i++) {
+                                pprops[attrs[i].name] = attrs[i].value;
+                            }
+                            ReactDOM.render(
+                                <AutoCompleteTextQuestion
+                                    question={question}
+                                    autofill={props.autofill}
+                                    inputProps={pprops}
+                                />
+                            , input.parentElement);
+                        }
+
                         let {autofill} = question;
                         // Try to autofill if unanswered
                         if (unanswered(question.value) && autofill) {
@@ -192,9 +232,13 @@ class Questions extends Component {
                                     question: question.name,
                                     autofill,
                                 });
-                                question.value = seq && seq.answer;
+                                // Make sure they didn't answer still
+                                if (unanswered(question.value)) {
+                                    question.value = seq && seq.answer;
+                                }
                             }
                         }
+
                         if (question.cerebralbutton) {
                             let seq = get(sequences`${question.cerebralbutton}`);
                             ReactDOM.render(
@@ -210,6 +254,75 @@ class Questions extends Component {
     }
 }
 
+class AutoCompleteTextQuestion extends Component {
+
+    state = {
+        value: '',
+        items: [],
+    }
+
+    componentWillMount() {
+        this.question = this.props.question;
+        this.question.onAnyValueChanged((s, {value}) => this.setState({value}));
+    }
+
+    async componentDidMount() {
+        this.setValue(this.question.value);
+        let {question} = this;
+        let {autofill} = question;
+
+        // Try to autofill if unanswered
+        if (unanswered(question.value) && autofill) {
+            if (typeof autofill === 'function') {
+                question.value = await autofill(question);
+            } else {
+                let seq = await this.props.autofill({
+                    // TODO: How to handle dynamic questions?
+                    question: question.name,
+                    autofill,
+                });
+                // Make sure they didn't answer still
+                if (unanswered(question.value)) {
+                    question.value = seq && seq.answer;
+                }
+            }
+        }
+        this.setValue(question.value);
+    }
+
+    setValue(value) {
+        // AutoComplete gets mad if it's not a string...
+        value = value ? `${value}` : '';
+
+        if (value === this.state.value) {
+            return;
+        }
+
+        this.question.value = value;
+        this.setState({value});
+    }
+
+    render() {
+        return (
+            <AutoComplete
+                inputProps={this.props.inputProps}
+                value={this.state.value}
+                items={[
+                ]}
+                wrapperStyle={{}}
+                onChange={(e) => this.setValue(e.target.value)}
+                onSelect={(val) => this.setValue(val)}
+                getItemValue={val => ''+val}
+                renderItem={(item, isHighlighted) => (
+                    <div>
+                        {item}
+                    </div>
+                )}
+            />
+        );
+    }
+}
+
 export default connect(
     {
         questions: state`questions`,
@@ -220,6 +333,8 @@ export default connect(
         setPages: sequences`setPages`,
         autofill: sequences`autofill`,
         upload: sequences`uploadScreenshot`,
+        initialized: state`initialized`,
+        pageNum: state`pageNum`,
     },
     withTheme(Questions)
 );

@@ -22,6 +22,7 @@
     "pica": "^5.0.0",
     "query-string": "^6.4.2",
     "react": "^16.8.6",
+    "react-autocomplete": "^1.8.1",
     "react-dom": "^16.8.6",
     "react-https-redirect": "^1.1.0",
     "react-qr-reader": "^2.2.1",

@@ -15,6 +15,7 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import Dialog from '@material-ui/core/Dialog';
 
 import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
 import gold from '@material-ui/core/colors/amber';
@@ -76,6 +77,12 @@ class App extends Component {
             <React.Fragment>
             <CssBaseline />
             <div className={classes.root}>
+                <Dialog
+                    fullScreen
+                    open={!props.initialized}
+                >
+                    {/* TODO: Make loading screen */}
+                </Dialog>
                 <PagesDrawer
                     classes={classes}
                     // Screens sizes to show permanent drawer
@@ -210,4 +217,5 @@ export default connect({
     createSheet: sequences`createSheet`,
     submitResults: sequences`submitResults`,
     submitting: state`submitting`,
+    initialized: state`initialized`,
 }, withStyles(styles)(App));
