@@ -6,7 +6,6 @@ import {Apixu} from 'apixu';
 import ducky from 'ducky';
 
 import * as errors from './errors';
-import model from '../surveyModel';
 import scope from '../googleScopes';
 
 export const geolocation = {
@@ -35,32 +34,6 @@ export const geolocation = {
             throw new errors.GetLocationError(msg);
         }
     }
-};
-
-export const survey = {
-    setAnswer(name, value) {
-        model.model.setValue(name, value);
-    },
-
-    setPage(num) {
-        model.model.currentPageNo = num;
-    },
-
-    nextPage() {
-        return model.model.nextPage();
-    },
-
-    previousPage() {
-        return model.model.prevPage();
-    },
-
-    setData(data) {
-        model.model.data = data;
-    },
-
-    submit() {
-        return model.model.completeLastPage();
-    },
 };
 
 let gapi;

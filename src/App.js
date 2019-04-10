@@ -99,10 +99,7 @@ class App extends Component {
                         </IconButton>
                         <Button
                             color='inherit'
-                            disabled={
-                                props.submitting ||
-                                    props.pages.some(page => page.error)
-                            }
+                            disabled={!props.canSubmit}
                             onClick={() => props.submit()}>
                             Submit
                             <SendIcon />
@@ -125,7 +122,7 @@ class App extends Component {
                 <ConfirmSubmitDialog classes={classes} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Questions
+                    {props.initialized && <Questions
                         classes={classes}
                         isSinglePage={params.singlePage !== undefined}
                         completedHtml={(
@@ -139,7 +136,7 @@ class App extends Component {
                             </div>
                         )}
                         onComplete={({data}) => props.submitResults()}
-                    />
+                    />}
                     <div className={classes.toolbar} />
                 </main>
                 <ErrorDisplay classes={classes} />
@@ -153,7 +150,7 @@ class App extends Component {
                             props.pageNum === props.pages.length - 1 ?
                                 <Button
                                     color='primary'
-                                    //disabled={}
+                                    disabled={!props.canSubmit}
                                     onClick={() => props.submit()}>
                                     Sumbit
                                     <SendIcon />
@@ -187,6 +184,7 @@ class App extends Component {
 }
 
 export default connect({
+    initialized: state`initialized`,
     navigationOpen: state`navigationOpen`,
     showNavigation: sequences`showNavigation`,
     hideNavigation: sequences`hideNavigation`,
@@ -209,5 +207,5 @@ export default connect({
     google: state`google`,
     createSheet: sequences`createSheet`,
     submitResults: sequences`submitResults`,
-    submitting: state`submitting`,
+    canSubmit: state`canSubmit`,
 }, withStyles(styles)(App));

@@ -7,6 +7,7 @@ export const init = [
     set(props`logout`, sequences`logout`),
     actions.initGapi,
     ({get}) => get(sequences`store.init`)(),
+    set(state`initialized`, true),
 ];
 
 export const showDroneQRScanner = [set(state`droneQRScannerActive`, true)];
@@ -157,7 +158,7 @@ export const autofill = [
         ],
         otherwise: [],
     },
-    actions.setAnswer,
+    //actions.setAnswer,
 ];
 
 export const displayError = [
