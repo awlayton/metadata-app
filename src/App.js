@@ -126,7 +126,7 @@ class App extends Component {
                 <ConfirmSubmitDialog classes={classes} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    { props.loggedin ?
+                    { props.initialized && (props.loggedin ?
                         <Questions
                             classes={classes}
                             isSinglePage={params.singlePage !== undefined}
@@ -148,7 +148,7 @@ class App extends Component {
                                 Please sign in to continue.
                             </Typography>
                         </Box>
-                    }
+                    )}
                     <div className={classes.toolbar} />
                 </main>
                 <ErrorDisplay classes={classes} />
@@ -196,6 +196,7 @@ class App extends Component {
 }
 
 export default connect({
+    initialized: state`initialized`,
     navigationOpen: state`navigationOpen`,
     showNavigation: sequences`showNavigation`,
     hideNavigation: sequences`hideNavigation`,
