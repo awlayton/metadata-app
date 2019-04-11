@@ -9,7 +9,7 @@ const drones = [
 
 export default {
     name: 'uav-drone',
-    title: 'Drone Info',
+    title: 'UAV Info',
     visibleIf: '{purpose} == "UAV"',
     elements: [
         {
