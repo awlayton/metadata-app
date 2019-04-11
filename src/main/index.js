@@ -2,6 +2,7 @@ import localstore from './modules/localstore';
 
 import * as providers from './providers';
 import * as sequences from './sequences';
+import * as computeds from './computeds';
 import * as errors from './errors';
 
 // TODO: Should this be here??
@@ -13,6 +14,7 @@ const store = localstore(['pageNum', 'surveyData']);
 export default {
     sequences,
     state: {
+        ...computeds,
         loggedin: null,
         appdataId: null,
         resultsId: null,
