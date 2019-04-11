@@ -14,6 +14,7 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import Link from '@material-ui/core/Link';
 
 function PagesDrawer(props) {
     const {classes={}} = props;
@@ -52,6 +53,18 @@ function PagesDrawer(props) {
                         />
                     </ListItem>
                 ))}
+            {props.readme && <>
+                <Divider />
+                <ListItem
+                    component={Link}
+                    target='_blank'
+                    href={props.readme}
+                >
+                <ListItemText
+                    primary='Readme'
+                />
+                </ListItem>
+            </>}
             </List>
         </div>
     );

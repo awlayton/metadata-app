@@ -51,6 +51,9 @@ const theme = createMuiTheme({
     },
 });
 
+const README_URL = 'https://docs.google.com/document/d/' +
+        '1wkG-bEYFyqxV-SmYoQmgLTJ1m1pvPvXlnTTnjh60ZFY/edit?usp=sharing';
+
 window.addEventListener('beforeinstallprompt', (e) => {
     // Prevent Chrome 67 and earlier from automatically showing the prompt
     e.preventDefault();
@@ -82,6 +85,7 @@ class App extends Component {
                     permScreens={{smUp: true}}
                     // Screens sizes to show temporary drawer
                     tempScreens={{xsDown: true}}
+                    readme={README_URL}
                 />
                 <AppBar position='fixed' className={classes.appBar}>
                     <Toolbar>
