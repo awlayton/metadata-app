@@ -1,7 +1,10 @@
 import {state} from 'cerebral/tags';
 
 export const canSubmit = get =>
-        !get(state`submitting`) && !get(state`pages`).some(page => page.error);
+        get(state`initialized`) &&
+        get(state`loggedin`) &&
+        !get(state`submitting`) &&
+        !get(state`pages`).some(page => page.error);
 
 export const canNext = get => {
     let page = get(state`pageNum`);
