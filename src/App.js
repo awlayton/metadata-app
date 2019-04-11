@@ -22,6 +22,7 @@ import gold from '@material-ui/core/colors/amber';
 // Has to be last mui import
 import Box from '@material-ui/core/Box';
 
+import DocumentMeta from 'react-document-meta';
 import HttpsRedirect from 'react-https-redirect';
 import queryString from 'query-string';
 
@@ -35,6 +36,11 @@ import ErrorDisplay from './ErrorDisplay';
 
 import styles from './styles';
 import scope from './googleScopes';
+import describe from './describe';
+
+const meta = {
+    title: 'foo',
+};
 
 // Parse query string
 const params = queryString.parse(window.location.search);
@@ -76,6 +82,7 @@ class App extends Component {
         return (
             <HttpsRedirect>
             <MuiThemeProvider theme={theme}>
+            <DocumentMeta {...meta} />
             <React.Fragment>
             <CssBaseline />
             <div className={classes.root}>
