@@ -60,7 +60,7 @@ export const loadappdata = [
         ],
     },
     set(state`resultsId`, props`body.resultsId`),
-    set(state`appaataId`, props`id`),
+    set(state`appdataId`, props`id`),
 ];
 
 export const uploadScreenshot = [
