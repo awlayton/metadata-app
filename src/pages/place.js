@@ -49,7 +49,7 @@ export default {
                 },
                 {
                     name: 'temperature',
-                    title: 'Temperature',
+                    title: 'Temperature (℉)',
                     type: 'text',
                     autofill: 'temperature',
                     //inputType: 'number',
@@ -57,7 +57,7 @@ export default {
                 },
                 {
                     name: 'windspeed',
-                    title: 'Wind Speed',
+                    title: 'Wind Speed (mph)',
                     type: 'text',
                     autofill: 'windspeed',
                     //inputType: 'number',
@@ -69,7 +69,7 @@ export default {
                     type: 'text',
                     autofill: 'winddirection',
                     //inputType: 'number',
-                    placeHolder: '35 deg',
+                    placeHolder: 'ENE',
                 },
             ],
         },
