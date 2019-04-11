@@ -15,6 +15,7 @@ export default {
     sequences,
     state: {
         ...computeds,
+        initialized: false,
         loggedin: null,
         appdataId: null,
         resultsId: null,
