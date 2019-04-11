@@ -14,9 +14,10 @@ export default {
     sequences,
     state: {
         loggedin: null,
+        appdataId: null,
         resultsId: null,
         submitting: false,
-        navigationOpen: true,
+        navigationOpen: false,
         confirmSubmitOpen: false,
         droneQRScannerActive: false,
         sensorQRScannerActive: false,
