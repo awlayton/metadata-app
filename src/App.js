@@ -125,21 +125,29 @@ class App extends Component {
                 <ConfirmSubmitDialog classes={classes} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Questions
-                        classes={classes}
-                        isSinglePage={params.singlePage !== undefined}
-                        completedHtml={(
-                            <div>
-                                <Typography color='inherit' >
-                                    Submitting Metadata
-                                </Typography>
-                                <Box p={4} >
-                                    <CircularProgress size={100} />
-                                </Box>
-                            </div>
-                        )}
-                        onComplete={({data}) => props.submitResults()}
-                    />
+                    { props.loggedin ?
+                        <Questions
+                            classes={classes}
+                            isSinglePage={params.singlePage !== undefined}
+                            completedHtml={(
+                                <div>
+                                    <Typography color='inherit' >
+                                        Submitting Metadata
+                                    </Typography>
+                                    <Box p={4} >
+                                        <CircularProgress size={100} />
+                                    </Box>
+                                </div>
+                            )}
+                            onComplete={({data}) => props.submitResults()}
+                        />
+                        :
+                        <Box p={4} >
+                            <Typography color='inherit' >
+                                Please sign in to continue.
+                            </Typography>
+                        </Box>
+                    }
                     <div className={classes.toolbar} />
                 </main>
                 <ErrorDisplay classes={classes} />
@@ -204,6 +212,7 @@ export default connect({
     hideDroneQRScanner: sequences`hideDroneQRScanner`,
     hideSensorQRScanner: sequences`hideSensorQRScanner`,
     init: sequences`init`,
+    loggedin: state`loggedin`,
     login: sequences`login`,
     logout: sequences`logout`,
     google: state`google`,
