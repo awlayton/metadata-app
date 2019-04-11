@@ -51,7 +51,6 @@ export default {
                     name: 'temperature',
                     title: 'Temperature',
                     type: 'text',
-                    inputType: 'number',
                     autofill: 'temperature',
                     //inputType: 'number',
                     placeHolder: '60 F'

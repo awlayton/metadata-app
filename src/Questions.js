@@ -11,6 +11,8 @@ import {withTheme} from '@material-ui/core/styles';
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
+import pages from './pages';
+
 import classNames from 'classnames';
 import isEmpty from 'lodash.isempty';
 import Pica from 'pica';
@@ -35,6 +37,14 @@ let pica = new Pica();
 function unanswered(value) {
     return isEmpty(value) || (value.every && value.every(isEmpty));
 }
+
+const model = new Survey.Model({
+    showNavigationButtons: false,
+    goNextPageAutomatic: true,
+    clearInvisibleValues: 'onHidden',
+    checkErrorsMode: 'onValueChanged',
+    pages,
+});
 
 function Questions({get, classes={}, theme, ...props}) {
     // Apply MUI theme to survey
@@ -66,6 +76,7 @@ function Questions({get, classes={}, theme, ...props}) {
     return (
         <Survey.Survey
             {...props}
+            model={model}
             onAfterRenderSurvey={updatePages}
             onCurrentPageChanged={(survey) => {
                 if (get(state`pageNum`) !== survey.currentPageNo) {
@@ -134,14 +145,23 @@ function Questions({get, classes={}, theme, ...props}) {
                 }
             }}
             onValueChanged={(survey, {name, value, question}) => {
-                props.setData({data: survey.data, foo: 1});
+                console.log('onValueChanged')
+                console.dir(survey)
+                console.dir(model)
+                props.setData({data: survey.data, foo: Date.now()});
                 setTimeout(() => updatePages(survey));
             }}
             completedHtml={
                 ReactDOMServer.renderToString(props.completedHtml)
             }
+            onDynamicPanelAdded={(survey, {question}) => {
+                console.log('onDynamicPanelAdded')
+                console.dir(question)
+            }}
             onAfterRenderQuestion={
                 async (survey, {question, htmlElement}) => {
+                    console.dir(htmlElement)
+                    console.dir(question)
                     // Make errors show immediately
                     question.hasErrors(true);
 
@@ -159,7 +179,7 @@ function Questions({get, classes={}, theme, ...props}) {
                                     question: question.name,
                                     autofill,
                                 });
-                                question.value = seq && seq.answer;
+                                //question.value = seq && seq.answer;
                             }
                         }
                     }
@@ -179,7 +199,6 @@ function Questions({get, classes={}, theme, ...props}) {
 
 export default connect(
     {
-        json: state`questions`,
         init: sequences`initSurvey`,
         data: state`surveyData`,
         setData: sequences`setSurveyData`,

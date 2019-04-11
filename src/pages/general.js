@@ -45,7 +45,7 @@ export default {
                     templateTitle: 'Location #{panelIndex}',
                     templateElements: [
                         {
-                            name: 'location',
+                            name: 'location #{panelIndex}',
                             title: 'Lat/Lon or Label',
                             type: 'text',
                             autofill: 'location',

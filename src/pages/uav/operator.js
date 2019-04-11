@@ -27,7 +27,7 @@ export default {
                     name: 'remote-pic-certificate',
                     title: 'Certificate Number or equivalent',
                     type: 'text',
-                    inputType: 'number',
+                    //inputType: 'number', // TODO: why does this break it??
                     isRequired: true,
                     placeHolder: '1234567',
                     validators: [

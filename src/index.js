@@ -7,6 +7,8 @@ import App from 'cerebral';
 import {Container} from '@cerebral/react';
 import Devtools from 'cerebral/devtools';
 
+import {Model} from 'survey-react';
+
 import AppComponent from './App';
 import main from './main';
 

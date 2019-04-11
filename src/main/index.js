@@ -1,3 +1,5 @@
+import {Model} from 'survey-react';
+
 import localstore from './modules/localstore';
 
 import * as providers from './providers';
@@ -27,13 +29,6 @@ export default {
         pastData: [],
         pages: [],
         pageNum: 0,
-        questions: {
-            showNavigationButtons: false,
-            goNextPageAutomatic: true,
-            clearInvisibleValues: 'onHidden',
-            checkErrorsMode: 'onValueChanged',
-            pages,
-        },
     },
     catch: [
         // TODO: Pop up toast or something about giving permission?
