@@ -103,10 +103,7 @@ class App extends Component {
                         </IconButton>
                         <Button
                             color='inherit'
-                            disabled={
-                                props.submitting ||
-                                    props.pages.some(page => page.error)
-                            }
+                            disabled={!props.canSubmit}
                             onClick={() => props.submit()}>
                             Submit
                             <SendIcon />
@@ -165,7 +162,7 @@ class App extends Component {
                             props.pageNum === props.pages.length - 1 ?
                                 <Button
                                     color='primary'
-                                    //disabled={}
+                                    disabled={!props.canSubmit}
                                     onClick={() => props.submit()}>
                                     Sumbit
                                     <SendIcon />
@@ -173,7 +170,7 @@ class App extends Component {
                                 :
                                 <Button
                                     color='primary'
-                                    //disabled={}
+                                    disabled={!props.canNext}
                                     onClick={() => props.goNextPage()}>
                                     Next
                                     <NavigateNextIcon />
@@ -182,7 +179,7 @@ class App extends Component {
                         backButton={
                             <Button
                                 color='primary'
-                                disabled={props.pageNum === 0}
+                                disabled={!props.canPrev}
                                 onClick={() => props.goPreviousPage()}>
                                 <NavigateBeforeIcon />
                                 Previous
@@ -222,5 +219,7 @@ export default connect({
     google: state`google`,
     createSheet: sequences`createSheet`,
     submitResults: sequences`submitResults`,
-    submitting: state`submitting`,
+    canSubmit: state`canSubmit`,
+    canNext: state`canNext`,
+    canPrev: state`canPrev`,
 }, withStyles(styles)(App));
