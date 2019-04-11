@@ -48,12 +48,16 @@ export async function deserializeResults({serialize, props}) {
 
     return {results: serialize.deserialize(results)};
 }
-export async function loadPastResults({googlesheets, props}) {
+export async function loadPastResults({googlesheets, path, props}) {
     let {resultsId} = props;
 
-    let results = (await googlesheets.getSheet(resultsId)) || [];
+    try {
+        let results = (await googlesheets.getSheet(resultsId)) || [];
 
-    return {results};
+        return path.found({results});
+    } catch (err) {
+        return path.notfound();
+    }
 }
 export async function uploadResults({googlesheets, props}) {
     let {results, resultsId} = props;
@@ -62,15 +66,20 @@ export async function uploadResults({googlesheets, props}) {
 }
 
 export async function createAppData({googleappdata, props}) {
-    let result = await googleappdata.initData(props);
+    let id = await googleappdata.initData(props);
+
+    return {id};
+}
+export async function updateAppData({googleappdata, props}) {
+    let result = await googleappdata.updateData(props);
 
     return {result};
 }
 export async function loadAppData({googleappdata, path}) {
-    let data = await googleappdata.getData();
+    let {data, id} = await googleappdata.getData();
 
     if (data) {
-        return path.found({body: data});
+        return path.found({body: data, id});
     } else {
         return path.notfound();
     }

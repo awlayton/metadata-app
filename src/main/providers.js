@@ -139,7 +139,11 @@ export const googleappdata = {
             throw new errors.GAPIError(err);
         }
 
-        return result.files[0] && result.files[0].appProperties;
+        let file = result.files[0] || {};
+        return {
+            data: file.appProperties,
+            id: file.id,
+        };
     },
 
     async initData({body = {}}) {
@@ -151,6 +155,25 @@ export const googleappdata = {
                     name: 'config.json',
                     mimeType: 'application/json',
                     parents: ['appDataFolder'],
+                    appProperties: body,
+                fields: 'id',
+                },
+            });
+            return result.id;
+        } catch (err) {
+            throw new errors.GAPIError(err);
+        }
+    },
+
+    async updateData({body = {}, id}) {
+        let {drive} = await this.context.gapiClient.get(appdataScope);
+
+        try {
+            let {result} = await drive.files.update({
+                fileId: id,
+                resource: {
+                    name: 'config.json',
+                    mimeType: 'application/json',
                     appProperties: body,
                 },
             });
