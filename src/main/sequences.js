@@ -59,6 +59,7 @@ export const loadappdata = [
         ],
     },
     set(state`resultsId`, props`body.resultsId`),
+    set(state`appaataId`, props`id`),
 ];
 
 export const uploadScreenshot = [
@@ -75,8 +76,18 @@ export const login = [
             loadappdata,
             set(props`resultsId`, state`resultsId`),
             actions.loadPastResults,
-            actions.deserializeResults,
-            set(state`pastData`, props`results`),
+            {
+                found: [
+                    actions.deserializeResults,
+                    set(state`pastData`, props`results`),
+                ],
+                notfound: [
+                    actions.createSheet,
+                    set(props`body`, {}),
+                    set(props`body.resultsId`, props`sheet.spreadsheetId`),
+                    actions.updateAppData,
+                ],
+            },
             set(state`loggedin`, props`name`, name => ({name})),
         ],
     },
