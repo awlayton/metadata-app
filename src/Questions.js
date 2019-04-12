@@ -8,6 +8,8 @@ import {state, sequences} from 'cerebral/tags';
 import Button from '@material-ui/core/Button';
 import {withTheme} from '@material-ui/core/styles';
 
+import debug from 'debug';
+
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
@@ -37,6 +39,9 @@ let pica = new Pica();
 function unanswered(value) {
     return isEmpty(value) || (value.every && value.every(isEmpty));
 }
+
+const info = debug('contxt:survey:info');
+info.log = console.info.bind(console);
 
 class Questions extends Component {
     componentWillMount() {
@@ -105,12 +110,17 @@ class Questions extends Component {
                 {...props}
                 model={this.model}
                 onCurrentPageChanged={(survey) => {
+                    info(`onCurrentPageChanged ${survey.currentPageNo}`);
+
                     if (get(state`pageNum`) !== survey.currentPageNo) {
                         props.setPage({pageNum: survey.currentPageNo});
                     }
                 }}
                 onUpdateQuestionCssClasses={
                     (survey, {question, cssClasses}) => {
+                        info(`onUpdateQuestionCssClasses ${question.name}=%o`,
+                                cssClasses);
+
                         // TODO: Support more CSS stuff?
                         cssClasses.preview =
                             classNames(cssClasses.preview, classes.ssPreview);
@@ -119,6 +129,8 @@ class Questions extends Component {
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
                 onUploadFiles={async (survey, {files, callback}) => {
+                    info(`onUploadFiles %o`, files);
+
                     // TODO: Support multiple files?
                     let file = files[0];
 
@@ -129,9 +141,10 @@ class Questions extends Component {
                         content: res.url,
                     }]);
                 }}
-                onValueChanging={(survey, options) => {
+                onValueChanging={(survey, {question, name, value}) => {
+                    info(`onValueChanging ${name}=%o`, value);
+
                     return;
-                    let {value, question} = options;
                     if (question instanceof Survey.QuestionFileModel) {
                         (value || []).forEach((file, i) => {
                             if (!(file && file.content) || file.converted) {
@@ -171,6 +184,8 @@ class Questions extends Component {
                     }
                 }}
                 onValueChanged={(survey, {name, value, question}) => {
+                    info(`onValueChanged ${name}=%o`, value);
+
                     props.setData({data: survey.data});
                     // No idea why, but cerebral freaks out if I call this
                     // without the setTimeout...
@@ -181,6 +196,8 @@ class Questions extends Component {
                 }
                 onAfterRenderQuestion={
                     async (survey, {question, htmlElement}) => {
+                        info(`onAfterRenderQuestion ${question.name}`);
+
                         let {autofill} = question;
                         // Try to autofill if unanswered
                         if (unanswered(question.value) && autofill) {
@@ -223,3 +240,4 @@ export default connect(
     },
     withTheme(Questions)
 );
+

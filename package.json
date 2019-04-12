@@ -14,6 +14,7 @@
     "classnames": "^2.2.6",
     "cra-append-sw": "^2.6.1",
     "cross-env": "^5.2.0",
+    "debug": "^4.1.1",
     "ducky": "^2.7.0",
     "gh-pages": "^2.0.1",
     "git-describe": "^4.0.4",
