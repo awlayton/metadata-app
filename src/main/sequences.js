@@ -49,6 +49,7 @@ export const setCurrentLocation = [
 ];
 
 export const loadappdata = [
+    actions.getSheetVersion,
     actions.loadAppData,
     {
         found: [],
@@ -56,10 +57,18 @@ export const loadappdata = [
             actions.createSheet,
             set(props`body`, {}),
             set(props`body.resultsId`, props`sheet.spreadsheetId`),
+            // Only load results for the right version
+            // TODO: Support migrating sheets to higher versions?
+            ({props}) => ({
+                body: {[`resultsId-v${props.version}`]: props.body.resultsId}
+            }),
             actions.createAppData,
         ],
     },
-    set(state`resultsId`, props`body.resultsId`),
+    ({props}) => ({
+        body: {resultsId: props.body[`resultsId-v${props.version}`]}
+    }),
+    set(state`resultsId`, props`body.resultsId`, id => id || ''),
     set(state`appdataId`, props`id`),
 ];
 
@@ -84,8 +93,12 @@ export const login = [
                 ],
                 notfound: [
                     actions.createSheet,
+                    set(state`resultsId`, props`sheet.spreadsheetId`),
                     set(props`body`, {}),
                     set(props`body.resultsId`, props`sheet.spreadsheetId`),
+                    ({props}) => ({
+                        body: {[`resultsId-v${props.version}`]: props.body.resultsId}
+                    }),
                     actions.updateAppData,
                 ],
             },

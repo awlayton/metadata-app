@@ -9,6 +9,8 @@ import * as errors from './errors';
 import model from '../surveyModel';
 import scope from '../googleScopes';
 
+import describe from '../describe';
+
 export const geolocation = {
     async getCurrentLoc() {
         try {
@@ -184,17 +186,27 @@ export const googleappdata = {
     },
 };
 const sheetsScope = 'https://www.googleapis.com/auth/drive.file';
+// Decide sheet version based on semver
+const {semver} = describe;
+const sheetVer = semver.major || semver.minor / 10;
 export const googlesheets = {
     async createSheet() {
         let {sheets} = await this.context.gapiClient.get(sheetsScope);
 
-        const properties = {title: 'CONTxT metadata uploads'};
+        const ver = googlesheets.getVersion();
+        const properties = {
+            title: `${process.env.REACT_APP_NAME} metadata uploads v${ver}`,
+        };
         try {
             let {result} = await sheets.spreadsheets.create({properties});
             return result;
         } catch (err) {
             throw new errors.GAPIError(err);
         }
+    },
+
+    getVersion() {
+        return sheetVer;
     },
 
     async getSheet(id) {
