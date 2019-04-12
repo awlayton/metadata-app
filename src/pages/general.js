@@ -8,6 +8,11 @@ export default {
             name: 'jobname',
             title: 'Job/Project name',
             type: 'text',
+            autocomplete: 'previous',
+            choices: [
+                'Bob Ross',
+                'Rusty Shackleford',
+            ],
         },
         {
             name: 'purpose',
