@@ -40,8 +40,18 @@ function unanswered(value) {
     return isEmpty(value) || (value.every && value.every(isEmpty));
 }
 
-const info = debug('contxt:survey:info');
+const info = debug('contxt:survey');
 info.log = console.info.bind(console);
+
+let loggers = {};
+function logCB() {
+    let [name, ...rest] = arguments;
+
+    let logger = loggers[name] || info.extend(name);
+    loggers[name] = logger;
+
+    return logger(...rest);
+}
 
 class Questions extends Component {
     componentWillMount() {
@@ -110,7 +120,7 @@ class Questions extends Component {
                 {...props}
                 model={this.model}
                 onCurrentPageChanged={(survey) => {
-                    info(`onCurrentPageChanged ${survey.currentPageNo}`);
+                    logCB('onCurrentPageChanged', `${survey.currentPageNo}`);
 
                     if (get(state`pageNum`) !== survey.currentPageNo) {
                         props.setPage({pageNum: survey.currentPageNo});
@@ -118,8 +128,8 @@ class Questions extends Component {
                 }}
                 onUpdateQuestionCssClasses={
                     (survey, {question, cssClasses}) => {
-                        info(`onUpdateQuestionCssClasses ${question.name}=%o`,
-                                cssClasses);
+                        logCB('onUpdateQuestionCssClasses',
+                                `${question.name}=%o`, cssClasses);
 
                         // TODO: Support more CSS stuff?
                         cssClasses.preview =
@@ -129,7 +139,7 @@ class Questions extends Component {
                 onPageVisibleChanged={this.updatePages.bind(this)}
                 onPageAdded={this.updatePages.bind(this)}
                 onUploadFiles={async (survey, {files, callback}) => {
-                    info(`onUploadFiles %o`, files);
+                    logCB('onUploadFiles', `%o`, files);
 
                     // TODO: Support multiple files?
                     let file = files[0];
@@ -142,7 +152,7 @@ class Questions extends Component {
                     }]);
                 }}
                 onValueChanging={(survey, {question, name, value}) => {
-                    info(`onValueChanging ${name}=%o`, value);
+                    logCB('onValueChanging', `${name}=%o`, value);
 
                     return;
                     if (question instanceof Survey.QuestionFileModel) {
@@ -184,7 +194,7 @@ class Questions extends Component {
                     }
                 }}
                 onValueChanged={(survey, {name, value, question}) => {
-                    info(`onValueChanged ${name}=%o`, value);
+                    logCB('onValueChanged', `%o=%o`, question, value);
 
                     props.setData({data: survey.data});
                     // No idea why, but cerebral freaks out if I call this
@@ -196,7 +206,7 @@ class Questions extends Component {
                 }
                 onAfterRenderQuestion={
                     async (survey, {question, htmlElement}) => {
-                        info(`onAfterRenderQuestion ${question.name}`);
+                        logCB('onAfterRenderQuestion', '%o', question);
 
                         let {autofill} = question;
                         // Try to autofill if unanswered
