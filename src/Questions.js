@@ -8,13 +8,10 @@ import {state, sequences} from 'cerebral/tags';
 import Button from '@material-ui/core/Button';
 import {withTheme} from '@material-ui/core/styles';
 
-import $ from 'jquery';
-
 import debug from 'debug';
 
 import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
-import * as widgets from 'surveyjs-widgets';
 
 import classNames from 'classnames';
 import isEmpty from 'lodash.isempty';
@@ -22,10 +19,9 @@ import Pica from 'pica';
 
 import surveyModel from './surveyModel';
 
-// Need these for survey autofill widget
-window.jQuery = window.$ = $;
-require('easy-autocomplete');
-widgets.autocomplete(Survey);
+import widget from './autocompleteWidget';
+
+Survey.CustomWidgetCollection.Instance.addCustomWidget(widget, 'property');
 
 Survey.JsonObject.metaData.addProperty('question', {
     name: 'cerebralbutton',
@@ -224,12 +220,13 @@ class Questions extends Component {
                     async (survey, {question, htmlElement}) => {
                         logCB('onAfterRenderQuestion', '%o', question);
 
+                        /*
                         if (question.autocomplete) {
                             question.choices = [
                                 new Survey.ItemValue('foo'),
                                 new Survey.ItemValue('bar'),
                             ];
-                        }
+                        }*/
 
                         let {autofill} = question;
                         // Try to autofill if unanswered
