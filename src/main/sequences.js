@@ -48,20 +48,25 @@ export const setCurrentLocation = [
     actions.setAnswer,
 ];
 
+// Create a sheet and put corresponding appdata in props...
+const createSheetWithAppData = [
+    actions.createSheet,
+    set(props`body`, {}),
+    set(props`body.resultsId`, props`sheet.spreadsheetId`),
+    // Only load results for the right version
+    // TODO: Support migrating sheets to higher versions?
+    ({props}) => ({
+        body: {[`resultsId-v${props.version}`]: props.body.resultsId}
+    }),
+];
+
 export const loadappdata = [
     actions.getSheetVersion,
     actions.loadAppData,
     {
         found: [],
         notfound: [
-            actions.createSheet,
-            set(props`body`, {}),
-            set(props`body.resultsId`, props`sheet.spreadsheetId`),
-            // Only load results for the right version
-            // TODO: Support migrating sheets to higher versions?
-            ({props}) => ({
-                body: {[`resultsId-v${props.version}`]: props.body.resultsId}
-            }),
+            createSheetWithAppData,
             actions.createAppData,
         ],
     },
@@ -92,13 +97,8 @@ export const login = [
                     set(state`pastData`, props`results`),
                 ],
                 notfound: [
-                    actions.createSheet,
+                    createSheetWithAppData,
                     set(state`resultsId`, props`sheet.spreadsheetId`),
-                    set(props`body`, {}),
-                    set(props`body.resultsId`, props`sheet.spreadsheetId`),
-                    ({props}) => ({
-                        body: {[`resultsId-v${props.version}`]: props.body.resultsId}
-                    }),
                     actions.updateAppData,
                 ],
             },
