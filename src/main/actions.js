@@ -34,6 +34,10 @@ export async function createSheet({googlesheets}) {
     let sheet = await googlesheets.createSheet();
     return {sheet};
 }
+export function getSheetVersion({googlesheets}){
+    let version = googlesheets.getVersion();
+    return {version};
+}
 export async function initSheet({googlesheets, props}) {
     let {result} = await googlesheets.createSheet();
     await googlesheets.addRow(result.spreadsheetId, props.headerRow);
