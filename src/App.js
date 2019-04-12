@@ -38,8 +38,12 @@ import styles from './styles';
 import scope from './googleScopes';
 import describe from './describe';
 
+const version = describe.semverString;
 const meta = {
-    title: 'foo',
+    title: `${process.env.REACT_APP_NAME} ${version}`,
+    meta: {
+        'ui-version': version,
+    },
 };
 
 // Parse query string
