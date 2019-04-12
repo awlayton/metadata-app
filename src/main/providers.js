@@ -316,8 +316,11 @@ export const serialize = {
                 try {
                     if (typeof result[key] === 'object') {
                         if (ducky.validate.execute(result[key], fileResult)) {
+                            /* TODO: Make IMAGE work in google sheets?
                             serialized[key] =
                                     `=IMAGE("${result[key][0].content}",3)`;
+                            */
+                            serialized[key] = result[key][0].content;
                         } else if (result[key]) {
                             let kkey = '$$' + key;
                             serialized[kkey] = JSON.stringify(result[key]);
