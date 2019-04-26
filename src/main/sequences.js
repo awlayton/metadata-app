@@ -102,6 +102,7 @@ export const login = [
                     actions.updateAppData,
                 ],
             },
+            actions.initPages,
             set(state`loggedin`, props`name`, name => ({name})),
         ],
     },

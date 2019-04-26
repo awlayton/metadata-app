@@ -19,6 +19,7 @@ export default {
                     name: 'remote-pic-name',
                     title: 'Name',
                     type: 'text',
+                    autocomplete: 'previous',
                     //autofill: 'person',
                     isRequired: true,
                     placeHolder: 'Rusty Shackleford',

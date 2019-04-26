@@ -32,11 +32,6 @@ Survey.JsonObject.metaData.addProperty('question', {
     default: false,
 });
 
-Survey.JsonObject.metaData.addProperty('question', {
-    name: 'autocomplete',
-    default: false,
-});
-
 // Override imageWidth for file questions
 Survey.JsonObject.metaData.addProperty('file', {
     name: 'imageWidth',
@@ -106,6 +101,15 @@ class Questions extends Component {
                 data: state`surveyData`,
             },
             ({data}) => this.model.data = data
+        );
+        this.props.reaction('changeQuestions',
+            {
+                questions: state`questions`,
+            },
+            ({questions}) => {
+                this.model = new Survey.Model(questions);
+                surveyModel.model = this.model;
+            }
         );
 
         this.updatePages(this.model);

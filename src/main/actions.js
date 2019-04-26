@@ -1,3 +1,5 @@
+import forIn from 'lodash.forin';
+
 import {state} from 'cerebral/tags';
 
 export function getCurrentLocation({geolocation}) {
@@ -110,4 +112,32 @@ export function getLastAnswer({get, props}) {
     } catch (err) {
         return {};
     }
+}
+
+export function initPages({get, store}) {
+    let pages = get(state`questions.pages`);
+    let data = get(state`pastData`);
+
+    pages.forEach(page => {
+        forIn(page, function findKeys(val, key, obj) {
+            switch (key) {
+                case 'autocomplete':
+                    switch (val) {
+                        case 'previous':
+                            let {name} = obj;
+                            obj.choices = data.map(row => row[name])
+                                    .filter(it => !!it);
+                            break;
+                        default:
+                    }
+                    break;
+                default:
+                    if (typeof val === 'object') {
+                        forIn(val, findKeys);
+                    }
+            }
+        });
+    });
+
+    store.merge(state`questions`, {pages});
 }
