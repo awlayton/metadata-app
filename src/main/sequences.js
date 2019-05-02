@@ -148,42 +148,52 @@ export const getCurrentLocationWeather = [
 ];
 
 export const autofill = [
-    equals(props`autofill`),
+    when(
+        props`question`,
+        state`surveyData`,
+        (q, d) => d[q] !== null && d[q] !== undefined,
+    ),
     {
-        person: [set(props`answer`, state`loggedin.name`)],
-        // TODO: Combine lat/lon into one autofill?
-        latitude: [
-            actions.getCurrentLocation,
-            set(props`answer`, props`currentLoc.latitude`),
+        true: [], // Don't autofill if already answered
+        false: [
+            equals(props`autofill`),
+            {
+                person: [set(props`answer`, state`loggedin.name`)],
+                // TODO: Combine lat/lon into one autofill?
+                latitude: [
+                    actions.getCurrentLocation,
+                    set(props`answer`, props`currentLoc.latitude`),
+                ],
+                longitude: [
+                    actions.getCurrentLocation,
+                    set(props`answer`, props`currentLoc.longitude`),
+                ],
+                location: [
+                    actions.getCurrentLocation,
+                    set(props`answer`, props`currentLoc`,
+                        ({latitude, longitude}) =>
+                            `${latitude},${longitude}`),
+                ],
+                // TODO: Combine weather autofills?
+                temperature: [
+                    getCurrentLocationWeather,
+                    set(props`answer`, props`temp_f`),
+                ],
+                windspeed: [
+                    getCurrentLocationWeather,
+                    set(props`answer`, props`wind_mph`),
+                ],
+                winddirection: [
+                    getCurrentLocationWeather,
+                    set(props`answer`, props`wind_dir`),
+                ],
+                lastused: [
+                    actions.getLastAnswer,
+                ],
+                otherwise: [],
+            },
         ],
-        longitude: [
-            actions.getCurrentLocation,
-            set(props`answer`, props`currentLoc.longitude`),
-        ],
-        location: [
-            actions.getCurrentLocation,
-            set(props`answer`, props`currentLoc`,
-                    ({latitude, longitude}) => `${latitude},${longitude}`),
-        ],
-        // TODO: Combine weather autofills?
-        temperature: [
-            getCurrentLocationWeather,
-            set(props`answer`, props`temp_f`),
-        ],
-        windspeed: [
-            getCurrentLocationWeather,
-            set(props`answer`, props`wind_mph`),
-        ],
-        winddirection: [
-            getCurrentLocationWeather,
-            set(props`answer`, props`wind_dir`),
-        ],
-        lastused: [
-            actions.getLastAnswer,
-        ],
-        otherwise: [],
     },
-    actions.setAnswer,
 ];
 
 export const displayError = [

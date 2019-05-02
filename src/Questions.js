@@ -41,7 +41,11 @@ Survey.JsonObject.metaData.addProperty('file', {
 let pica = new Pica();
 
 function unanswered(value) {
-    return isEmpty(value) || (value.every && value.every(isEmpty));
+    if (typeof value === 'object') {
+        return isEmpty(value) || (value.every && value.every(isEmpty));
+    } else {
+        return value === undefined;
+    }
 }
 
 const info = debug('contxt:survey');
@@ -223,6 +227,7 @@ class Questions extends Component {
                 onAfterRenderQuestion={
                     async (survey, {question, htmlElement}) => {
                         logCB('onAfterRenderQuestion', '%o', question);
+                        console.log(unanswered(question.value), question.value)
 
                         /*
                         if (question.autocomplete) {
