@@ -269,6 +269,7 @@ export default connect(
         data: state`surveyData`,
         setData: sequences`setSurveyData`,
         setPage: sequences`setSurveyPage`,
+        currentPageNo: state`pageNum`,
         setPages: sequences`setPages`,
         autofill: sequences`autofill`,
         upload: sequences`uploadScreenshot`,
