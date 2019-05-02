@@ -21,10 +21,14 @@ export default {
             choices: [
                 'UAV',
                 'Planting',
-                'Spraying',
-                'Tilling',
+                {
+                    value: 'Spraying',
+                    text: 'Spraying/Spreading',
+                },
+                'Tillage',
                 'Harvest'
             ],
+            isRequired: true,
             autofill: 'lastused',
         },
         {
