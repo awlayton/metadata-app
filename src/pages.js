@@ -3,10 +3,17 @@ import pages from '!import-glob!./pages-loader';
 
 pages.forEach(page => {
     // Add a footer to each page
-    page.elements.push({
-        type: 'html',
-        html: '* Indicates required field',
-    });
+    page.elements.push(
+        {
+            name: 'notes',
+            title: 'Notes or comments',
+            type: 'comment',
+        },
+        {
+            type: 'html',
+            html: '* Indicates required field',
+        },
+    );
 });
 
 export default pages;

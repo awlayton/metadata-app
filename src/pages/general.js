@@ -68,10 +68,5 @@ export default {
                 */
             ],
         },
-        {
-            name: 'notes',
-            title: 'Notes or comments',
-            type: 'comment',
-        },
     ]
 };
