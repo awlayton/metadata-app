@@ -5,7 +5,7 @@ pages.forEach(page => {
     // Add a footer to each page
     page.elements.push(
         {
-            name: 'notes',
+            name: `notes-${page.name}`,
             title: 'Notes or comments',
             type: 'comment',
         },
