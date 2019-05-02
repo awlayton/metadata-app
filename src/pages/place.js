@@ -1,7 +1,6 @@
 export default {
     name: 'place',
     title: 'Place',
-    //visibleIf: '{purpose} == "UAV"',
     elements: [
         {
             name: 'client',
