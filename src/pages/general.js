@@ -25,15 +25,14 @@ export default {
                 'Tilling',
                 'Harvest'
             ],
-            defaultValue: 'UAV' // TODO: remove default later
+            autofill: 'lastused',
         },
         {
             name: 'datetime',
             title: 'Date/Time of data',
             type: 'text',
             inputType: 'datetime-local',
-            defaultValue: DateTime.local()
-                .toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+            defaultValue: DateTime.local().toFormat("yyyy-MM-dd'T'HH:mm:ss"),
         },
         {
             type: 'panel',
