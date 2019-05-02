@@ -58,6 +58,7 @@ export default {
                     hideIfChoicesEmpty: false,
                     isRequired: true,
                     hasOther: true,
+                    storeOthersAsComment: false,
                     otherText: 'Add new make and model',
                     otherErrorText:
                         'Please enter the new make and model',
