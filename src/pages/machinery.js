@@ -13,7 +13,7 @@ const implements_ = [
 ];
 
 export default {
-    name: 'planting-machinery',
+    name: 'machinery',
     title: 'Machinery',
     visibleIf:
         '["Planting", "Spraying", "Tillage", "Harvest"] contains {purpose}',
