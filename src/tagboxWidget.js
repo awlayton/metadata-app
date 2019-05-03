@@ -4,7 +4,8 @@ import $ from 'jquery';
 import 'select2';
 import 'select2/dist/css/select2.min.css';
 
-//import './select2.scss';
+import 'material-design-icons';
+import './select2.scss';
 
 export default {
     name: 'tagbox',

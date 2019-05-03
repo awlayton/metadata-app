@@ -26,7 +26,7 @@ export default {
             select2Config: {
                 tags: true,
                 multiple: true,
-                theme: 'default',
+                theme: 'material',
                 placeholder: 'add treatments',
                 //allowClear: true,
                 tokenSeparators: [','],
