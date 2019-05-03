@@ -30,18 +30,22 @@ export default {
             name: 'machinery-spray-or-spread',
             visibleIf: '{purpose} == "Spraying"',
             title: 'Spray or Spread',
-            type: 'text',
-            description: 'TODO: ASk Buckmaster what this is supposed to be',
-            enableIf: 'false',
+            type: 'radiogroup',
+            choices: [
+                'Spraying',
+                'Spreading',
+            ],
             isRequired: true,
         },
         {
             name: 'machinery-pull-type',
             visibleIf: '{purpose} == "Spraying"',
             title: 'Pull Type',
-            type: 'text',
-            description: 'TODO: ASk Buckmaster what this is supposed to be',
-            enableIf: 'false',
+            type: 'radiogroup',
+            choices: [
+                'Pull',
+                'Self-Propelled',
+            ],
             isRequired: true,
         },
         {
@@ -93,10 +97,10 @@ export default {
             name: 'machinery-implement',
             title: 'Implement',
             type: 'panel',
-            visibleIf: '{purpose} == "Tillage"',
             elements: [
                 {
                     name: 'machinery-implement-type',
+                    visibleIf: '{purpose} == "Tillage"',
                     title: 'Type',
                     type: 'dropdown',
                     isRequired: true,
@@ -109,6 +113,7 @@ export default {
                 },
                 {
                     name: 'machinery-implement-makemodel',
+                    visibleIf: '{purpose} == "Tillage" or {machinery-pull-type} == "Self-Propelled"',
                     title: 'Make and Model',
                     type: 'dropdown',
                     hideIfChoicesEmpty: false,
