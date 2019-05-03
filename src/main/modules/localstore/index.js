@@ -15,8 +15,8 @@ export default (paths) => ({
                 return ls.set(key, val);
             },
 
-            clear() {
-                return ls.clear();
+            clear(key) {
+                return ls.remove(key);
             },
         },
     },
