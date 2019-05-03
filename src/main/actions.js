@@ -116,7 +116,6 @@ export function getLastAnswer({get, props}) {
 
 export function initPages({get, store}) {
     let pages = get(state`questions.pages`);
-    let data = get(state`pastData`);
 
     pages.forEach(page => {
         forIn(page, function findKeys(val, key, obj) {
@@ -125,8 +124,7 @@ export function initPages({get, store}) {
                     switch (val) {
                         case 'previous':
                             let {name} = obj;
-                            obj.choices = data.map(row => row[name])
-                                    .filter(it => !!it);
+                            obj.choices = get(state`pastAnswers.${name}`);
                             break;
                         default:
                     }

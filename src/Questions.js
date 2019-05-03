@@ -14,13 +14,14 @@ import * as Survey from 'survey-react';
 import 'survey-react/survey.css';
 
 import classNames from 'classnames';
-import isEmpty from 'lodash.isempty';
 import Pica from 'pica';
 
 import surveyModel from './surveyModel';
 
 import acwidget from './autocompleteWidget';
 import tbwidget from './tagboxWidget';
+
+import unanswered from './unanswered';
 
 Survey.CustomWidgetCollection.Instance.addCustomWidget(acwidget, 'property');
 Survey.CustomWidgetCollection.Instance.addCustomWidget(tbwidget, 'customtype');
@@ -41,14 +42,6 @@ Survey.JsonObject.metaData.addProperty('file', {
 });
 
 let pica = new Pica();
-
-function unanswered(value) {
-    if (typeof value === 'object') {
-        return isEmpty(value) || (value.every && value.every(isEmpty));
-    } else {
-        return value === undefined;
-    }
-}
 
 const info = debug('contxt:survey');
 info.log = console.info.bind(console);
