@@ -34,7 +34,7 @@
     "react-https-redirect": "^1.1.0",
     "react-qr-reader": "^2.2.1",
     "react-scripts": "2.1.1",
-    "select2": "^4.0.6",
+    "select2": "^4.0.4",
     "semver": "^6.0.0",
     "serve": "^10.1.2",
     "survey-react": "^1.0.83",

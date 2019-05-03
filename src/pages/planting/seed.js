@@ -25,6 +25,7 @@ export default {
             type: 'tagbox',
             select2Config: {
                 tags: true,
+                multiple: true,
                 theme: 'default',
                 placeholder: 'add treatments',
                 //allowClear: true,
