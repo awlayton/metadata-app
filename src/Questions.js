@@ -213,11 +213,34 @@ class Questions extends Component {
                     // without the setTimeout...
                     setTimeout(() => this.updatePages(survey));
                 }}
+                onMatrixRowAdded={(survey, {question, rowIndex}) => {
+                    logCB('onMatrixRowAdded', '%d %o', rowIndex, question);
+                    setTimeout(() => this.updatePages(survey));
+                }}
+                onMatrixRowRemoved={(survey, {question, rowIndex}) => {
+                    logCB('onMatrixRowRemoved', '%d %o', rowIndex, question);
+                    setTimeout(() => this.updatePages(survey));
+                }}
+                onDynamicPanelItemValueChanged={
+                    (survey, {question, value, itemIndex, itemValue}) => {
+                        logCB('onDynamicPanelItemValueChanged', `%o=%o %o=%o`,
+                                question, value, itemIndex, itemValue);
+                    }
+                }
+                onMatrixCellValueChanged={
+                    (survey, {question, value, columnName, row}) => {
+                        logCB('onMatrixCellValueChanged', `%o=%o %s %s`,
+                                question, value, columnName, row);
+                    }
+                }
+                onValidateQuestion={(survey, {question, name, value}) => {
+                    logCB('onValidateQuestion', '%o', question);
+                }}
                 completedHtml={
                     ReactDOMServer.renderToString(props.completedHtml)
                 }
                 onQuestionAdded={(survey, options) => {
-                        logCB('onQuestionAdded', '%o', options);
+                    logCB('onQuestionAdded', '%o', options);
                 }}
                 onAfterRenderQuestion={
                     async (survey, {question, htmlElement}) => {
