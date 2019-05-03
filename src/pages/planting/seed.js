@@ -23,23 +23,10 @@ export default {
             name: 'seed-treatments',
             title: 'Treatments',
             type: 'tagbox',
-            select2Config: {
-                tags: true,
-                multiple: true,
-                theme: 'material',
-                placeholder: 'add treatments',
-                //allowClear: true,
-                tokenSeparators: [','],
-                //containerCssClass: 'sv_q_text_root',
-            },
             //autofill: 'lastused',
             //autocomplete: 'previous',
             isRequired: true,
             placeHolder: 'Choose Treatments',
-            choices: [
-                'a',
-                'b',
-            ],
         },
         {
             name: 'seed-population',

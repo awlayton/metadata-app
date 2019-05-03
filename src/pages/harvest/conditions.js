@@ -35,11 +35,7 @@ export default {
             name: 'harvest-conditions-grain-quality',
             title: 'Grain Quality',
             type: 'tagbox',
-            select2Config: {
-                tags: true,
-                placeholder: 'Add conditions',
-                tokenSeparators: [','],
-            },
+            placeHolder: 'Add conditions',
             isRequired: false,
             choices: [
                 'Moldy',

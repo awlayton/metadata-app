@@ -37,6 +37,10 @@ export default {
             name: 'select2Config',
             default: null
         });
+        Survey.JsonObject.metaData.addProperty('tagbox', {
+            name: 'placeHolder',
+            default: null
+        });
         Survey.matrixDropdownColumnTypes.tagbox = {
             properties: [
                 'choices',
@@ -56,14 +60,16 @@ export default {
     },
     afterRender: function(question, el) {
         var self = this;
-        var settings = question.select2Config;
-        var $el = $(el).is('select') ? $(el) : $(el).find('select');
-        $el.select2({
+        var settings = {
             tags: true,
             disabled: question.isReadOnly,
             placeholder: question.placeHolder,
-            theme: 'classic'
-        });
+            theme: 'material',
+            tokenSeparators: [','],
+            ...question.select2Config,
+        };
+        var $el = $(el).is('select') ? $(el) : $(el).find('select');
+        $el.select2(settings);
 
         self.fixStyles(el);
 
@@ -80,27 +86,16 @@ export default {
         var updateChoices = function() {
             $el.select2().empty();
 
-            if (settings) {
-                if (settings.ajax) {
-                    $el.select2(settings);
-                } else {
-                    settings.data = question.visibleChoices.map(function(choice) {
-                        return {
-                            id: choice.value,
-                            text: choice.text
-                        };
-                    });
-                    $el.select2(settings);
-                }
+            if (settings.ajax) {
+                $el.select2(settings);
             } else {
-                $el.select2({
-                    data: question.visibleChoices.map(function(choice) {
-                        return {
-                            id: choice.value,
-                            text: choice.text
-                        };
-                    })
+                settings.data = question.visibleChoices.map(function(choice) {
+                    return {
+                        id: choice.value,
+                        text: choice.text
+                    };
                 });
+                $el.select2(settings);
             }
 
             updateValueHandler();
