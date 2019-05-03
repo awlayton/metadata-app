@@ -26,7 +26,11 @@ export default {
                     text: 'Spraying/Spreading',
                 },
                 'Tillage',
-                'Harvest'
+                'Harvest',
+                {
+                    value: 'Anomalies',
+                    text: 'Anomaly Reporting',
+                },
             ],
             isRequired: true,
             autofill: 'lastused',
