@@ -19,9 +19,11 @@ import Pica from 'pica';
 
 import surveyModel from './surveyModel';
 
-import widget from './autocompleteWidget';
+import acwidget from './autocompleteWidget';
+import tbwidget from './tagboxWidget';
 
-Survey.CustomWidgetCollection.Instance.addCustomWidget(widget, 'property');
+Survey.CustomWidgetCollection.Instance.addCustomWidget(acwidget, 'property');
+Survey.CustomWidgetCollection.Instance.addCustomWidget(tbwidget, 'customtype');
 
 Survey.JsonObject.metaData.addProperty('question', {
     name: 'cerebralbutton',
@@ -227,7 +229,6 @@ class Questions extends Component {
                 onAfterRenderQuestion={
                     async (survey, {question, htmlElement}) => {
                         logCB('onAfterRenderQuestion', '%o', question);
-                        console.log(unanswered(question.value), question.value)
 
                         /*
                         if (question.autocomplete) {
