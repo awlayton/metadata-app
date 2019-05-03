@@ -1,17 +1,3 @@
-// TODO: Get these from sheets
-const implements_ = [
-    {
-        make: 'Sony',
-        model: 'A6000',
-        type: 'RGB',
-    },
-    {
-        make: 'Parrot',
-        model: 'Sequoia',
-        type: 'Multispectral',
-    },
-];
-
 export default {
     name: 'machinery',
     title: 'Machinery',
@@ -108,8 +94,8 @@ export default {
                     storeOthersAsComment: false,
                     otherText: 'Add new type',
                     otherErrorText: 'Please enter the new type',
-                    choices: [
-                    ],
+                    autofill: 'lastused',
+                    autocomplete: 'previous',
                 },
                 {
                     name: 'machinery-implement-makemodel',
@@ -123,12 +109,8 @@ export default {
                     otherText: 'Add new make and model',
                     otherErrorText:
                         'Please enter the new make and model',
-                    choices: implements_.map((e, i) => ({
-                        text: e.make + ' ' + e.model,
-                        value: e.make + ' ' + e.model,
-                        //value: i,
-                        visibleIf: `{machinery-implement-type} == "${e.type}"`,
-                    })),
+                    autofill: 'lastused',
+                    autocomplete: 'previous',
                 },
             ],
         },
