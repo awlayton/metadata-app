@@ -116,9 +116,16 @@ export default {
         question.valueChangedCallback = updateValueHandler;
         let setValue = function(e) {
             info('setValue %o', e);
+
             let val = $el.select2('data').map(it => it.id);
-            // TODO: Check if id is already a choice
-            question.choices.push(new Survey.ItemValue(e.params.data.id));
+            val.forEach(val => {
+                // Add choice if it does not exist
+                if (!question.choices.some(choice => choice.value === val)) {
+                    let choice = new Survey.ItemValue(e.params.data.id);
+                    question.choices.push(choice);
+                }
+            });
+
             question.value = val;
         };
         $el.on('select2:select', setValue);
