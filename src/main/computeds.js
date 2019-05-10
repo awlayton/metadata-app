@@ -1,6 +1,7 @@
 import {state} from 'cerebral/tags';
 
 import forin from 'lodash.forin';
+import isequal from 'lodash.isequal';
 
 import unanswered from '../unanswered';
 
@@ -34,10 +35,18 @@ export const pastAnswers = get => {
             return;
         }
 
-        if (!ans[key]) {
-            ans[key] = [val];
-        } else if (!ans[key].includes(val)) {
-            ans[key].unshift(val);
+        if (Array.isArray(val)) {
+            return val.map(addAnswer);
+        } else {
+            return addAnswer(val);
+        }
+
+        function addAnswer(val) {
+            if (!ans[key]) {
+                ans[key] = [val];
+            } else if (!ans[key].some(ans => isequal(ans, val))) {
+                ans[key].unshift(val);
+            }
         }
     }));
 
