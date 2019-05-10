@@ -163,8 +163,8 @@ class Questions extends Component {
                         content: res.url,
                     }]);
                 }}
-                onValueChanging={(survey, {question, name, value}) => {
-                    logCB('onValueChanging', `${name}=%o`, value);
+                onValueChanging={(survey, {question, name, oldValue, value}) => {
+                    logCB('onValueChanging', `%o ${name}=%o`, oldValue, value);
 
                     return;
                     if (question instanceof Survey.QuestionFileModel) {
@@ -208,7 +208,7 @@ class Questions extends Component {
                 onValueChanged={(survey, {name, value, question}) => {
                     logCB('onValueChanged', `%o=%o`, question, value);
 
-                    props.setData({data: survey.data});
+                    props.setData({data: survey.data, name, value});
                     // No idea why, but cerebral freaks out if I call this
                     // without the setTimeout...
                     setTimeout(() => this.updatePages(survey));
@@ -233,9 +233,12 @@ class Questions extends Component {
                                 question, value, columnName, row);
                     }
                 }
-                onValidateQuestion={(survey, {question, name, value}) => {
-                    logCB('onValidateQuestion', '%o', question);
-                }}
+                onValidateQuestion={
+                    (survey, {question, name, value, error}) => {
+                        logCB('onValidateQuestion', '%o %s %s %s',
+                                question, name, value, error);
+                    }
+                }
                 completedHtml={
                     ReactDOMServer.renderToString(props.completedHtml)
                 }

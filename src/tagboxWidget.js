@@ -1,11 +1,14 @@
+import debug from 'debug';
+
 import * as Survey from 'survey-react';
 
 import $ from 'jquery';
 import 'select2';
 import 'select2/dist/css/select2.min.css';
 
-import 'material-design-icons';
 import './select2.scss';
+
+let info = debug('contxt:tagbox');
 
 export default {
     name: 'tagbox',
@@ -111,8 +114,12 @@ export default {
             }
         );
         question.valueChangedCallback = updateValueHandler;
-        let setValue = function() {
-            question.value = $el.select2('data').map(it => it.id);
+        let setValue = function(e) {
+            info('setValue %o', e);
+            let val = $el.select2('data').map(it => it.id);
+            // TODO: Check if id is already a choice
+            question.choices.push(new Survey.ItemValue(e.params.data.id));
+            question.value = val;
         };
         $el.on('select2:select', setValue);
         $el.on('select2:unselect', setValue);
