@@ -23,10 +23,9 @@ export default {
             name: 'seed-treatments',
             title: 'Treatments',
             type: 'tagbox',
-            //autofill: 'lastused',
-            //autocomplete: 'previous',
             isRequired: true,
             placeHolder: 'Choose Treatments',
+            previousAsChoices: true,
         },
         {
             name: 'seed-population',

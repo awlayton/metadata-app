@@ -44,6 +44,7 @@ export default {
                 'High Foreign Matter',
                 'Sprouting Seeds',
             ],
+            previousAsChoices: true,
         },
     ],
 };

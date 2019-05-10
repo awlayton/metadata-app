@@ -129,6 +129,18 @@ export function initPages({get, store}) {
                         default:
                     }
                     break;
+                case 'previousAsChoices':
+                    if (val) {
+                        let {name, choices=[]} = obj;
+                        let previous = get(state`pastAnswers.${name}`) || [];
+                        previous.forEach(ans => {
+                            if (!choices.includes(ans)) {
+                                choices.push(ans);
+                            }
+                        });
+                        obj.choices = choices;
+                    }
+                    break;
                 default:
                     if (typeof val === 'object') {
                         forIn(val, findKeys);
