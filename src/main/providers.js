@@ -359,7 +359,7 @@ export const serialize = {
     },
 };
 
-const apixu = new Apixu({apikey: 'XXXXXXXXX'});
+const apixu = new Apixu({apikey: process.env.REACT_APP_APIXU_KEY});
 export const weather = {
     async current(query) {
         return (await apixu.current(query)).current;
