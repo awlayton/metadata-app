@@ -15,9 +15,12 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
+import {withStyles} from '@material-ui/styles';
+
+import styles from './styles';
 
 function PagesDrawer(props) {
-    const {classes={}} = props;
+    const {classes} = props;
 
     const contents = (
         <div>
@@ -105,4 +108,4 @@ export default connect({
     setSurveyPage: sequences`setSurveyPage`,
     pages: state`pages`,
     pageNum: state`pageNum`,
-}, PagesDrawer);
+}, withStyles(styles)(PagesDrawer));

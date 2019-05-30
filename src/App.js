@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {connect} from '@cerebral/react';
 import {state, sequences} from 'cerebral/tags';
 
-import {withStyles} from '@material-ui/core/styles';
+import {withStyles} from '@material-ui/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -16,7 +16,8 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import {createMuiTheme, MuiThemeProvider} from '@material-ui/core/styles';
+import {createMuiTheme} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/styles';
 import gold from '@material-ui/core/colors/amber';
 
 // Has to be last mui import
@@ -52,9 +53,6 @@ const params = queryString.parse(window.location.search);
 // All the following keys are optional.
 // We try our best to provide a great default value.
 const theme = createMuiTheme({
-    typography: {
-        useNextVariants: true,
-    },
     palette: {
         type: params.theme || 'dark',
         primary: gold,
@@ -74,7 +72,7 @@ window.addEventListener('beforeinstallprompt', (e) => {
     }
 });
 
-class App extends Component {
+const App = withStyles(styles)(class App extends Component {
     componentWillMount() {
         this.props.init();
     }
@@ -84,11 +82,6 @@ class App extends Component {
         const {classes} = props;
 
         return (
-            <HttpsRedirect>
-            <MuiThemeProvider theme={theme}>
-            <DocumentMeta {...meta} />
-            <React.Fragment>
-            <CssBaseline />
             <div className={classes.root}>
                 <PagesDrawer
                     classes={classes}
@@ -199,11 +192,22 @@ class App extends Component {
                     />
                 </AppBar>
             </div>
-            </React.Fragment>
-            </MuiThemeProvider>
-            </HttpsRedirect>
         );
     }
+});
+
+function AppContainer(props) {
+    return (
+        <HttpsRedirect>
+            <ThemeProvider theme={theme}>
+                <DocumentMeta {...meta} />
+                <React.Fragment>
+                    <CssBaseline />
+                    <App {...props} />
+                </React.Fragment>
+            </ThemeProvider>
+        </HttpsRedirect>
+    );
 }
 
 export default connect({
@@ -234,4 +238,4 @@ export default connect({
     canSubmit: state`canSubmit`,
     canNext: state`canNext`,
     canPrev: state`canPrev`,
-}, withStyles(styles)(App));
+}, AppContainer);
