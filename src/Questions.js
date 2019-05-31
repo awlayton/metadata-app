@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ReactDOMServer from 'react-dom/server';
 
+// TODO: Handle this without having mui stuff in this class??
+import {ThemeProvider} from '@material-ui/styles';
+
 import {connect} from '@cerebral/react';
 import {state, sequences} from 'cerebral/tags';
 
@@ -126,7 +129,8 @@ class Questions extends Component {
     }
 
     render() {
-        const {get, classes={}, ...props} = this.props;
+        const {get, theme, classes={}, ...props} = this.props;
+
         return (
             <Survey.Survey
                 {...props}
@@ -240,7 +244,11 @@ class Questions extends Component {
                     }
                 }
                 completedHtml={
-                    ReactDOMServer.renderToString(props.completedHtml)
+                    ReactDOMServer.renderToString(
+                        <ThemeProvider theme={theme}>
+                            props.completedHtml
+                        </ThemeProvider>
+                    )
                 }
                 onQuestionAdded={(survey, options) => {
                     logCB('onQuestionAdded', '%o', options);
@@ -275,9 +283,11 @@ class Questions extends Component {
                         if (question.cerebralbutton) {
                             let seq = get(sequences`${question.cerebralbutton}`);
                             ReactDOM.render(
-                                <Button onClick={() => seq()}>
-                                    {question.title}
-                                </Button>
+                                <ThemeProvider theme={theme}>
+                                    <Button onClick={() => seq()}>
+                                        {question.title}
+                                    </Button>
+                                </ThemeProvider>
                             , htmlElement);
                         }
                     }
