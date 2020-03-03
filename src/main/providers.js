@@ -382,7 +382,7 @@ export const serialize = {
  * @see {@link https://weatherstack.com/documentation#nodejs}
  */
 const weatherstack = axios.create({
-    baseURL: 'https://api.weatherstack.com/'
+    baseURL: 'http://api.weatherstack.com/'
 })
 weatherstack.interceptors.request.use(({ params, ...rest }) => {
     // Add access key to config
