@@ -382,13 +382,15 @@ export const serialize = {
  * @see {@link https://weatherstack.com/documentation#nodejs}
  */
 const weatherstack = axios.create({
-    baseURL: 'http://api.weatherstack.com/'
+    baseURL: 'http://api.weatherstack.com/',
+    method: 'get'
 })
 weatherstack.interceptors.request.use(({ params, ...rest }) => {
-    // Add access key to config
+    // Add default params to config
     return {
         params: {
             access_key: process.env.REACT_APP_WEATHERSTACK_KEY,
+            units: 'f', // Use US customary units
             ...params
         },
         ...rest
@@ -398,7 +400,7 @@ export const weather = {
     async current (query) {
         const {
             data: { current }
-        } = await weatherstack.get('/current', { params: { query } })
+        } = await weatherstack('/current', { params: { query } })
         return current
     }
 }

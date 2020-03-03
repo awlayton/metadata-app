@@ -177,11 +177,11 @@ export const autofill = [
                 // TODO: Combine weather autofills?
                 temperature: [
                     getCurrentLocationWeather,
-                    set(props`answer`, props`temp_f`),
+                    set(props`answer`, props`temperature`),
                 ],
                 windspeed: [
                     getCurrentLocationWeather,
-                    set(props`answer`, props`wind_mph`),
+                    set(props`answer`, props`wind_speed`),
                 ],
                 winddirection: [
                     getCurrentLocationWeather,
