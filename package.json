@@ -9,7 +9,7 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.0.1",
     "aot-loader": "^1.0.1",
-    "apixu": "github:apixu/apixu-nodejs",
+    "axios": "^0.19.2",
     "bluebird": "^3.5.5",
     "cerebral": "^5.1.1",
     "classnames": "^2.2.6",
