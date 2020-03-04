@@ -1,15 +1,15 @@
-import localstore from './modules/localstore';
+import localstore from './modules/localstore'
 
-import * as providers from './providers';
-import * as sequences from './sequences';
-import * as computeds from './computeds';
-import * as errors from './errors';
+import * as providers from './providers'
+import * as sequences from './sequences'
+import * as computeds from './computeds'
+import * as errors from './errors'
 
 // TODO: Should this be here??
-import pages from '../pages';
+import pages from '../pages'
 
 // Parts of state to keep in localstorage
-const store = localstore(['pageNum', 'surveyData']);
+const store = localstore(['pageNum', 'surveyData'])
 
 export default {
     sequences,
@@ -33,18 +33,18 @@ export default {
             goNextPageAutomatic: true,
             clearInvisibleValues: 'onHidden',
             checkErrorsMode: 'onValueChanged',
-            pages,
-        },
+            pages
+        }
     },
     catch: [
         // TODO: Pop up toast or something about giving permission?
         //[errors.GetLocationError, ({error}) => console.error(error)],
         //[Error, ({error}) => console.error(error)],
-        [Error, sequences.displayError],
+        [Error, sequences.displayError]
     ],
     providers,
     modules: {
-        store,
+        store
         //storage,
-    },
-};
+    }
+}

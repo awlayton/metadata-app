@@ -9,7 +9,7 @@ export default {
             type: 'text',
             autofill: 'lastused',
             autocomplete: 'previous',
-            isRequired: true,
+            isRequired: true
         },
         {
             name: 'seed-variety',
@@ -17,7 +17,7 @@ export default {
             type: 'text',
             autofill: 'lastused',
             autocomplete: 'previous',
-            isRequired: true,
+            isRequired: true
         },
         {
             name: 'seed-treatments',
@@ -25,7 +25,7 @@ export default {
             type: 'tagbox',
             isRequired: true,
             placeHolder: 'Choose Treatments',
-            previousAsChoices: true,
+            previousAsChoices: true
         },
         {
             name: 'seed-population',
@@ -33,7 +33,7 @@ export default {
             type: 'text',
             inputType: 'number',
             autofill: 'lastused',
-            isRequired: true,
-        },
-    ],
-};
+            isRequired: true
+        }
+    ]
+}

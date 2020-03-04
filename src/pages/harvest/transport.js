@@ -7,7 +7,7 @@ export default {
             name: 'harvest-transport-cart',
             title: 'Grain Cart?',
             type: 'boolean',
-            isRequired: true,
+            isRequired: true
         },
         {
             name: 'harvest-transport-cart-makemodel',
@@ -19,13 +19,12 @@ export default {
             hasOther: true,
             storeOthersAsComment: false,
             otherText: 'Add new make and model',
-            otherErrorText:
-                'Please enter the new make and model',
+            otherErrorText: 'Please enter the new make and model',
             autocomplete: 'previous',
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ],
+            ]
         },
         {
             name: 'harvest-transport-tractor-makemodel',
@@ -37,13 +36,12 @@ export default {
             hasOther: true,
             storeOthersAsComment: false,
             otherText: 'Add new make and model',
-            otherErrorText:
-                'Please enter the new make and model',
+            otherErrorText: 'Please enter the new make and model',
             autocomplete: 'previous',
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ],
-        },
-    ],
-};
+            ]
+        }
+    ]
+}

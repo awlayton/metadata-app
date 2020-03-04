@@ -9,7 +9,7 @@ export default {
             type: 'text',
             inputType: 'number',
             isRequired: false,
-            placeHolder: '5 %',
+            placeHolder: '5 %'
         },
         {
             name: 'harvest-conditions-anticipated-yield-avg',
@@ -17,19 +17,14 @@ export default {
             type: 'text',
             inputType: 'number',
             isRequired: false,
-            placeHolder: '250 bu/ac',
+            placeHolder: '250 bu/ac'
         },
         {
             name: 'harvest-conditions-lodging',
             title: 'Lodging',
             type: 'dropdown',
             isRequired: true,
-            choices: [
-                'None',
-                'Slight',
-                'Moderate',
-                'Severe',
-            ],
+            choices: ['None', 'Slight', 'Moderate', 'Severe']
         },
         {
             name: 'harvest-conditions-grain-quality',
@@ -42,9 +37,9 @@ export default {
                 'Splits',
                 'Grain Damage',
                 'High Foreign Matter',
-                'Sprouting Seeds',
+                'Sprouting Seeds'
             ],
-            previousAsChoices: true,
-        },
-    ],
-};
+            previousAsChoices: true
+        }
+    ]
+}

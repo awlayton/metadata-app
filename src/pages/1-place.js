@@ -8,35 +8,35 @@ export default {
             type: 'text',
             placeHolder: 'Farmer Frank',
             autofill: 'lastused',
-            autocomplete: 'previous',
+            autocomplete: 'previous'
         },
         {
             name: 'operation',
             title: 'Farm (or Operation)',
             type: 'text',
             placeHolder: 'Frank Farms',
-            autocomplete: 'previous',
+            autocomplete: 'previous'
         },
         {
             name: 'site',
             title: 'Field (or Site)',
             type: 'text',
             placeHolder: 'East Field',
-            autocomplete: 'previous',
+            autocomplete: 'previous'
         },
         {
             name: 'crop',
             title: 'Crop',
             type: 'text',
             placeHolder: 'corn',
-            autocomplete: 'previous',
+            autocomplete: 'previous'
         },
         {
             name: 'prev-crop',
             title: 'Previous Crop',
             type: 'text',
             placeHolder: 'beans',
-            autocomplete: 'previous',
+            autocomplete: 'previous'
         },
         {
             name: 'weather',
@@ -49,7 +49,7 @@ export default {
                     type: 'html',
                     visible: false,
                     // TODO: Implement functionality for button
-                    cerebralbutton: 'setCurrentWeather',
+                    cerebralbutton: 'setCurrentWeather'
                 },
                 {
                     name: 'temperature',
@@ -65,7 +65,7 @@ export default {
                     type: 'text',
                     autofill: 'windspeed',
                     //inputType: 'number',
-                    placeHolder: '10 mph',
+                    placeHolder: '10 mph'
                 },
                 {
                     name: 'winddirection',
@@ -73,9 +73,9 @@ export default {
                     type: 'text',
                     autofill: 'winddirection',
                     //inputType: 'number',
-                    placeHolder: 'ENE',
-                },
-            ],
-        },
-    ],
-};
+                    placeHolder: 'ENE'
+                }
+            ]
+        }
+    ]
+}

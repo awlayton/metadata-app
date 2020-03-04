@@ -2,8 +2,8 @@ export default {
     name: 'spraying-chemicals',
     title: 'Chemicals',
     visibleIf: '{purpose} == "Spraying"',
-    elements: ['Herbicide', 'Insecticide', 'Fungicide', 'Fertilizer']
-        .map(chem => ({
+    elements: ['Herbicide', 'Insecticide', 'Fungicide', 'Fertilizer'].map(
+        chem => ({
             name: `spraying-chemicals-${chem.toLowerCase()}s`,
             title: `${chem}s`,
             type: 'paneldynamic',
@@ -18,7 +18,7 @@ export default {
                     valueName: 'product',
                     title: 'Product Name',
                     type: 'text',
-                    isRequired: true,
+                    isRequired: true
                 },
                 {
                     name: `spraying-checmicals-${chem.toLowerCase()}s-amount`,
@@ -26,8 +26,9 @@ export default {
                     title: 'Amount per Acre (this product)',
                     type: 'text',
                     inputType: 'number',
-                    isRequired: true,
-                },
-            ],
-        })),
-};
+                    isRequired: true
+                }
+            ]
+        })
+    )
+}

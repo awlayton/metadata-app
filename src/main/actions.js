@@ -3,11 +3,9 @@ import forIn from 'lodash.forin'
 import { state } from 'cerebral/tags'
 
 export function getCurrentLocation ({ geolocation }) {
-    return geolocation
-        .getCurrentLoc()
-        .then(({ latitude, longitude }) => ({
-            currentLoc: { latitude, longitude }
-        }))
+    return geolocation.getCurrentLoc().then(({ latitude, longitude }) => ({
+        currentLoc: { latitude, longitude }
+    }))
 }
 
 export function setAnswer ({ survey, props }) {

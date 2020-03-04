@@ -2,4 +2,4 @@
 // Want a singleton of survey model
 export default {
     model: null
-};
+}

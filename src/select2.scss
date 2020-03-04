@@ -36,10 +36,6 @@ ul {
         color: inherit;
     }
 
-
-
-
-
     /**
      * Textbox
      */
@@ -64,15 +60,15 @@ ul {
         width: 100%;
         color: #55595c;
         background-clip: padding-box;
-        border: 1px solid rgba(0,0,0,.15);
+        border: 1px solid rgba(0, 0, 0, 0.15);
 
-        padding: .5rem 0 .6rem;
+        padding: 0.5rem 0 0.6rem;
         font-size: 1rem;
         line-height: 1.5;
         background-color: transparent;
         background-image: none;
         border-radius: 0;
-        margin-top: .2rem;
+        margin-top: 0.2rem;
         margin-bottom: 1rem;
 
         /* @extend input[type=text] */
@@ -85,7 +81,7 @@ ul {
         width: 100%;
         font-size: 1rem;
         box-shadow: none;
-        transition: all .3s;
+        transition: all 0.3s;
 
         min-height: 2.1rem;
 
@@ -126,7 +122,7 @@ ul {
             border-radius: 16px;
             background-color: #dedede;
             display: inline-block;
-            color: rgba(0,0,0,.87);
+            color: rgba(0, 0, 0, 0.87);
             margin: 2px 0;
             font-size: 0;
             white-space: nowrap;
@@ -135,8 +131,6 @@ ul {
             font-size: 13px;
             vertical-align: middle;
             display: inline-block;
-
-
 
             float: left;
 
@@ -161,7 +155,7 @@ ul {
             transition: opacity;
 
             &::before {
-                content: "cancel";
+                content: 'cancel';
 
                 /* @extend .material-icons */
                 font-family: 'Material Icons';
@@ -198,8 +192,6 @@ ul {
         }
     }
 
-
-
     /**
      * Dropdown
      */
@@ -213,7 +205,7 @@ ul {
             border: 0;
             border-bottom: 1px solid #ccc;
 
-            transition: all .3s;
+            transition: all 0.3s;
 
             &:focus {
                 border-bottom: 1px solid #4285f4;
@@ -224,7 +216,8 @@ ul {
 
     .select2-results__options {
         /* @extend .zf-shadow-depth* */
-        box-shadow: 0 2px 5px 0 rgba(0,0,0,.16),0 2px 10px 0 rgba(0,0,0,.12);
+        box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16),
+            0 2px 10px 0 rgba(0, 0, 0, 0.12);
 
         /* @extend .dropdown-content */
         background-color: #fff;
@@ -236,7 +229,7 @@ ul {
         //opacity: 0;
         //position: absolute;
         z-index: 999;
-        will-change: width,height;
+        will-change: width, height;
 
         /* @extend .dropdown-content inline styles */
         //position: absolute;
@@ -254,8 +247,6 @@ ul {
         }
     }
 
-
-
     /**
      * Options
      */
@@ -265,7 +256,7 @@ ul {
         cursor: pointer;
 
         clear: both;
-        color: rgba(0,0,0,.87);
+        color: rgba(0, 0, 0, 0.87);
         line-height: 1.5rem;
         //width: 100%;
         text-align: left;
@@ -280,10 +271,10 @@ ul {
         /**
          * Disabled options
          */
-        &[aria-disabled=true] {
+        &[aria-disabled='true'] {
             /* @extend .select-dropdown li.disabled */
-            color: rgba(0,0,0,.3);
-            background-color: transparent!important;
+            color: rgba(0, 0, 0, 0.3);
+            background-color: transparent !important;
             cursor: context-menu;
 
             /* @extend .disabled */
@@ -293,7 +284,7 @@ ul {
         /**
          * Selected option
          */
-        &[aria-selected=true] {
+        &[aria-selected='true'] {
             /* @extend .dropdown-content li:active, .dropdow-content li:hover */
             color: #4285f4;
 
@@ -308,8 +299,6 @@ ul {
         }
     }
 
-
-
     /**
      * Focused textbox
      */
@@ -322,8 +311,6 @@ ul {
         }
     }
 
-
-
     /**
      * Disabled textbox
      */
@@ -331,10 +318,10 @@ ul {
     &.select2-container--disabled {
         .select2-selection {
             /* @extend .select-wrapper input.select-dropdown:disabled */
-            color: rgba(0,0,0,.3);
+            color: rgba(0, 0, 0, 0.3);
             cursor: default;
             user-select: none;
-            border-bottom: 1px solid rgba(0,0,0,.3);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
         }
 
         &.select2-container--focus {
@@ -344,4 +331,3 @@ ul {
         }
     }
 }
-

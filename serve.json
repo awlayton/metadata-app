@@ -18,10 +18,10 @@
             "destination": "/static/:dir/:file"
         }
     ],
-    "redirects" : [
+    "redirects": [
         {
             "source": "/",
-            "destination" : "/metadata-app/"
+            "destination": "/metadata-app/"
         }
     ]
 }

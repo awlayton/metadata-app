@@ -6,7 +6,8 @@ export default {
         {
             name: 'remote-pics',
             title: 'Remote Pilot in Command (PIC)',
-            description: 'remote PIC - A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107.',
+            description:
+                'remote PIC - A person who holds a remote pilot certificate with an sUAS rating and has the final authority and responsibility for the operation and safety of an sUAS operation conducted under part 107.',
             type: 'paneldynamic',
             panelCount: 1,
             minPanelCount: 1,
@@ -22,7 +23,7 @@ export default {
                     autocomplete: 'previous',
                     //autofill: 'person',
                     isRequired: true,
-                    placeHolder: 'Rusty Shackleford',
+                    placeHolder: 'Rusty Shackleford'
                 },
                 {
                     name: 'remote-pic-certificate',
@@ -38,14 +39,14 @@ export default {
                             text: 'License number must be 7 digits'
                         }
                     ]
-                },
-
-            ],
+                }
+            ]
         },
         {
             name: 'observer',
             title: 'Visual Observer (VO)',
-            description: 'VO - A person acting as a flightcrew member who assists the small UA remote PIC and the person manipulating the controls to see and avoid other air traffic or objects aloft or on the ground.',
+            description:
+                'VO - A person acting as a flightcrew member who assists the small UA remote PIC and the person manipulating the controls to see and avoid other air traffic or objects aloft or on the ground.',
             type: 'paneldynamic',
             panelCount: 0,
             panelAddText: 'Add VO',
@@ -58,8 +59,8 @@ export default {
                     type: 'text',
                     isRequired: true,
                     placeHolder: 'John Doe'
-                },
-            ],
-        },
+                }
+            ]
+        }
     ]
-};
+}

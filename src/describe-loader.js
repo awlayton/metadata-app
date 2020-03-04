@@ -1,3 +1,3 @@
-let {gitDescribe} = require('git-describe');
+let { gitDescribe } = require('git-describe')
 
-module.exports = gitDescribe();
+module.exports = gitDescribe()
