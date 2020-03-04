@@ -5,8 +5,8 @@ const anomalies = [
     'Disease',
     'Vertebrate',
     'Nutrient Deficiency',
-    'Drainage Installation or Repair',
-];
+    'Drainage Installation or Repair'
+]
 
 export default {
     name: 'anomalies',
@@ -27,28 +27,70 @@ export default {
                     cellType: 'dropdown',
                     isRequired: true,
                     hasOther: true,
-                    choices: anomalies,
+                    choices: anomalies
                 },
                 {
                     name: 'what',
                     title: 'What',
                     cellType: 'text',
-                    isRequired: true,
+                    isRequired: true
                 },
                 {
                     name: 'when',
                     title: 'When',
                     cellType: 'text',
                     inputType: 'datetime-local',
-                    isRequired: true,
+                    isRequired: true
                 },
                 {
                     name: 'extent',
                     title: 'Extent',
                     cellType: 'text',
-                    isRequired: true,
-                },
-            ],
+                    isRequired: true
+                }
+            ]
         },
-    ],
-};
+        {
+            name: 'anomalies-panel-0',
+            title: 'Photo 1',
+            type: 'panel',
+            state: 'collapsed',
+            elements: [
+                {
+                    name: 'anomalies-photo-0',
+                    title: 'Photo',
+                    type: 'file',
+                    storeDataAsText: false,
+                    acceptedTypes: 'image/*',
+                    allowMultiple: false
+                },
+                {
+                    name: 'anomalies-photo-0-label',
+                    title: 'Label',
+                    type: 'text'
+                }
+            ]
+        },
+        {
+            name: 'anomalies-panel-1',
+            title: 'Photo 2',
+            type: 'panel',
+            state: 'collapsed',
+            elements: [
+                {
+                    name: 'anomalies-photo-1',
+                    title: 'Photo',
+                    type: 'file',
+                    storeDataAsText: false,
+                    acceptedTypes: 'image/*',
+                    allowMultiple: false
+                },
+                {
+                    name: 'anomalies-photo-1-label',
+                    title: 'Label',
+                    type: 'text'
+                }
+            ]
+        }
+    ]
+}
