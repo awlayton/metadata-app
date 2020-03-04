@@ -1,4 +1,4 @@
-import {DateTime} from 'luxon';
+import { DateTime } from 'luxon'
 
 export default {
     name: 'general',
@@ -9,10 +9,7 @@ export default {
             title: 'Job/Project name',
             type: 'text',
             autocomplete: 'previous',
-            choices: [
-                'Bob Ross',
-                'Rusty Shackleford',
-            ],
+            choices: ['Bob Ross', 'Rusty Shackleford']
         },
         {
             name: 'purpose',
@@ -23,24 +20,25 @@ export default {
                 'Planting',
                 {
                     value: 'Spraying',
-                    text: 'Spraying/Spreading',
+                    text: 'Spraying/Spreading'
                 },
                 'Tillage',
                 'Harvest',
                 {
                     value: 'Anomalies',
-                    text: 'Anomaly Reporting',
+                    text: 'Anomaly Reporting'
                 },
+                'Sensor Deployment'
             ],
             isRequired: true,
-            autofill: 'lastused',
+            autofill: 'lastused'
         },
         {
             name: 'datetime',
             title: 'Date/Time of data',
             type: 'text',
             inputType: 'datetime-local',
-            defaultValue: DateTime.local().toFormat("yyyy-MM-dd'T'HH:mm:ss"),
+            defaultValue: DateTime.local().toFormat("yyyy-MM-dd'T'HH:mm:ss")
         },
         {
             type: 'panel',
@@ -61,10 +59,10 @@ export default {
                             title: 'Lat/Lon or Label',
                             type: 'text',
                             autofill: 'location',
-                            isRequired: true,
-                        },
-                    ],
-                },
+                            isRequired: true
+                        }
+                    ]
+                }
                 /*
                 {
                     name: 'location-button',
@@ -73,7 +71,7 @@ export default {
                     cerebralbutton: 'setCurrentLocation',
                 },
                 */
-            ],
-        },
+            ]
+        }
     ]
-};
+}
