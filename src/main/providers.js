@@ -379,28 +379,28 @@ export const serialize = {
 }
 
 /**
- * @see {@link https://weatherstack.com/documentation#nodejs}
+ * @see {@link https://openweathermap.org/current#geo}
  */
-const weatherstack = axios.create({
-    baseURL: 'http://api.weatherstack.com/',
+const openweather = axios.create({
+    baseURL: 'https://api.openweathermap.org/data/2.5/',
+    url: '/weather',
     method: 'get'
 })
-weatherstack.interceptors.request.use(({ params, ...rest }) => {
+openweather.interceptors.request.use(({ params, ...rest }) => {
     // Add default params to config
     return {
         params: {
-            access_key: process.env.REACT_APP_WEATHERSTACK_KEY,
-            units: 'f', // Use US customary units
-            ...params
+            // WARNING: The order of these matters to the API...
+            ...params,
+            units: 'imperial', // Use US customary units
+            appid: process.env.REACT_APP_OPENWEATHER_KEY
         },
         ...rest
     }
 })
 export const weather = {
     async current (query) {
-        const {
-            data: { current }
-        } = await weatherstack('/current', { params: { query } })
-        return current
+        const { data } = await openweather({ params: query })
+        return data
     }
 }
