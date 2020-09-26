@@ -1,9 +1,9 @@
 // TODO: Should this be here??
-import { IContext } from 'cerebral';
+import type { IContext } from 'cerebral';
 
 import * as sequences from './sequences';
 import * as providers from './providers';
-import { JsonObjectProperty, PageModel } from 'survey-react';
+import type { JsonObjectProperty, PageModel } from 'survey-react';
 
 interface Page extends PageModel {
     //choices: string[];

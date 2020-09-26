@@ -1,7 +1,7 @@
 import localstore from './modules/localstore';
 
-import { ModuleDefinition } from 'cerebral';
-import { State, Sequences } from './types';
+import type { ModuleDefinition } from 'cerebral';
+import type { State, Sequences } from './types';
 import * as providers from './providers';
 import * as sequences from './sequences';
 import * as computeds from './computeds';
@@ -37,7 +37,10 @@ const state: State = {
     },
 };
 
-const module: ModuleDefinition<State, Sequences> = {
+/**
+ * React App breaks with a var named module...
+ */
+const _module: ModuleDefinition<State, Sequences> = {
     sequences,
     state,
     catch: [
@@ -53,4 +56,4 @@ const module: ModuleDefinition<State, Sequences> = {
     },
 };
 
-export default module;
+export default _module;
