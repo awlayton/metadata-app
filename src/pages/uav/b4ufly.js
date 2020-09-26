@@ -11,8 +11,8 @@ export default {
             choices: [
                 'proceed with caution',
                 'flying in controlled airspace (class B/C/D/E)',
-                'other'
-            ]
+                'other',
+            ],
         },
         {
             name: 'b4ufly-extra',
@@ -26,23 +26,23 @@ export default {
                     title: 'Airport Operator Contact',
                     type: 'text',
                     requiredIf:
-                        '{b4ufly-status} == "flying in controlled airspace (class B/C/D/E)"'
+                        '{b4ufly-status} == "flying in controlled airspace (class B/C/D/E)"',
                 },
                 {
                     name: 'b4ufly-control-tower',
                     title: 'Control Tower Contact',
                     type: 'text',
                     requiredIf:
-                        '{b4ufly-status} == "flying in controlled airspace (class B/C/D/E)"'
+                        '{b4ufly-status} == "flying in controlled airspace (class B/C/D/E)"',
                 },
                 {
                     name: 'b4ufly-prior-authorization',
                     title: 'Prior Authorization',
                     type: 'text',
                     requiredIf:
-                        '{b4ufly-status} == "flying in controlled airspace (class B/C/D/E)"'
-                }
-            ]
+                        '{b4ufly-status} == "flying in controlled airspace (class B/C/D/E)"',
+                },
+            ],
         },
         {
             // TODO: What the heck even is this?
@@ -55,13 +55,13 @@ export default {
                 'checked flight restrictions',
                 'checked local restrictions',
                 'checked upcoming restrictions',
-                'checked national parks'
-            ]
+                'checked national parks',
+            ],
         },
         {
             name: 'b4ufly-certificate',
             title: 'COW or COA #',
-            type: 'text'
-        }
-    ]
-}
+            type: 'text',
+        },
+    ],
+};

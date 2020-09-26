@@ -3,14 +3,14 @@ const sensors = [
     {
         make: 'Sony',
         model: 'A6000',
-        type: 'RGB'
+        type: 'RGB',
     },
     {
         make: 'Parrot',
         model: 'Sequoia',
-        type: 'Multispectral'
-    }
-]
+        type: 'Multispectral',
+    },
+];
 
 export default {
     name: 'uav-sensors',
@@ -21,7 +21,7 @@ export default {
             name: 'sensor-qr',
             type: 'html',
             cerebralbutton: 'showSensorQRScanner',
-            visible: false
+            visible: false,
         },
         {
             name: 'sensors',
@@ -48,8 +48,8 @@ export default {
                         'Multispectral',
                         'Hyperspectral',
                         'LiDAR',
-                        'Thermal'
-                    ]
+                        'Thermal',
+                    ],
                 },
                 {
                     name: 'uav-sensor-makemodel',
@@ -65,10 +65,10 @@ export default {
                         text: e.make + ' ' + e.model,
                         value: e.make + ' ' + e.model,
                         //value: i,
-                        visibleIf: `{panel.type} == "${e.type}"`
-                    }))
-                }
-            ]
-        }
-    ]
-}
+                        visibleIf: `{panel.type} == "${e.type}"`,
+                    })),
+                },
+            ],
+        },
+    ],
+};

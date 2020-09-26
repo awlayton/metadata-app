@@ -23,7 +23,7 @@ export default {
                     autocomplete: 'previous',
                     //autofill: 'person',
                     isRequired: true,
-                    placeHolder: 'Rusty Shackleford'
+                    placeHolder: 'Rusty Shackleford',
                 },
                 {
                     name: 'remote-pic-certificate',
@@ -36,11 +36,11 @@ export default {
                         {
                             type: 'regex',
                             regex: /^[0-9]{7}$/,
-                            text: 'License number must be 7 digits'
-                        }
-                    ]
-                }
-            ]
+                            text: 'License number must be 7 digits',
+                        },
+                    ],
+                },
+            ],
         },
         {
             name: 'observer',
@@ -58,9 +58,9 @@ export default {
                     title: 'Name',
                     type: 'text',
                     isRequired: true,
-                    placeHolder: 'John Doe'
-                }
-            ]
-        }
-    ]
-}
+                    placeHolder: 'John Doe',
+                },
+            ],
+        },
+    ],
+};

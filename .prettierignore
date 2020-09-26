@@ -1,2 +1,7 @@
+# Ignore compiled TS output
+lib
 build
-node_modules
+
+yarn.lock
+yarn-error.log
+tags*

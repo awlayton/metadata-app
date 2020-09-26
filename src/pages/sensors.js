@@ -18,7 +18,7 @@ export default {
                     name: 'sensor-name',
                     valueName: 'name',
                     title: 'Name of Node/Module',
-                    type: 'text'
+                    type: 'text',
                 },
                 {
                     name: 'sensor-type',
@@ -39,21 +39,21 @@ export default {
                         'Air Temperature',
                         'Air Relative Humidity',
                         'Nitrate',
-                        'Meter Probe'
-                    ]
+                        'Meter Probe',
+                    ],
                 },
                 {
                     name: 'sensor-location',
                     valueName: 'location',
                     title: 'Sensor Location',
                     type: 'text',
-                    autofill: 'location'
+                    autofill: 'location',
                 },
                 {
                     name: 'sensor-note',
                     valueName: 'note',
                     title: 'Sensor note or comment',
-                    type: 'comment'
+                    type: 'comment',
                 },
                 {
                     name: 'sensor-map',
@@ -62,7 +62,7 @@ export default {
                     type: 'file',
                     storeDataAsText: false,
                     acceptedTypes: 'image/*',
-                    allowMultiple: false
+                    allowMultiple: false,
                 },
                 {
                     name: 'sensor-installation',
@@ -71,9 +71,9 @@ export default {
                     type: 'file',
                     storeDataAsText: false,
                     acceptedTypes: 'image/*',
-                    allowMultiple: false
-                }
-            ]
-        }
-    ]
-}
+                    allowMultiple: false,
+                },
+            ],
+        },
+    ],
+};

@@ -7,7 +7,7 @@ export default {
             name: 'harvest-transport-cart',
             title: 'Grain Cart?',
             type: 'boolean',
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'harvest-transport-cart-makemodel',
@@ -24,7 +24,7 @@ export default {
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ]
+            ],
         },
         {
             name: 'harvest-transport-tractor-makemodel',
@@ -41,7 +41,7 @@ export default {
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ]
-        }
-    ]
-}
+            ],
+        },
+    ],
+};

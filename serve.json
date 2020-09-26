@@ -14,7 +14,15 @@
             "destination": "/:file"
         },
         {
+            "source": "/CONTxT/:file",
+            "destination": "/:file"
+        },
+        {
             "source": "/metadata-app/static/:dir/:file",
+            "destination": "/static/:dir/:file"
+        },
+        {
+            "source": "/CONTxT/static/:dir/:file",
             "destination": "/static/:dir/:file"
         }
     ],

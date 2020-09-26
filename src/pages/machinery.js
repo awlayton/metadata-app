@@ -10,7 +10,7 @@ export default {
             type: 'text',
             isRequired: true,
             autocomplete: 'previous',
-            autofill: 'lastused'
+            autofill: 'lastused',
         },
         {
             name: 'machinery-spray-or-spread',
@@ -18,7 +18,7 @@ export default {
             title: 'Spray or Spread',
             type: 'radiogroup',
             choices: ['Spraying', 'Spreading'],
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-pull-type',
@@ -26,7 +26,7 @@ export default {
             title: 'Pull Type',
             type: 'radiogroup',
             choices: ['Pull', 'Self-Propelled'],
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-makemodel',
@@ -43,7 +43,7 @@ export default {
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ]
+            ],
         },
         {
             name: 'planter-makemodel',
@@ -60,7 +60,7 @@ export default {
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ]
+            ],
         },
         {
             name: 'planter-num-rows',
@@ -69,7 +69,7 @@ export default {
             type: 'text',
             isRequired: true,
             inputType: 'number',
-            autofill: 'lastused'
+            autofill: 'lastused',
         },
         {
             name: 'machinery-implement',
@@ -87,7 +87,7 @@ export default {
                     otherText: 'Add new type',
                     otherErrorText: 'Please enter the new type',
                     autofill: 'lastused',
-                    autocomplete: 'previous'
+                    autocomplete: 'previous',
                 },
                 {
                     name: 'machinery-implement-makemodel',
@@ -102,16 +102,16 @@ export default {
                     otherText: 'Add new make and model',
                     otherErrorText: 'Please enter the new make and model',
                     autofill: 'lastused',
-                    autocomplete: 'previous'
-                }
-            ]
+                    autocomplete: 'previous',
+                },
+            ],
         },
         {
             name: 'machinery-calibration-report',
             visibleIf: '{purpose} == "Planting"',
             title: 'Calibration Report',
             type: 'text',
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-row-width',
@@ -121,7 +121,7 @@ export default {
             inputType: 'number',
             placeHolder: '3 ft',
             isRequired: true,
-            autofill: 'lastused'
+            autofill: 'lastused',
         },
         {
             name: 'machinery-width',
@@ -131,7 +131,7 @@ export default {
             inputType: 'number',
             placeHolder: '30 ft',
             isRequired: true,
-            autofill: 'lastused'
+            autofill: 'lastused',
         },
         {
             name: 'machinery-hearder-width',
@@ -141,7 +141,7 @@ export default {
             inputType: 'number',
             placeHolder: '30 ft',
             isRequired: true,
-            autofill: 'lastused'
+            autofill: 'lastused',
         },
         {
             name: 'machinery-sprayer-type',
@@ -150,14 +150,14 @@ export default {
             type: 'dropdown',
             isRequired: true,
             autofill: 'lastused',
-            choices: ['Nozzles', 'Drop Tube', 'Spinner']
+            choices: ['Nozzles', 'Drop Tube', 'Spinner'],
         },
         {
             name: 'machinery-rate',
             visibleIf: '{purpose} == "Spraying"',
             title: 'Rate',
             type: 'text',
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-speed',
@@ -165,7 +165,7 @@ export default {
             type: 'text',
             isRequired: true,
             inputType: 'number',
-            placeHolder: '15 mph'
+            placeHolder: '15 mph',
         },
         {
             name: 'machinery-depth',
@@ -174,21 +174,21 @@ export default {
             type: 'text',
             isRequired: true,
             inputType: 'number',
-            placeHolder: '1.5 in'
+            placeHolder: '1.5 in',
         },
         {
             name: 'machinery-yield-mapped',
             visibleIf: '{purpose} == "Harvest"',
             title: 'Yield Mapped?',
             type: 'boolean',
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-yield-calibrated',
             visibleIf: '{purpose} == "Harvest"',
             title: 'Yield Monitor Calibrated?',
             type: 'boolean',
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-controller-makemodel',
@@ -205,14 +205,14 @@ export default {
             autofill: 'lastused',
             choices: [
                 // TODO: Have default choices from a secondary sheet?
-            ]
+            ],
         },
         {
             name: 'machinery-variable-rate',
             visibleIf: '{purpose} == "Spraying"',
             title: 'Variable Rate?',
             type: 'boolean',
-            isRequired: true
+            isRequired: true,
         },
         {
             name: 'machinery-variable-rate-source',
@@ -221,7 +221,7 @@ export default {
             title: 'Variable Rate Source',
             type: 'text',
             isRequired: true,
-            autocomplete: 'previous'
-        }
-    ]
-}
+            autocomplete: 'previous',
+        },
+    ],
+};

@@ -3,9 +3,9 @@ const drones = [
     {
         make: 'Test',
         model: 'testtest',
-        type: 'Fixed wing'
-    }
-]
+        type: 'Fixed wing',
+    },
+];
 
 export default {
     name: 'uav-drone',
@@ -24,7 +24,7 @@ export default {
                     type: 'file',
                     storeDataAsText: false,
                     acceptedTypes: 'image/*',
-                    allowMultiple: false
+                    allowMultiple: false,
                 },
                 {
                     name: 'drone-advanced-flight-planning',
@@ -32,16 +32,16 @@ export default {
                     type: 'file',
                     storeDataAsText: false,
                     acceptedTypes: 'image/*',
-                    allowMultiple: false
-                }
-            ]
+                    allowMultiple: false,
+                },
+            ],
         },
         {
             name: 'drone-qr',
             title: 'Scan drone QR code',
             type: 'html',
             cerebralbutton: 'showDroneQRScanner',
-            visible: false
+            visible: false,
         },
         {
             name: 'uav-drone-type',
@@ -50,7 +50,7 @@ export default {
             isRequired: true,
             defaultValue: 'Fixed wing',
             hasOther: true,
-            choices: ['Fixed wing', 'Multi-rotor', 'Helicopter']
+            choices: ['Fixed wing', 'Multi-rotor', 'Helicopter'],
         },
         {
             name: 'uav-drone-makemodel',
@@ -66,8 +66,8 @@ export default {
                 text: e.make + ' ' + e.model,
                 value: e.make + ' ' + e.model,
                 //value: i,
-                visibleIf: `{uav-drone-type} == "${e.type}"`
-            }))
-        }
-    ]
-}
+                visibleIf: `{uav-drone-type} == "${e.type}"`,
+            })),
+        },
+    ],
+};

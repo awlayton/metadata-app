@@ -9,7 +9,7 @@ export default {
             type: 'text',
             isRequired: true,
             autocomplete: 'previous',
-            autofill: 'lastused'
+            autofill: 'lastused',
         },
         {
             name: 'planting-chemicals-insectiside',
@@ -17,7 +17,7 @@ export default {
             type: 'text',
             isRequired: true,
             autocomplete: 'previous',
-            autofill: 'lastused'
-        }
-    ]
-}
+            autofill: 'lastused',
+        },
+    ],
+};
