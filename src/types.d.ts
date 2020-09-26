@@ -31,3 +31,12 @@ declare module 'ducky' {
 
     export = ducky;
 }
+
+declare module '!import-glob!./pages-loader' {
+    // TODO Find better type than PageModel?
+    import { JsonObjectProperty } from 'survey-react';
+
+    declare const pages: JsonObjectProperty[];
+
+    export = pages;
+}

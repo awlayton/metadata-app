@@ -6,7 +6,8 @@ pages.forEach((page) => {
     page.elements.push(
         {
             name: `notes-${page.name}`,
-            title: 'Notes or comments',
+            // @ts-ignore
+            title: `${page.title} notes or comments`,
             type: 'comment',
         },
         {
