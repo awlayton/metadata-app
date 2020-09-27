@@ -107,10 +107,10 @@ export default {
         {
             name: 'machinery-row-width',
             visibleIf: '{purpose} == "Planting"',
-            title: 'Row Width (ft)',
+            title: 'Row Width (in)',
             type: 'text',
             inputType: 'number',
-            placeHolder: '3 ft',
+            placeHolder: '24 in',
             autofill: 'lastused',
         },
         {
