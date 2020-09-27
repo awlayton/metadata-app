@@ -28,12 +28,25 @@ export default {
             previousAsChoices: true,
         },
         {
-            name: 'seed-population',
-            title: 'Population',
-            type: 'text',
-            inputType: 'number',
-            autofill: 'lastused',
-            isRequired: true,
+            type: 'panel',
+            elements: [
+                {
+                    name: 'seed-population',
+                    title: 'Population',
+                    type: 'text',
+                    inputType: 'number',
+                    autofill: 'lastused',
+                    isRequired: true,
+                },
+                {
+                    name: 'seed-population-units',
+                    title: 'Population units',
+                    type: 'dropdown',
+                    choices: ['seeds per acre', 'pounds per acre'],
+                    autofill: 'lastused',
+                    isRequired: true,
+                },
+            ],
         },
     ],
 };
