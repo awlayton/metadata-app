@@ -16,7 +16,7 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import SendIcon from '@material-ui/icons/Send';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
 import gold from '@material-ui/core/colors/amber';
 
@@ -55,12 +55,14 @@ const params = queryString.parse(window.location.search);
 
 // All the following keys are optional.
 // We try our best to provide a great default value.
-export const theme = createMuiTheme({
-    palette: {
-        type: params.theme === 'light' ? 'light' : 'dark',
-        primary: gold,
-    },
-});
+export const theme = responsiveFontSizes(
+    createMuiTheme({
+        palette: {
+            type: params.theme === 'light' ? 'light' : 'dark',
+            primary: gold,
+        },
+    })
+);
 
 const README_URL =
     'https://docs.google.com/document/d/' +
