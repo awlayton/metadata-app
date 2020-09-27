@@ -437,7 +437,6 @@ export const Questions = withStyles(styles)(
     )
 );
 
-type Deps = typeof deps;
 const deps = {
     questions: state`questions`,
     init: sequences`initSurvey`,
@@ -449,6 +448,7 @@ const deps = {
     autofill: sequences`autofill`,
     upload: sequences`uploadScreenshot`,
 };
+type Deps = typeof deps;
 type ExternalProps = {
     isSinglePage: boolean;
     completedHtml: React.ReactComponentElement<any>;

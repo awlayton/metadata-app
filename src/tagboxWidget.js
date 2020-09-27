@@ -10,7 +10,7 @@ import './select2.scss';
 
 let info = debug('contxt:tagbox');
 
-export default {
+export const tagboxWidget = {
     name: 'tagbox',
     title: 'Tag box',
     iconName: 'icon-tagbox',
@@ -137,3 +137,5 @@ export default {
         question.readOnlyChangedCallback = null;
     },
 };
+
+export default tagboxWidget;

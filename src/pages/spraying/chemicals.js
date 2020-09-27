@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'spraying-chemicals',
     title: 'Chemicals',
     visibleIf: '{purpose} == "Spraying"',
@@ -32,3 +32,5 @@ export default {
         })
     ),
 };
+
+export default page;

@@ -6,8 +6,6 @@ import { WithStyles } from '@material-ui/styles';
 
 const drawerWidth = 240;
 
-export type Styles = WithStyles<typeof styles>;
-
 export const styles = (theme: Theme) =>
     createStyles({
         root: {
@@ -71,5 +69,7 @@ export const styles = (theme: Theme) =>
             width: '95%',
         },
     });
+
+export type Styles = WithStyles<typeof styles>;
 
 export default styles;

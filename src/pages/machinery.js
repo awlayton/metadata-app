@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'machinery',
     title: 'Machinery',
     visibleIf:
@@ -194,3 +194,5 @@ export default {
         },
     ],
 };
+
+export default page;

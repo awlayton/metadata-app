@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-export default {
+export const page = {
     name: 'general',
     title: 'General',
     elements: [
@@ -76,3 +76,5 @@ export default {
         },
     ],
 };
+
+export default page;

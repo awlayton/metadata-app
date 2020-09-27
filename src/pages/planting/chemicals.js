@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'planting-chemicals',
     title: 'Chemicals',
     visibleIf: '{purpose} == "Planting"',
@@ -21,3 +21,5 @@ export default {
         },
     ],
 };
+
+export default page;

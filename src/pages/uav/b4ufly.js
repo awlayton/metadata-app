@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'b4ufly',
     title: 'B4UFLY Status',
     visible: false, // Get rid of B4UFLY page for now
@@ -65,3 +65,5 @@ export default {
         },
     ],
 };
+
+export default page;

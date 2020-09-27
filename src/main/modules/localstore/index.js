@@ -4,7 +4,7 @@ import { set, merge, when, parallel } from 'cerebral/factories';
 
 import ls from 'local-storage';
 
-export default (paths) => ({
+export const localstore = (paths) => ({
     providers: {
         localstore: {
             get(key) {
@@ -86,3 +86,5 @@ export default (paths) => ({
         })
         .reduce((obj, reaction) => Object.assign(obj, reaction), {}),
 });
+
+export default localstore;

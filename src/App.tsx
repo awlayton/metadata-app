@@ -58,6 +58,7 @@ const params = queryString.parse(window.location.search);
 export const theme = responsiveFontSizes(
     createMuiTheme({
         palette: {
+            // Default to dark theme
             type: params.theme === 'light' ? 'light' : 'dark',
             primary: gold,
         },
@@ -89,7 +90,7 @@ const App = withStyles(styles)(
         }
 
         render() {
-            let { props } = this;
+            const { props } = this;
             const { classes } = props;
 
             return (
@@ -218,7 +219,6 @@ const App = withStyles(styles)(
     }
 );
 
-type Deps = typeof deps;
 const deps = {
     initialized: state`initialized` as State['initialized'],
     navigationOpen: state`navigationOpen`,
@@ -248,6 +248,7 @@ const deps = {
     canNext: state`canNext`,
     canPrev: state`canPrev`,
 };
+type Deps = typeof deps;
 
 export const AppContainer: React.FunctionComponent<
     typeof deps & ConnectedProps

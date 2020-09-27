@@ -7,7 +7,7 @@ const drones = [
     },
 ];
 
-export default {
+export const page = {
     name: 'uav-drone',
     title: 'UAV Info',
     visibleIf: '{purpose} == "UAV"',
@@ -71,3 +71,5 @@ export default {
         },
     ],
 };
+
+export default page;

@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'sensors',
     visibleIf: '{purpose} == "Sensor Deployment"',
     title: 'Sensors',
@@ -75,3 +75,5 @@ export default {
         },
     ],
 };
+
+export default page;

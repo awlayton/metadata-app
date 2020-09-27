@@ -8,7 +8,7 @@ const anomalies = [
     'Drainage Installation or Repair',
 ];
 
-export default {
+export const page = {
     name: 'anomalies',
     visibleIf: '{purpose} == "Anomalies"',
     title: 'Anomalies and Disorders',
@@ -94,3 +94,5 @@ export default {
         },
     ],
 };
+
+export default page;

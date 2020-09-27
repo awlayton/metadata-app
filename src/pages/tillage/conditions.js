@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'tillage-conditions',
     title: 'Conditions',
     visibleIf: '{purpose} == "Tillage"',
@@ -49,3 +49,5 @@ export default {
         },
     ],
 };
+
+export default page;

@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'planting-seed',
     title: 'Seed',
     visibleIf: '{purpose} == "Planting"',
@@ -50,3 +50,5 @@ export default {
         },
     ],
 };
+
+export default page;

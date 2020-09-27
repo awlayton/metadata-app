@@ -12,7 +12,7 @@ const sensors = [
     },
 ];
 
-export default {
+export const page = {
     name: 'uav-sensors',
     title: 'Sensors',
     visibleIf: '{purpose} == "UAV"',
@@ -71,3 +71,5 @@ export default {
         },
     ],
 };
+
+export default page;

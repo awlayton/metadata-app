@@ -29,7 +29,7 @@ Survey.JsonObject.metaData.addProperty('text', {
 });
 */
 
-export default {
+export const autocompleteWidget = {
     name: 'autocomplete',
 
     widgetIsLoaded() {
@@ -69,3 +69,5 @@ export default {
         $el.autocomplete('destroy');
     },
 };
+
+export default autocompleteWidget;

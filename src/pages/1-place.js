@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'place',
     title: 'Place',
     elements: [
@@ -79,3 +79,5 @@ export default {
         },
     ],
 };
+
+export default page;

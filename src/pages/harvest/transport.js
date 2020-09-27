@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'harvest-transport',
     title: 'Transport',
     visibleIf: '{purpose} == "Harvest"',
@@ -41,3 +41,5 @@ export default {
         },
     ],
 };
+
+export default page;

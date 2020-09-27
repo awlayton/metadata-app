@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'harvest-conditions',
     title: 'Crop Conditions',
     visibleIf: '{purpose} == "Harvest"',
@@ -43,3 +43,5 @@ export default {
         },
     ],
 };
+
+export default page;

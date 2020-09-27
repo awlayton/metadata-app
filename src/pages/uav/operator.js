@@ -1,4 +1,4 @@
-export default {
+export const page = {
     name: 'uav-operator',
     title: 'UAV Operator',
     visibleIf: '{purpose} == "UAV"',
@@ -64,3 +64,5 @@ export default {
         },
     ],
 };
+
+export default page;

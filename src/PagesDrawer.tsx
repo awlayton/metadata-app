@@ -110,7 +110,6 @@ export const PagesDrawer = withStyles(styles)((props: Props) => {
     );
 });
 
-type Deps = typeof deps;
 const deps = {
     navigationOpen: state`navigationOpen`,
     showNavigation: sequences`showNavigation`,
@@ -119,6 +118,7 @@ const deps = {
     pages: state`pages`,
     pageNum: state`pageNum`,
 };
+type Deps = typeof deps;
 type ExternalProps = {
     readme: string;
     permScreens: any;
