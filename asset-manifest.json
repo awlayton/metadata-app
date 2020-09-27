@@ -1,25 +1,23 @@
 {
   "files": {
-    "main.css": "https://awlayton.github.io/metadata-app/static/css/main.21fc8e05.chunk.css",
-    "main.js": "https://awlayton.github.io/metadata-app/static/js/main.2ab8d1eb.chunk.js",
-    "main.js.map": "https://awlayton.github.io/metadata-app/static/js/main.2ab8d1eb.chunk.js.map",
-    "runtime-main.js": "https://awlayton.github.io/metadata-app/static/js/runtime-main.f8eb9720.js",
-    "runtime-main.js.map": "https://awlayton.github.io/metadata-app/static/js/runtime-main.f8eb9720.js.map",
-    "static/css/2.74590b8b.chunk.css": "https://awlayton.github.io/metadata-app/static/css/2.74590b8b.chunk.css",
-    "static/js/2.abbf8a16.chunk.js": "https://awlayton.github.io/metadata-app/static/js/2.abbf8a16.chunk.js",
-    "static/js/2.abbf8a16.chunk.js.map": "https://awlayton.github.io/metadata-app/static/js/2.abbf8a16.chunk.js.map",
+    "main.css": "https://awlayton.github.io/metadata-app/static/css/main.547b0dbb.chunk.css",
+    "main.js": "https://awlayton.github.io/metadata-app/static/js/main.340e9cfa.chunk.js",
+    "main.js.map": "https://awlayton.github.io/metadata-app/static/js/main.340e9cfa.chunk.js.map",
+    "runtime-main.js": "https://awlayton.github.io/metadata-app/static/js/runtime-main.6f78012f.js",
+    "runtime-main.js.map": "https://awlayton.github.io/metadata-app/static/js/runtime-main.6f78012f.js.map",
+    "static/css/2.f8077403.chunk.css": "https://awlayton.github.io/metadata-app/static/css/2.f8077403.chunk.css",
+    "static/js/2.99f442a0.chunk.js": "https://awlayton.github.io/metadata-app/static/js/2.99f442a0.chunk.js",
+    "static/js/2.99f442a0.chunk.js.map": "https://awlayton.github.io/metadata-app/static/js/2.99f442a0.chunk.js.map",
     "index.html": "https://awlayton.github.io/metadata-app/index.html",
-    "precache-manifest.27fd36a613ebbeb090ee545816af181e.js": "https://awlayton.github.io/metadata-app/precache-manifest.27fd36a613ebbeb090ee545816af181e.js",
-    "service-worker.js": "https://awlayton.github.io/metadata-app/service-worker.js",
-    "static/css/2.74590b8b.chunk.css.map": "https://awlayton.github.io/metadata-app/static/css/2.74590b8b.chunk.css.map",
-    "static/css/main.21fc8e05.chunk.css.map": "https://awlayton.github.io/metadata-app/static/css/main.21fc8e05.chunk.css.map",
-    "static/js/2.abbf8a16.chunk.js.LICENSE.txt": "https://awlayton.github.io/metadata-app/static/js/2.abbf8a16.chunk.js.LICENSE.txt"
+    "static/css/2.f8077403.chunk.css.map": "https://awlayton.github.io/metadata-app/static/css/2.f8077403.chunk.css.map",
+    "static/css/main.547b0dbb.chunk.css.map": "https://awlayton.github.io/metadata-app/static/css/main.547b0dbb.chunk.css.map",
+    "static/js/2.99f442a0.chunk.js.LICENSE.txt": "https://awlayton.github.io/metadata-app/static/js/2.99f442a0.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.f8eb9720.js",
-    "static/css/2.74590b8b.chunk.css",
-    "static/js/2.abbf8a16.chunk.js",
-    "static/css/main.21fc8e05.chunk.css",
-    "static/js/main.2ab8d1eb.chunk.js"
+    "static/js/runtime-main.6f78012f.js",
+    "static/css/2.f8077403.chunk.css",
+    "static/js/2.99f442a0.chunk.js",
+    "static/css/main.547b0dbb.chunk.css",
+    "static/js/main.340e9cfa.chunk.js"
   ]
 }
