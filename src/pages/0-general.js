@@ -59,6 +59,7 @@ export default {
                             title: 'Lat/Lon or Label',
                             type: 'text',
                             autofill: 'location',
+                            autocomplete: 'previousLocationLabels',
                             isRequired: true,
                         },
                     ],

@@ -164,11 +164,22 @@ export function initPages({ get, store }: Context) {
         forIn(page, function findKeys(val, key, obj, root = '') {
             switch (key) {
                 case 'autocomplete':
+                    const { name } = obj;
                     switch (val) {
                         case 'previous':
-                            let { name } = obj;
                             // @ts-ignore
                             obj.choices = get(state`pastAnswers.${name}`);
+                            break;
+                        case 'previousLocationLabels':
+                            const locations: any[] = get(
+                                state`pastAnswers.locations`
+                            );
+                            // @ts-ignore
+                            obj.choices = locations
+                                .map(
+                                    (obj: { location: string }) => obj.location
+                                )
+                                .filter((location) => !/^\d/.test(location));
                             break;
                         default:
                     }
