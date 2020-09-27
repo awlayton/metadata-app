@@ -25,15 +25,13 @@ export default {
                     valueName: 'type',
                     // TODO: change title based on operation?
                     title: 'Sensor Type',
-                    type: 'dropdown',
+                    type: 'text',
+                    autocomplete: 'previous',
                     hideIfChoicesEmpty: false,
                     hasOther: true,
                     storeOthersAsComment: false,
-                    otherText: 'Add new sensor type',
-                    otherErrorText: 'Please enter the new sensor type',
                     //autocomplete: 'previous',
                     //autofill: 'lastused',
-                    previousAsChoices: true,
                     choices: [
                         // TODO: Have default choices from a secondary sheet?
                         'Air Temperature',
