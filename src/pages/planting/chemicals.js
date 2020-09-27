@@ -5,7 +5,7 @@ export default {
     elements: [
         {
             name: 'planting-chemicals-starter',
-            title: 'Starter',
+            title: 'Starter/Fertilizer',
             type: 'text',
             isRequired: true,
             autocomplete: 'previous',
