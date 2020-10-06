@@ -166,13 +166,10 @@ export function initPages({ get, store }: Context) {
                 case 'autocomplete':
                     const { name } = obj;
                     // @ts-ignore
-                    obj.choices ??= [];
                     switch (val) {
                         case 'previous':
                             // @ts-ignore
-                            obj.choices = obj.choices.concat(
-                                get(state`pastAnswers.${name}`)
-                            );
+                            obj.choices = get(state`pastAnswers.${name}`);
                             break;
                         case 'previousLocationLabels':
                             const locations: any[] = get(
